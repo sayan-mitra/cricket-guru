@@ -48,9 +48,10 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 TAVILY_API_KEY = os.environ.get("TAVILY_API_KEY")
 BRAVE_API_KEY = os.environ.get("BRAVE_API_KEY")
 # Provider-qualified model strings (Pydantic AI format "<provider>:<model>").
-# Answerer flips to anthropic:claude-sonnet-5 once the Anthropic key lands.
+# All-Anthropic: Sonnet answers, Haiku cross-judges. A non-Anthropic judge would make
+# the same-vs-cross bias check stronger (see docs/how-it-works.md), but keeps it OpenAI-free.
 ANSWERER_MODEL = os.environ.get("CG_ANSWERER_MODEL", "anthropic:claude-sonnet-5")
-JUDGE_CROSS_MODEL = os.environ.get("CG_JUDGE_MODEL", "openai:gpt-4o")
+JUDGE_CROSS_MODEL = os.environ.get("CG_JUDGE_MODEL", "anthropic:claude-haiku-4-5")
 # Serving critic (CRAG groundedness gate). Its own knob so it can run on a strong
 # model (Opus) independent of the answerer and the eval judge. Falls back to the
 # answerer until the Anthropic key lands.

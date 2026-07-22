@@ -1,10 +1,8 @@
 """Cricket Guru — Streamlit frontend.
 
-Chat-first. The workspace is a conversation (Ask), with a Chat/Compare toggle at the top;
-a left nav rail switches to Traces and the How-it-works reference.
-
-  Ask · Chat     — Mode A serving: one path, the critic decides ship / web / abstain.
-  Ask · Compare  — Mode B fan-out: the same engine across lanes, display-only swimlane.
+Chat-first. The workspace is a conversation (Ask); a left nav rail switches to Traces
+and the How-it-works reference. One serving path, the critic decides ship / web / abstain.
+Per-leg comparison is a local eval (cricket_guru.eval.run_experiments), not a UI mode.
 
     PYTHONPATH=backend streamlit run frontend/app.py
 """
@@ -17,7 +15,7 @@ import streamlit.components.v1 as components
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "backend"))
 from cricket_guru.config import DATA_DIR          # noqa: E402
-from cricket_guru.serve import compare, serving_engine   # noqa: E402
+from cricket_guru.serve import serving_engine   # noqa: E402
 
 st.set_page_config(page_title="Cricket Guru", page_icon="🏏", layout="wide",
                    initial_sidebar_state="expanded")
@@ -71,7 +69,6 @@ BADGE = {
 }
 
 NAV = {"Ask": "💬  Ask", "Traces": "🔎  Traces", "How": "📖  How it works"}
-MODES = ["💬 Chat", "🔀 Compare"]
 
 # --- true mermaid via mermaid.js (components.html is not under the artifact CSP, so the CDN
 #     import resolves; the local app has network). Theme tuned to the light/green canvas.
@@ -208,12 +205,7 @@ def chat_serve(question, history):
             "sources": b.sources, "trace": b.trace}
 
 
-@st.cache_data(show_spinner=False)
-def compare_cached(question, axis):
-    return compare(question, axis)
-
-
-# --- Ask: chat (Mode A) ----------------------------------------------------
+# --- Ask: chat -------------------------------------------------------------
 
 def _new_chat():
     st.session_state.chat = []
@@ -257,63 +249,12 @@ def render_chat():
         st.rerun()
 
 
-# --- Ask: compare (Mode B) -------------------------------------------------
-
-def render_compare():
-    st.caption("The same engine, fanned out over one axis at a time. Display-only — "
-               "every lane's answer and critic verdict, no winner picked.")
-    axis = st.radio("Compare", ["router", "chunking"], horizontal=True,
-                    format_func=lambda x: {"router": "Routing (rule vs agent)",
-                                           "chunking": "Chunking (fixed vs structural)"}[x])
-    st.caption({"router": "Full system; chunking + retrieval held at baseline.",
-                "chunking": "Text-RAG arm only, no router; retrieval held at baseline."}[axis])
-    q = st.text_input("Question to compare", key="cmp_q",
-                      placeholder="Who scored the most runs in IPL 2016?")
-    if not q:
-        st.info("Type a question above to fan it out across the lanes.")
-        return
-    if not st.button("Run comparison", type="primary"):
-        return
-    with st.spinner(f"Running {axis} lanes…"):
-        r = compare_cached(q, axis)
-    lanes = r["lanes"]
-    cols = st.columns(len(lanes) + 1)
-    for col, L in zip(cols, lanes):
-        with col, st.container(border=True):
-            st.markdown(f"**{L['label']}**")
-            st.markdown(BADGE.get(L["verdict"], L["verdict"]))
-            bits = [f"{L['latency_ms']/1000:.1f}s"]
-            if L["retrieval_score"] is not None:
-                bits.append(f"match {L['retrieval_score']:.2f}")
-            if L["tokens"]:
-                bits.append(f"{L['tokens']} tok")
-            st.caption(" · ".join(bits))
-            st.markdown(L["text"][:600])
-            st.caption("Tools: " + " → ".join(L["tools"]))
-            if L["reason"]:
-                st.caption(f"critic: {L['reason'][:120]}")
-    # Gold lane — greyed when no semantic match, present but honest.
-    with cols[-1], st.container(border=True):
-        g = r["gold"]
-        if g:
-            st.markdown("**gold reference** ✓")
-            st.caption(f"matched {g['id']} · sim {g['score']:.2f}")
-            st.markdown(g["reference"][:600])
-        else:
-            st.markdown(":gray[**gold reference**]")
-            st.caption("no gold hit — this question isn't in the curated set")
-
-
 def render_ask():
     st.markdown("#### Ask about stats, rules, or cricket history")
     st.caption("It routes each question to the right source — the Cricsheet database, the rule "
                "books, the encyclopedia, or the web. A critic checks the answer before it ships, "
                "and every step is on the record.")
-    # Keyed widget + callback-set state, so a sample button can force back to Chat
-    # (passing `default` alone won't override the widget's remembered selection).
-    st.session_state.setdefault("mode_sel", MODES[0])
-    mode = st.segmented_control("mode", MODES, key="mode_sel", label_visibility="collapsed")
-    (render_compare if mode == "🔀 Compare" else render_chat)()
+    render_chat()
 
 
 # --- tools (nav rail) ------------------------------------------------------
@@ -454,8 +395,8 @@ def render_howitworks():
         st.divider()
 
         st.markdown("**Routing** — richer tool descriptions and coverage notes do the work, not hardcoded "
-                    "keyword rules. A small answerer (gpt-mini) routed on par with a strong model this way; "
-                    "the numbers on this page are now measured on Sonnet, after the OpenAI quota ran out.")
+                    "keyword rules. A small model routed on par with a strong one this way; the numbers on "
+                    "this page are measured on Sonnet.")
         st.caption("Example — the same router discriminates by intent and by data coverage:")
         st.markdown("- *“most runs in IPL 2016?”* → **cricket_stats** (in-window SQL)\n"
                     "- *“why was the 2019 final controversial?”* → **semantic_search** (wiki prose)\n"
@@ -503,9 +444,9 @@ def render_howitworks():
         st.divider()
 
         st.markdown("**Judge** — a second model grades the answers, to catch a model marking its own "
-                    "homework. The check was cross-vendor while gpt answered and Sonnet judged; the OpenAI "
-                    "quota ran out mid-run, so Sonnet now answers and Haiku grades. Same vendor, shared "
-                    "training — read the gap as a floor on self-preference, not a measurement of it.")
+                    "homework. Sonnet answers and Haiku grades — same vendor, shared training, which weakens "
+                    "the check; a non-Anthropic judge would make it stronger. Read the gap as a floor on "
+                    "self-preference, not a measurement of it.")
         st.caption("The sign flipped when the pair changed. Under gpt/Sonnet the self-judge scored the agent "
                    "LOWER than the cross judge (56% vs 60%) — no self-preference. Under Sonnet/Haiku it "
                    "scores HIGHER (88% vs 84%). That is the direction self-preference predicts, but Haiku "
@@ -655,6 +596,6 @@ with st.sidebar:
         st.caption("Try one — tap to ask:")
         for sample, why in SAMPLES:
             st.button(sample, key=f"s_{sample[:20]}", use_container_width=True, help=why,
-                      on_click=lambda s=sample: st.session_state.update(pending=s, mode_sel="💬 Chat"))
+                      on_click=lambda s=sample: st.session_state.update(pending=s))
 
 {"Ask": render_ask, "Traces": render_traces, "How": render_howitworks}[nav]()
