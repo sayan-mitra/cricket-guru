@@ -63,7 +63,11 @@ surname alone can cover several players; when you cannot pin the initials, GROUP
 return one row per player rather than summing strangers together.
 
 Teams and events: international team names are stable (New Zealand, Sri Lanka), but franchise and event names
-vary and get renamed — match those with ILIKE ('Delhi Capitals'/'Delhi Daredevils'). format already
+vary and get renamed — match those with ILIKE. A franchise can appear under more than one string across
+its history: the city gets respelled, a sponsor is added or dropped, the nickname is kept. Both forms
+sit in the table as different values, so a filter on the full registered name silently reads half the
+club and the query still returns rows. Match on ONE distinctive word, whichever part of the name is
+likely to have survived, never the whole name. format already
 scopes the competition (IPL/ODI/Test/T20I), so do NOT also
 filter on event_name for a single match — it over-constrains and can return nothing. To locate a
 specific match ('the final', 'the match against X'), identify it by the teams and the relevant/latest
@@ -148,6 +152,9 @@ _VOCAB = {
     "player": ("cricsheet.player_lineups", "player"),
 }
 _PEOPLE = {"batter", "bowler", "non_striker", "player_out", "player"}
+# Columns where several stored strings can name the same side. Franchises get renamed mid-history and
+# both spellings stay in the table, so a filter can match real rows and still miss half the club.
+_TEAMISH = {"team1", "team2", "winner", "toss_winner", "batting_team", "bowling_team", "event_name"}
 _FILTER_RE = re.compile(r"\b(" + "|".join(_VOCAB) + r")\s*(?:i?like|=)\s*'([^']*)'", re.I)
 MAX_PROBES = 6           # filters we look up per empty result — the probe runs on the failure path
 
@@ -155,6 +162,17 @@ MAX_PROBES = 6           # filters we look up per empty result — the probe run
 def _clean(sql):
     sql = re.sub(r"```sql|```", "", sql).strip()
     return sql.split(";")[0].strip()          # single statement only
+
+
+def _words(name):
+    return {w.lower() for w in re.split(r"[^A-Za-z0-9]+", name) if len(w) >= 4}
+
+
+def _shares_word(a, b):
+    """A rename keeps part of the name — the city, or the nickname. Substring overlap isn't enough:
+    'Chennai Super Kings' and 'Rising Pune Supergiant' share the letters of 'Super' and nothing else,
+    and their seasons happen not to overlap because Chennai was suspended in the years Pune played."""
+    return bool(_words(a) & _words(b))
 
 
 def _all_null_or_zero(rows, sql):
@@ -180,7 +198,7 @@ class StatsSQLArm:
 
     def answer(self, question):
         steps, prompt, sql, rows, err = [], question, "", None, None
-        failures = []
+        failures, alias_checked = [], False
         for i in range(MAX_SQL_TRIES):
             sql = _clean(self.sqlgen.run_sync(prompt).output)
             steps.append({"name": f"sqlgen #{i+1}", "output": sql,
@@ -198,6 +216,19 @@ class StatsSQLArm:
             steps.append({"name": f"execute #{i+1}", "input": sql,
                           "output": f"ERROR: {err}" if err else str(rows)})
             if err is None and rows:
+                # Rows came back, but a team filter can still be half-blind to a renamed club. Worth
+                # one corrective pass; after that take what we have rather than loop on it.
+                alias = [] if alias_checked else self._aliases(sql)
+                if alias and i < MAX_SQL_TRIES - 1:
+                    alias_checked = True
+                    steps.append({"name": f"alias probe #{i+1}", "input": sql,
+                                  "output": "\n".join(alias)})
+                    failures.append((sql, "returned rows, but the filter misses the same side stored "
+                                          "under another name:\n" + "\n".join(alias)))
+                    prompt = (f"{question}\n\nThe query below ran and returned rows, but its filters are "
+                              f"too narrow, so the answer would cover only part of the data. Return ONE "
+                              f"corrected read-only query.\n\nSQL:\n{sql}\n" + "\n".join(alias))
+                    continue
                 break
             if err is None:                        # valid query but no rows — usually over-constrained
                 if i == MAX_SQL_TRIES - 1:
@@ -282,6 +313,57 @@ class StatsSQLArm:
                 lines.append(hint)
         return ("Checked against the database, these filter values are the problem:\n"
                 + "\n".join(lines)) if lines else None
+
+    def _aliases(self, sql):
+        """Catch the query that returns rows and is still wrong.
+
+        A team filter can match real rows while missing the same club under its other name — a city
+        respelled, a sponsor added — and nothing looks broken: the numbers are just computed over part
+        of the history. So for each team filter, compare what the whole literal matches against what
+        each of its own words matches. If a word reaches stored values the filter doesn't, the filter
+        is narrower than the side it names. No list of clubs anywhere; the table says which names go
+        together.
+        """
+        lines = []
+        for col, lit in _FILTER_RE.findall(sql):
+            col, core = col.lower(), lit.strip("%").strip()
+            if col not in _TEAMISH or len(core) < 4:
+                continue
+            table, column = _VOCAB[col]
+            matched = set(self._values(table, column, core, limit=25))
+            if not matched:
+                continue                      # a dead filter is the empty-result probe's job
+            for tok in sorted(set(re.split(r"[^A-Za-z0-9]+", core)), key=len, reverse=True):
+                if len(tok) < 4 or tok.lower() == core.lower():
+                    continue
+                missed = {x for x in self._values(table, column, tok, limit=25) if x not in matched
+                          and any(_shares_word(m, x) and self._renamed(m, x) for m in matched)}
+                if missed:
+                    lines.append(
+                        f"  {col} '{lit}' matched {sorted(matched)} but '{tok}' also matches "
+                        f"{sorted(missed)} — the same side stored under another name. Match on "
+                        f"'%{tok}%' instead, or the answer covers only part of the history.")
+                    break
+        return lines
+
+    def _renamed(self, a, b):
+        """Are these two stored names the same club? A club never plays a season as both names, so
+        two names that share a word and never appear in the same season are a rename; two that do
+        are separate clubs whose names happen to overlap (plenty of Super Kings and Super Giants)."""
+        conn = connect()
+        try:
+            cur = conn.cursor()
+            cur.execute(
+                "SELECT COUNT(*) FROM ("
+                "  SELECT season FROM cricsheet.matches WHERE team1 = %s OR team2 = %s"
+                "  INTERSECT"
+                "  SELECT season FROM cricsheet.matches WHERE team1 = %s OR team2 = %s) t",
+                (a, a, b, b))
+            return cur.fetchone()[0] == 0
+        except Exception:
+            return False
+        finally:
+            conn.close()
 
     def _values(self, table, column, needle, limit=8):
         """Values of a whitelisted column containing needle, commonest first — a surname search should

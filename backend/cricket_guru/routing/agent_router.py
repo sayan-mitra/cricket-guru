@@ -13,7 +13,7 @@ from cricket_guru import config, guardrails
 from cricket_guru.arms.base import Answer
 from cricket_guru.arms.stats_sql import StatsSQLArm
 from cricket_guru.arms.text_rag import TextRAGArm
-from cricket_guru.llm import SETTINGS
+from cricket_guru.llm import SETTINGS, agent
 from cricket_guru.tools.web_search import sources_only, web_search_frozen
 from cricket_guru.trace import Trace
 
@@ -22,7 +22,16 @@ try:
 except Exception:  # keep working across pydantic-ai versions
     UsageLimitExceeded = Exception
 
-LOOP_CAP = 6   # max model requests per question (tool guardrail)
+# Max model requests per question (tool guardrail). A three-part question — a total, a margin, and a
+# player's score — spends one call per part before it can compose, and retries come out of the same
+# budget, so 6 cut off questions that were answering fine.
+LOOP_CAP = 10
+
+SALVAGE_SYS = (
+    "You are Cricket Guru. The tool budget ran out before the agent finished, so answer the question "
+    "from the tool results below and nothing else. Give every part you can support, and say plainly "
+    "which parts you could not determine. Never fill a gap with your own knowledge."
+)
 
 SYS = (
     "You are Cricket Guru. Answer cricket questions by calling the right tool:\n"
@@ -159,7 +168,18 @@ class AgentRouter:
                 out = result.output
                 tokens = getattr(result.usage(), "total_tokens", 0) or 0
             except UsageLimitExceeded:
-                return self._blocked(question, "Stopped: hit the tool-call limit.")
+                # Don't throw away what the tools already returned. Running out of budget on the third
+                # part of a three-part question used to discard correct answers to the first two and
+                # reply "Stopped: hit the tool-call limit."
+                if not self._evidence:
+                    return self._blocked(question, "Stopped: hit the tool-call limit.")
+                out = agent(SALVAGE_SYS).run_sync(
+                    f"Question: {question}\n\nTool results:\n" + "\n\n".join(self._evidence)).output
+                s["output"] = out
+                s["input"] = f"[system]\n{SALVAGE_SYS}\n\n[user]\n{question}"
+                self._t.spans.append({"kind": "action", "name": "salvage", "ms": 0,
+                                      "input": "tool budget exhausted",
+                                      "output": "answered from the evidence already gathered"})
             s["tokens"] = tokens
             s["input"] = f"[system]\n{SYS}\n\n[user]\n{asked}"
             s["output"] = out
