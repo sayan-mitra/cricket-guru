@@ -6,6 +6,10 @@ Group: IP8, Cricket Guru. Framework: Pydantic AI.
 
 Live demo: <https://cricket-guru-production.up.railway.app>
 
+## Demo
+
+https://github.com/user-attachments/assets/7cd8e437-fc19-4e2f-b517-6be3af796be5
+
 ## The idea
 
 Cricket knowledge lives in two incompatible shapes. Prose holds narrative (why a match mattered, how a rule works); structured records hold exact facts (most runs in IPL 2016). No single retrieval method serves both, and records go stale the moment they break. So Cricket Guru is an agent that reads the question and picks the right tool, and the project measures where each approach wins.
