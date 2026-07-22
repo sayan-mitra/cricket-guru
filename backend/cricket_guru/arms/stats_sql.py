@@ -18,7 +18,7 @@ matches — one row per match
   event_name                   series / tournament, e.g. 'India tour of England', 'ICC World Cup'
   match_date                   date
   venue, city                  ground and city
-  team1, team2                 the two sides, full names (e.g. 'India')
+  team1, team2                 the two sides, full names (e.g. 'New Zealand')
   toss_winner, toss_decision
   winner                       winning team; NULL = tie / draw / no result
   result                       'normal' | 'tie' | 'draw' | 'no result'
@@ -55,16 +55,16 @@ cannot be answered here — do not fabricate them from lineups or matches played
 SQL_SYS = f"""Write ONE read-only PostgreSQL SELECT to answer a cricket question over this schema:
 {SCHEMA}
 
-Names: players are stored as initial(s)+surname, e.g. 'JM Anderson', 'V Kohli', 'RG Sharma'. Match on
-the SURNAME with a leading wildcard — bowler ILIKE '%Anderson' — never exact '='. Never put the given
-name inside the wildcards: '%Rohit Sharma%' matches nothing, because no stored value carries the given
+Names: players are stored as initial(s)+surname, e.g. 'DW Steyn', 'DL Vettori', 'MG Johnson'. Match on
+the SURNAME with a leading wildcard — bowler ILIKE '%Steyn' — never exact '='. Never put the given
+name inside the wildcards: '%Dale Steyn%' matches nothing, because no stored value carries the given
 name, and worse, it can match an unrelated player who happens to be registered under a full name. A
 surname alone can cover several players; when you cannot pin the initials, GROUP BY the name column and
 return one row per player rather than summing strangers together.
 
-Teams and events: international team names are stable (India, England), but franchise and event names
-vary and get renamed — match those with ILIKE ('Punjab Kings'/'Kings XI Punjab', 'Royal Challengers
-Bengaluru'/'Bangalore'). format already scopes the competition (IPL/ODI/Test/T20I), so do NOT also
+Teams and events: international team names are stable (New Zealand, Sri Lanka), but franchise and event names
+vary and get renamed — match those with ILIKE ('Delhi Capitals'/'Delhi Daredevils'). format already
+scopes the competition (IPL/ODI/Test/T20I), so do NOT also
 filter on event_name for a single match — it over-constrains and can return nothing. To locate a
 specific match ('the final', 'the match against X'), identify it by the teams and the relevant/latest
 date; do NOT add a winner filter unless the question asks who won.
@@ -77,9 +77,9 @@ Series/tours: identified by (event_name, season), e.g. ('India tour of England',
 won a series, aggregate that series' matches by the winner column (winner IS NULL = a draw). For the
 'last/most recent' series between two teams, take the (event_name, season) with the latest match_date
 where both teams appear, then tally winners.
-Example — who won the last India-England Test series:
+Example — who won the last New Zealand-Bangladesh Test series:
   WITH s AS (SELECT event_name, season FROM cricsheet.matches WHERE format='Test'
-    AND team1 IN ('India','England') AND team2 IN ('India','England')
+    AND team1 IN ('New Zealand','Bangladesh') AND team2 IN ('New Zealand','Bangladesh')
     GROUP BY event_name, season ORDER BY MAX(match_date) DESC LIMIT 1)
   SELECT m.winner, COUNT(*) FROM cricsheet.matches m
     JOIN s ON m.event_name=s.event_name AND m.season=s.season GROUP BY m.winner;
@@ -91,7 +91,10 @@ format + season + the two teams and leave event_name out of it — never filter 
 colloquial trophy name (Border-Gavaskar, The Ashes, Freedom Trophy, Pataudi). event_name is for
 multi-team tournaments ('ICC World Cup', 'Indian Premier League').
 
-A split-year season is written with a slash — '2024/25', never '2024-25' or '2024-2025'.
+A split-year season is written with a slash — '2024/25', never '2024-25' or '2024-2025'. A bare year in
+a question ('most wickets in Tests 2017', 'the IPL 2016') names the season column, not the calendar
+year — filter season, not EXTRACT(year FROM match_date). The two disagree: a season labelled '2017'
+holds matches either side of the new year, and a tour that starts in December sits in '2024/25'.
 
 Never mask an empty result. Do not wrap an aggregate in COALESCE(...,0) and do not add a fallback row:
 when nothing matches, the query must come back empty. A zero conjured by COALESCE reads downstream as a
@@ -101,6 +104,8 @@ Return ONLY the SQL — no markdown fences, no prose."""
 PHRASE_SYS = ("Answer the cricket question in one precise sentence using the SQL result. "
               "Include the number. For a series result, give the win tally per team and count "
               "any no-winner rows as draws (e.g. '2-2, with one drawn Test'). "
+              "A NULL cell means that part of the query matched nothing — say so for that part, and "
+              "never report a NULL or a 0 standing in for it as a real figure. "
               "The database covers only Tests from Dec 2001, ODIs from 2002, T20Is from 2005, "
               "and IPL from 2008. If the number is a career or aggregate total for a player or "
               "team whose career began BEFORE that window, give it but add that it counts only "
@@ -198,7 +203,7 @@ class StatsSQLArm:
                 if i == MAX_SQL_TRIES - 1:
                     break                          # out of tries; accept it as genuinely no data
                 fb = ("returned no rows — filters are likely too strict. Match teams/events on a "
-                      "distinctive word with ILIKE (e.g. ILIKE '%Punjab%', ILIKE '%Challengers%'), use "
+                      "distinctive word with ILIKE (e.g. ILIKE '%Delhi%', ILIKE '%Capitals%'), use "
                       "OR between the two sides of a match, and drop filters the question doesn't "
                       "require (winner, exact ball counts).")
                 probe = self._probe(sql)

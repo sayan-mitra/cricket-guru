@@ -26,15 +26,17 @@ LOOP_CAP = 6   # max model requests per question (tool guardrail)
 SYS = (
     "You are Cricket Guru. Answer cricket questions by calling the right tool:\n"
     "- cricket_stats for numbers COMPUTABLE from the match database — a specific season/match/format "
-    "tally WITHIN coverage (Tests 2001+, ODIs 2002+, T20Is 2005+, IPL 2008+), e.g. 'most runs in IPL "
-    "2016', 'who won the last India-England series'. NOT for all-time records, tournament history "
-    "across years, historical firsts, events before the window, OR captaincy/leadership records and "
-    "player careers (the database has no captain data — it knows who played, not who led).\n"
+    "tally WITHIN coverage (Tests 2001+, ODIs 2002+, T20Is 2005+, IPL 2008+), e.g. 'how many Test "
+    "wickets did DL Vettori take in 2010', 'who won the last New Zealand-Bangladesh Test series'. NOT "
+    "for all-time records, tournament history across years, historical firsts, events before the "
+    "window, OR captaincy/leadership records and player careers (the database has no captain data — it "
+    "knows who played, not who led).\n"
     "- cricket_rules for laws/officiating (no-ball, LBW, DRS, free hit, dismissals, playing conditions)\n"
     "- cricket_prose for history, records, and narrative — why a match mattered, controversies, player "
     "style, tournament history, captaincy and leadership records, player careers, AND all-time/"
-    "historical facts EVEN WHEN the answer is a number ('how many times has England hosted the World "
-    "Cup', 'most wickets in a single World Cup', \"Kohli's Test captaincy record vs Dhoni's\").\n"
+    "historical facts EVEN WHEN the answer is a number ('how many World Cup finals has New Zealand "
+    "reached', 'which captain has the best Test win rate', 'a bowler's career strike rate across "
+    "formats').\n"
     "- web_search only when the tools are insufficient or the answer may be out of date\n"
     "A tally for one named series, season, or match that sits inside coverage is cricket_stats work — "
     "call it FIRST, before prose or the web, even when the series is known by a trophy name.\n"
@@ -72,10 +74,11 @@ class AgentRouter:
             """Exact cricket facts COMPUTABLE from the structured match database (Cricsheet): match
             and series results, winners, margins and scores, plus player aggregates (runs, wickets,
             sixes) — queryable by team, season, format, or date, WITHIN coverage (Tests from Dec
-            2001, ODIs 2002, T20Is 2005, IPL 2008). Use for a specific in-window tally like 'most
-            runs in IPL 2016' or 'who won the last India-England series'. Do NOT use for all-time
-            records, tournament history, historical firsts, events before the window, or captaincy/
-            leadership and player careers (no captain data exists) — those go to cricket_prose."""
+            2001, ODIs 2002, T20Is 2005, IPL 2008). Use for a specific in-window tally like 'how many
+            Test wickets did DL Vettori take in 2010' or 'who won the last New Zealand-Bangladesh
+            Test series'. Do NOT use for all-time records, tournament history, historical firsts,
+            events before the window, or captaincy/leadership and player careers (no captain data
+            exists) — those go to cricket_prose."""
             with self._t.span("cricket_stats", "tool") as s:
                 r = stats.answer(question)
                 out = r.text
@@ -88,8 +91,8 @@ class AgentRouter:
             """History, records, and narrative from the encyclopedia: why a match mattered,
             controversies, player style, tournament history across years, captaincy and leadership
             records, player careers, all-time records and historical firsts — EVEN WHEN the answer is
-            a number (how many times England has hosted the World Cup; Kohli's Test captaincy record;
-            a batsman's score in a 1979 final)."""
+            a number (how many World Cup finals New Zealand has reached; which captain has the best
+            Test win rate; a bowler's career strike rate across formats)."""
             with self._t.span("cricket_prose", "tool") as s:
                 r = text.answer(question)
                 out = r.text
