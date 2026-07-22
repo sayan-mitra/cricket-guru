@@ -17,6 +17,7 @@ class Answer:
     latency_ms: int = 0
     tokens: int = 0
     grounded: Optional[bool] = None                  # output guardrail verdict
+    grounded_reason: str = ""                        # why — surfaced when the guard blocks the answer
     blocked: Optional[str] = None                    # reason if a guardrail blocked
     evidence: str = ""                               # context/tool text the critic grounds against
     retrieval_score: Optional[float] = None          # max chunk similarity; None if no corpus retrieval

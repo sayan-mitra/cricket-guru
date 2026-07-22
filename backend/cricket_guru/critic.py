@@ -28,7 +28,8 @@ COVERAGE_WINDOW = ("The stats database covers only: Test matches from Dec 2001, 
                    "T20Is from 2005, IPL from 2008. Anything earlier is absent.")
 
 CRITIC_SYS = f"""You grade a finished cricket answer before it ships. You are given the QUESTION, the
-ANSWER, and the EVIDENCE (tool output — SQL result rows with dates, or retrieved passages).
+ANSWER, the TOOLS that ran, and the EVIDENCE (tool output — SQL result rows with dates, or retrieved
+passages).
 
 {COVERAGE_WINDOW}
 
@@ -43,6 +44,15 @@ Return exactly one verdict:
   be wrong. The answer should be verified against the web.
 - hallucination: the evidence does not support the answer's main claim, and a web search would not fix
   it. Abstain.
+
+One more check, on where the number came from. The stats database is the authority for anything
+computable from match records — a per-series or per-season tally, a match result, a player's runs or
+wickets over a stated period. If the answer's key figure is a computable in-window tally like that but
+came from web_search, with the stats tool absent or returning nothing, the database should have
+answered and did not: the query failed, and an unchecked web figure has silently replaced it. Return
+hallucination — that is exactly how a wrong number ships wearing a correct-looking citation. This does
+NOT apply to facts the database cannot hold whatever the date — retirements, captaincy, awards, news,
+anything about a player's life rather than the balls bowled.
 
 Reason briefly, judging scope by cricket history: which formats or matchups predate the window, and
 which exist entirely inside it."""
@@ -75,8 +85,9 @@ def critique(question: str, answer: Answer) -> Verdict:
     if score is not None and score < config.CRITIC_THRESHOLD:
         return Verdict(RETRIEVAL_GAP,
                        f"weak retrieval (top similarity {score:.2f} < {config.CRITIC_THRESHOLD})")
+    tools = ", ".join(answer.tool_trace) or "(none)"
     v = _agent().run_sync(
-        f"QUESTION: {question}\n\nANSWER: {answer.text}\n\nEVIDENCE:\n{answer.evidence or '(none)'}"
-    ).output
+        f"QUESTION: {question}\n\nANSWER: {answer.text}\n\nTOOLS: {tools}\n\n"
+        f"EVIDENCE:\n{answer.evidence or '(none)'}").output
     verdict = v.verdict if v.verdict in (OK, RETRIEVAL_GAP, HALLUCINATION) else OK
     return Verdict(verdict, v.reason)

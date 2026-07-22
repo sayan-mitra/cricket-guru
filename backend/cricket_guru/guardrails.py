@@ -52,7 +52,18 @@ def _ground_agent(model=None):
             "evidence AND nothing in the answer contradicts it. Extra explanatory detail or general "
             "cricket knowledge that goes beyond the evidence is acceptable as long as it does not "
             "contradict the evidence. grounded=false only when the core answer is unsupported by the "
-            "evidence, or the answer contradicts it."))
+            "evidence, or the answer contradicts it.\n"
+            "When the evidence carries CONFLICTING values for the quantity the answer states — two "
+            "different run tallies for the same player and series, two different record holders — one "
+            "supporting span is not enough, because the other span says the answer is wrong. Rank the "
+            "evidence and check the answer took the strongest: a SQL result from the match database "
+            "outranks a web snippet, and a snippet attributed to a named source outranks a search "
+            "engine's own summary. If the answer states a value that a stronger piece of evidence "
+            "contradicts, grounded=false, and name both values in the reason.\n"
+            "Read statistical snippets rather than skimming them for a familiar number. Two snippets "
+            "giving a player different totals are covering different periods, and at most one of them "
+            "answers the question asked — ranking evidence means picking the row whose period matches "
+            "the question, not the first plausible figure."))
     return _ground[model]
 
 

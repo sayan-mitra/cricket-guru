@@ -24,6 +24,8 @@ from cricket_guru import config
 SNAPSHOT = {}
 
 MARKER = "[WEB]"   # the answer-side caution is driven by this + the system prompt
+SUMMARY_TAG = "summary (engine-written, unverified — check it against the sources):"
+SOURCES_TAG = "sources:"
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/120 Safari/537.36")
 
@@ -72,10 +74,22 @@ def _tavily_call(query: str, domains) -> str | None:
         return None
     parts = []
     if ans:
-        parts.append(f"summary (verify against the sources): {ans}")
+        parts.append(f"{SUMMARY_TAG} {ans}")
     if snips:
-        parts.append(f"sources: {snips}")
+        parts.append(f"{SOURCES_TAG} {snips}")
     return f"{MARKER} " + "  ".join(parts)
+
+
+def sources_only(text: str) -> str:
+    """The evidence half of a web result — the sourced snippets, without the engine's summary.
+
+    Grounding an answer against that summary is circular: the summary is a claim derived from the
+    same snippets, and Tavily collapsed two Border-Gavaskar editions into one wrong figure (242 for
+    Rohit Sharma, against the 31 sitting in its own ESPNcricinfo row) that the guard then waved
+    through. Backends that return snippets only pass through unchanged.
+    """
+    i = text.find(SOURCES_TAG)
+    return f"{MARKER} {text[i:]}" if i != -1 else text
 
 
 def _tavily(query: str) -> str | None:

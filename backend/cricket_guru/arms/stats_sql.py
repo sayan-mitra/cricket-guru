@@ -55,9 +55,12 @@ cannot be answered here — do not fabricate them from lineups or matches played
 SQL_SYS = f"""Write ONE read-only PostgreSQL SELECT to answer a cricket question over this schema:
 {SCHEMA}
 
-Names: players are stored as initial(s)+surname, e.g. 'JM Anderson', 'V Kohli', 'SR Tendulkar' — when
-the user names a player by surname or full name, match with ILIKE (e.g. bowler ILIKE '%Anderson'),
-never exact '=', since the stored form carries initials.
+Names: players are stored as initial(s)+surname, e.g. 'JM Anderson', 'V Kohli', 'RG Sharma'. Match on
+the SURNAME with a leading wildcard — bowler ILIKE '%Anderson' — never exact '='. Never put the given
+name inside the wildcards: '%Rohit Sharma%' matches nothing, because no stored value carries the given
+name, and worse, it can match an unrelated player who happens to be registered under a full name. A
+surname alone can cover several players; when you cannot pin the initials, GROUP BY the name column and
+return one row per player rather than summing strangers together.
 
 Teams and events: international team names are stable (India, England), but franchise and event names
 vary and get renamed — match those with ILIKE ('Punjab Kings'/'Kings XI Punjab', 'Royal Challengers
@@ -81,6 +84,18 @@ Example — who won the last India-England Test series:
   SELECT m.winner, COUNT(*) FROM cricsheet.matches m
     JOIN s ON m.event_name=s.event_name AND m.season=s.season GROUP BY m.winner;
 This returns each team's win count plus a NULL-winner row = drawn Tests; do NOT filter out NULL winners.
+
+Trophy names are NOT stored. Cricsheet labels most bilateral series as tours, so the 2024/25
+Border-Gavaskar Trophy lives under event_name 'India tour of Australia'. Identify a bilateral series by
+format + season + the two teams and leave event_name out of it — never filter event_name on a
+colloquial trophy name (Border-Gavaskar, The Ashes, Freedom Trophy, Pataudi). event_name is for
+multi-team tournaments ('ICC World Cup', 'Indian Premier League').
+
+A split-year season is written with a slash — '2024/25', never '2024-25' or '2024-2025'.
+
+Never mask an empty result. Do not wrap an aggregate in COALESCE(...,0) and do not add a fallback row:
+when nothing matches, the query must come back empty. A zero conjured by COALESCE reads downstream as a
+real answer — 'scored 0 runs' — and it stops the retry that would have fixed the filters.
 Return ONLY the SQL — no markdown fences, no prose."""
 
 PHRASE_SYS = ("Answer the cricket question in one precise sentence using the SQL result. "
@@ -107,10 +122,50 @@ _FMT_RE = re.compile(r"format\s*=\s*'(test|odi|t20i|ipl)'", re.I)
 _NAME_RE = re.compile(
     r"\b(?:batter|bowler|player|non_striker|player_out)\s+(?:i?like\s*'%?|=\s*')([^%']+)", re.I)
 
+# Columns whose values are free text the model can only guess at. When a query comes back empty we
+# look up what the database actually holds for each filtered literal, so the retry corrects the wrong
+# value instead of rewording it — three attempts once died in a row on event_name ILIKE '%Border%'
+# for a series stored as 'India tour of Australia'.
+_VOCAB = {
+    "event_name": ("cricsheet.matches", "event_name"),
+    "season": ("cricsheet.matches", "season"),
+    "venue": ("cricsheet.matches", "venue"),
+    "city": ("cricsheet.matches", "city"),
+    "team1": ("cricsheet.matches", "team1"),
+    "team2": ("cricsheet.matches", "team2"),
+    "winner": ("cricsheet.matches", "winner"),
+    "batting_team": ("cricsheet.innings", "batting_team"),
+    "bowling_team": ("cricsheet.innings", "bowling_team"),
+    "batter": ("cricsheet.deliveries", "batter"),
+    "bowler": ("cricsheet.deliveries", "bowler"),
+    "non_striker": ("cricsheet.deliveries", "non_striker"),
+    "player_out": ("cricsheet.deliveries", "player_out"),
+    "player": ("cricsheet.player_lineups", "player"),
+}
+_PEOPLE = {"batter", "bowler", "non_striker", "player_out", "player"}
+_FILTER_RE = re.compile(r"\b(" + "|".join(_VOCAB) + r")\s*(?:i?like|=)\s*'([^']*)'", re.I)
+MAX_PROBES = 6           # filters we look up per empty result — the probe runs on the failure path
+
 
 def _clean(sql):
     sql = re.sub(r"```sql|```", "", sql).strip()
     return sql.split(";")[0].strip()          # single statement only
+
+
+def _all_null_or_zero(rows, sql):
+    """Is this 'no rows' wearing a disguise?
+
+    An aggregate over zero matching rows still comes back as one row — all NULLs, or all zeros once
+    COALESCE has been wrapped round it. Either shape reads downstream as a real answer and skips the
+    retry that would have fixed the filters, which is how the arm reported 'Rohit Sharma scored 0 runs'
+    off a query whose season and player filters both matched nothing.
+    """
+    if len(rows) != 1:
+        return False
+    cells = list(rows[0])
+    if all(c is None for c in cells):
+        return True
+    return "coalesce" in sql.lower() and all(c is None or c == 0 for c in cells)
 
 
 class StatsSQLArm:
@@ -133,6 +188,8 @@ class StatsSQLArm:
                 rows, err = None, "not a read-only SELECT/WITH query"
             else:
                 rows, err = self._execute(sql)
+                if err is None and _all_null_or_zero(rows, sql):
+                    rows = []                      # a masked empty result, not a genuine zero
             steps.append({"name": f"execute #{i+1}", "input": sql,
                           "output": f"ERROR: {err}" if err else str(rows)})
             if err is None and rows:
@@ -144,6 +201,10 @@ class StatsSQLArm:
                       "distinctive word with ILIKE (e.g. ILIKE '%Punjab%', ILIKE '%Challengers%'), use "
                       "OR between the two sides of a match, and drop filters the question doesn't "
                       "require (winner, exact ball counts).")
+                probe = self._probe(sql)
+                if probe:
+                    fb += "\n" + probe
+                    steps.append({"name": f"value probe #{i+1}", "input": sql, "output": probe})
             else:
                 fb = err
             # feed back EVERY prior failure (errors AND empty results), so a fix isn't reintroduced
@@ -180,6 +241,92 @@ class StatsSQLArm:
             return None, str(e)
         finally:
             conn.close()
+
+    def _probe(self, sql):
+        """Ground the retry in real column values: for each literal the empty query filtered on, say
+        whether the database holds it and what it holds instead. Without this the model rewords the
+        same dead filter — it has no way to see that no event_name contains 'Border' for 2024/25."""
+        lines, seen = [], set()
+        for col, lit in _FILTER_RE.findall(sql):
+            col, core = col.lower(), lit.strip("%").strip()
+            if len(core) < 3 or (col, core.lower()) in seen or len(seen) >= MAX_PROBES:
+                continue
+            seen.add((col, core.lower()))
+            table, column = _VOCAB[col]
+            if not self._values(table, column, core):
+                tok, alts = self._nearest(table, column, core)
+                lines.append(f"  {col} '{lit}' matches NOTHING stored" + (
+                    f" — values containing '{tok}': {', '.join(alts)}" if alts
+                    else " — nothing resembles it either; drop this filter"))
+            elif col in _PEOPLE and " " in core:
+                # the literal matched, but a full name in a surname column is nearly always the wrong
+                # person — the stored form is initials+surname, so anything with a given name is a
+                # different registration
+                surname = core.split()[-1]
+                alts = self._values(table, column, surname)
+                lines.append(f"  {col} '{lit}' carries a given name — stored players are "
+                             f"initials+surname. Matching '{surname}': {', '.join(alts) or 'none'}")
+        # An event_name filter is the prime suspect on any empty result, even when the literal exists:
+        # 'Border-Gavaskar Trophy' is a real label for the 2008-2017 editions and a dead one for
+        # 2024/25, so checking the value in isolation clears a filter that is still wrong here.
+        if any(c.lower() == "event_name" for c, _ in _FILTER_RE.findall(sql)):
+            hint = self._series_hint(sql)
+            if hint:
+                lines.append("  the event_name filter is the likeliest culprit — drop it and identify "
+                             "the series by teams + format + season instead")
+                lines.append(hint)
+        return ("Checked against the database, these filter values are the problem:\n"
+                + "\n".join(lines)) if lines else None
+
+    def _values(self, table, column, needle, limit=8):
+        """Values of a whitelisted column containing needle, commonest first — a surname search should
+        surface RG Sharma ahead of the alphabet. Table/column come from _VOCAB, never from the model;
+        only the needle reaches the database, parameterized."""
+        conn = connect()
+        try:
+            cur = conn.cursor()
+            cur.execute(f"SELECT {column} FROM {table} WHERE {column} ILIKE %s "
+                        f"GROUP BY {column} ORDER BY COUNT(*) DESC LIMIT {limit}", (f"%{needle}%",))
+            return [str(r[0]) for r in cur.fetchall() if r[0] is not None]
+        except Exception:
+            return []
+        finally:
+            conn.close()
+
+    def _nearest(self, table, column, core):
+        """Longest word of a dead literal that does match something — '2024-25' has no hits, but
+        '2024' finds '2024/25'. Returns (token, values) or ('', [])."""
+        for tok in sorted(re.split(r"[^A-Za-z0-9]+", core), key=len, reverse=True):
+            if len(tok) > 3:
+                alts = self._values(table, column, tok)
+                if alts:
+                    return tok, alts
+        return "", []
+
+    def _series_hint(self, sql):
+        """A dead event_name filter usually means the series is stored under its tour name, so list
+        the series that do exist for the teams in the query."""
+        teams = [t.strip("%").strip() for c, t in _FILTER_RE.findall(sql)
+                 if c.lower() in ("team1", "team2", "batting_team", "bowling_team", "winner")]
+        teams = list(dict.fromkeys(t for t in teams if len(t) > 2))[:2]
+        fmt = _FMT_RE.search(sql)
+        if not (teams and fmt):
+            return None
+        where = " AND ".join(["lower(format) = %s"]
+                             + ["(team1 ILIKE %s OR team2 ILIKE %s)"] * len(teams))
+        params = [fmt.group(1).lower()] + [p for t in teams for p in (f"%{t}%", f"%{t}%")]
+        conn = connect()
+        try:
+            cur = conn.cursor()
+            cur.execute(f"SELECT DISTINCT event_name, season FROM cricsheet.matches WHERE {where} "
+                        f"ORDER BY season DESC LIMIT 10", params)
+            rows = cur.fetchall()
+        except Exception:
+            return None
+        finally:
+            conn.close()
+        return ("  series actually stored for " + " vs ".join(teams) + ": "
+                + "; ".join(f"{e} ({s})" for e, s in rows)) if rows else None
 
     def _boundary_hug(self, sql):
         """B (data backstop): does the player's earliest match in the DB hug the format's

@@ -62,6 +62,16 @@ class Engine:
             "input": f"candidate answer + retrieval_score={base.retrieval_score}",
             "output": f"{v.verdict} — {v.reason}"})
 
+        # The output guard is a gate, not just a metric. Its verdict used to be recorded and then
+        # ignored, which is how '242 runs' shipped with the contradicting '31' row sitting in the same
+        # evidence blob. A rejected answer abstains whatever the critic makes of its scope. We require
+        # evidence to exist first, so 'nothing gathered' stays the critic's call, not an auto-abstain.
+        if base.grounded is False and base.evidence.strip():
+            v = critic.Verdict(critic.HALLUCINATION, base.grounded_reason or
+                               "the evidence doesn't support the answer")
+            base.trace.append({"kind": "critic", "name": "output_guard_gate", "ms": 0,
+                               "input": "grounded=False", "output": f"forced {v.verdict} — {v.reason}"})
+
         text = base.text
         # A retrieval_gap with no retrieval score is a stats/all-time record beyond the data window.
         # The web has repeatedly handed back wrong precise figures for these (272, Warne 708, Anderson

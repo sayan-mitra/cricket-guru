@@ -13,7 +13,7 @@ from cricket_guru import config, guardrails
 from cricket_guru.arms.base import Answer
 from cricket_guru.arms.stats_sql import StatsSQLArm
 from cricket_guru.arms.text_rag import TextRAGArm
-from cricket_guru.tools.web_search import web_search_frozen
+from cricket_guru.tools.web_search import sources_only, web_search_frozen
 from cricket_guru.trace import Trace
 
 try:
@@ -36,6 +36,12 @@ SYS = (
     "historical facts EVEN WHEN the answer is a number ('how many times has England hosted the World "
     "Cup', 'most wickets in a single World Cup', \"Kohli's Test captaincy record vs Dhoni's\").\n"
     "- web_search only when the tools are insufficient or the answer may be out of date\n"
+    "A tally for one named series, season, or match that sits inside coverage is cricket_stats work — "
+    "call it FIRST, before prose or the web, even when the series is known by a trophy name.\n"
+    "Where cricket_stats and web_search disagree on a number, the database wins: give its figure, and "
+    "say the web disagreed rather than quietly picking one. A web result carries a summary line and "
+    "the source snippets it was built from — read the snippets, and never repeat a summary figure the "
+    "snippets contradict.\n"
     "Never invent facts. Prefer cricket_rules over cricket_prose for anything about how the game "
     "is officiated. If a tool returns nothing useful, try web_search rather than guessing. "
     "Say which source your answer came from. When you rely on web_search, START the answer with a "
@@ -109,7 +115,9 @@ class AgentRouter:
             with self._t.span("web_search", "tool") as s:
                 out = web_search_frozen(query)
                 s["input"], s["output"], s["parent"] = query, out, "agent_run"
-            self._evidence.append(out)
+            # only the sourced snippets become evidence — grounding against the engine's own
+            # summary is circular, and that summary is where the wrong numbers come from
+            self._evidence.append(sources_only(out))
             return out
 
         self.agent = agent
@@ -152,12 +160,13 @@ class AgentRouter:
             s["input"] = f"[system]\n{SYS}\n\n[user]\n{asked}"
             s["output"] = out
 
-        grounded = None
+        grounded, grounded_reason = None, ""
         if self.guard:
             with self._t.span("output_guard", "guard") as s:
                 evidence = "\n".join(self._evidence)
                 v = guardrails.check_output(out, evidence)
-                grounded, s["reason"] = v.grounded, v.reason
+                grounded, grounded_reason = v.grounded, v.reason
+                s["reason"] = v.reason
                 s["input"] = f"[evidence]\n{evidence}\n\n[candidate]\n{out}"
                 s["output"] = f"grounded={v.grounded}: {v.reason}"
 
@@ -170,7 +179,7 @@ class AgentRouter:
         scores = [s for s in self._scores if s is not None]
         a = Answer(out, "agent", tool_trace=["agent_router"] + tools,
                    trace=self._t.spans, latency_ms=self._t.elapsed_ms(),
-                   tokens=tokens, grounded=grounded,
+                   tokens=tokens, grounded=grounded, grounded_reason=grounded_reason,
                    evidence="\n".join(self._evidence),
                    retrieval_score=max(scores) if scores else None)
         self._t.save(question, out, {"tokens": tokens, "grounded": grounded})
