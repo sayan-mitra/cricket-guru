@@ -19,6 +19,7 @@ from pydantic_ai import Agent
 
 from cricket_guru import config
 from cricket_guru.arms.base import Answer
+from cricket_guru.llm import SETTINGS
 
 OK = "ok"
 RETRIEVAL_GAP = "retrieval_gap"
@@ -75,7 +76,8 @@ _critic = None
 def _agent():
     global _critic
     if _critic is None:
-        _critic = Agent(config.CRITIC_MODEL, output_type=_CVerdict, system_prompt=CRITIC_SYS)
+        _critic = Agent(config.CRITIC_MODEL, output_type=_CVerdict, system_prompt=CRITIC_SYS,
+                        model_settings=SETTINGS)
     return _critic
 
 

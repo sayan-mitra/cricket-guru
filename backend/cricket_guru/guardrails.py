@@ -12,6 +12,7 @@ from pydantic import BaseModel
 from pydantic_ai import Agent
 
 from cricket_guru import config
+from cricket_guru.llm import SETTINGS
 
 INJECTION = re.compile(
     r"ignore (the |your |all )?(previous|above|prior)|disregard (the|your|all)|"
@@ -36,7 +37,8 @@ _ground = {}      # cached per model — the critic may use its own CRITIC_MODEL
 def _gate_agent():
     global _gate
     if _gate is None:
-        _gate = Agent(config.ANSWERER_MODEL, output_type=Gate, system_prompt=(
+        _gate = Agent(config.ANSWERER_MODEL, output_type=Gate, model_settings=SETTINGS,
+                      system_prompt=(
             "Classify the user message. is_cricket: is it a question about the "
             "sport of cricket? is_safe: is it free of harmful, abusive, or "
             "clearly out-of-scope content?"))
@@ -46,7 +48,8 @@ def _gate_agent():
 def _ground_agent(model=None):
     model = model or config.ANSWERER_MODEL
     if model not in _ground:
-        _ground[model] = Agent(model, output_type=Grounded, system_prompt=(
+        _ground[model] = Agent(model, output_type=Grounded, model_settings=SETTINGS,
+                               system_prompt=(
             "Decide if the candidate answer is trustworthy given the evidence (tool outputs and "
             "retrieved context). grounded=true when the answer's MAIN claim is supported by the "
             "evidence AND nothing in the answer contradicts it. Extra explanatory detail or general "

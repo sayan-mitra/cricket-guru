@@ -13,6 +13,7 @@ from cricket_guru import config, guardrails
 from cricket_guru.arms.base import Answer
 from cricket_guru.arms.stats_sql import StatsSQLArm
 from cricket_guru.arms.text_rag import TextRAGArm
+from cricket_guru.llm import SETTINGS
 from cricket_guru.tools.web_search import sources_only, web_search_frozen
 from cricket_guru.trace import Trace
 
@@ -67,7 +68,7 @@ class AgentRouter:
         rules = TextRAGArm(rules_retrieval or retrieval, chunking, source="rules")  # dense, no rerank
         text.retriever      # warm the in-memory indexes in this (main) thread so
         rules.retriever     # tool worker threads never touch the SQLite-backed store
-        agent = Agent(config.ANSWERER_MODEL, system_prompt=SYS)
+        agent = Agent(config.ANSWERER_MODEL, system_prompt=SYS, model_settings=SETTINGS)
 
         @agent.tool_plain
         def cricket_stats(question: str) -> str:

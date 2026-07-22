@@ -62,6 +62,11 @@ CRITIC_MODEL = os.environ.get("CG_CRITIC_MODEL", ANSWERER_MODEL)
 # retrieval genuinely whiffs. The coverage flag + groundedness do the real work.
 CRITIC_THRESHOLD = float(os.environ.get("CG_CRITIC_THRESHOLD", "0.55"))
 
+# Per-request deadline on every LLM call. Without one the client blocks forever on a socket the far
+# end has already dropped — an eval run sat on a dead CLOSE_WAIT connection for 80 minutes, and the
+# same hang in serving would freeze the app with no error to show the user.
+LLM_TIMEOUT = float(os.environ.get("CG_LLM_TIMEOUT", "120"))
+
 
 def have_llm_keys() -> bool:
     return bool(ANTHROPIC_API_KEY or OPENAI_API_KEY)

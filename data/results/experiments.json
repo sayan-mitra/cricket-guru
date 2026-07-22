@@ -1,27 +1,76 @@
 {
   "L1_chunking": {
-    "fixed": 0.68,
-    "structural": 0.76
+    "fixed": 0.72,
+    "structural": 0.8
   },
   "L3_retrieval": {
-    "dense": 0.68,
-    "hybrid": 0.72
+    "dense": 0.72,
+    "hybrid": 0.84
   },
   "L5_routing": {
-    "rule": 0.5,
-    "agent": 0.906
+    "rule": 0.527,
+    "agent": 0.919
   },
   "L6_judge": {
-    "same": 0.56,
-    "cross": 0.6
+    "same": 0.88,
+    "cross": 0.84
   },
   "rules_chunking": {
-    "fixed": 0.828,
-    "structural": 0.966
+    "fixed": 0.931,
+    "structural": 1.0
   },
   "rules_arm": {
     "hybrid": 0.931
   },
   "sample_size": 15,
-  "narr_gold": "narrative_gold_corpus"
+  "narr_gold": "narrative_gold_corpus",
+  "models": {
+    "answerer": "anthropic:claude-sonnet-5",
+    "critic": "anthropic:claude-sonnet-5",
+    "judge_same": "anthropic:claude-sonnet-5",
+    "judge_cross": "anthropic:claude-haiku-4-5"
+  },
+  "judge_note": "same-vendor, different model \u2014 Haiku grading Sonnet is a floor on self-preference, not a cross-vendor check",
+  "caveats": {
+    "L5_routing.agent": "0.919 = 68/74. The leg first ran 0.892 because two multistep items deadlocked and the harness timed them out; both pass in ~22s once parallel tool calls are off, and were re-scored individually rather than by re-running the whole leg. Stats items: 15/15.",
+    "rules_chunking": "structural is saturated at 29/29 \u2014 the rules gold can no longer separate variants above this.",
+    "L6_judge": "answerer and judge both changed model, so the 0.56->0.88 move mixes 'answers better' with 'grades itself differently'.",
+    "deadlock": "Concurrent tool calls deadlocked the router \u2014 the model returns two tool_use blocks, pydantic-ai runs sync tools on threads, and our tools call run_sync inside. Fixed by parallel_tool_calls=False."
+  },
+  "prompts": "de-leaked \u2014 five gold questions were routing exemplars and four gold answers were named in the SQL prompt until this run",
+  "previous": {
+    "note": "measured before the answerer switched vendor and before the prompts were de-leaked; not comparable leg-for-leg",
+    "models": {
+      "answerer": "openai:gpt-5.4-mini",
+      "critic": "anthropic:claude-sonnet-5",
+      "judge_same": "openai:gpt-5.4-mini",
+      "judge_cross": "anthropic:claude-sonnet-5"
+    },
+    "legs": {
+      "L1_chunking": {
+        "fixed": 0.68,
+        "structural": 0.76
+      },
+      "L3_retrieval": {
+        "dense": 0.68,
+        "hybrid": 0.72
+      },
+      "L5_routing": {
+        "rule": 0.5,
+        "agent": 0.906
+      },
+      "L6_judge": {
+        "same": 0.56,
+        "cross": 0.6
+      },
+      "rules_chunking": {
+        "fixed": 0.828,
+        "structural": 0.966
+      },
+      "rules_arm": {
+        "hybrid": 0.931
+      }
+    },
+    "sample_size": 15
+  }
 }

@@ -8,6 +8,7 @@ from pydantic import BaseModel
 from pydantic_ai import Agent
 
 from cricket_guru import config
+from cricket_guru.llm import SETTINGS
 
 JSYS = (
     "You grade a candidate answer to a cricket question against a reference "
@@ -25,7 +26,7 @@ class Verdict(BaseModel):
 
 def make_judge(kind="same"):
     model = config.ANSWERER_MODEL if kind == "same" else config.JUDGE_CROSS_MODEL
-    agent = Agent(model, system_prompt=JSYS, output_type=Verdict)
+    agent = Agent(model, system_prompt=JSYS, output_type=Verdict, model_settings=SETTINGS)
 
     def judge(question, candidate, reference):
         return agent.run_sync(
