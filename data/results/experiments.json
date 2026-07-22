@@ -1,0 +1,27 @@
+{
+  "L1_chunking": {
+    "fixed": 0.68,
+    "structural": 0.76
+  },
+  "L3_retrieval": {
+    "dense": 0.68,
+    "hybrid": 0.72
+  },
+  "L5_routing": {
+    "rule": 0.5,
+    "agent": 0.906
+  },
+  "L6_judge": {
+    "same": 0.56,
+    "cross": 0.6
+  },
+  "rules_chunking": {
+    "fixed": 0.828,
+    "structural": 0.966
+  },
+  "rules_arm": {
+    "hybrid": 0.931
+  },
+  "sample_size": 15,
+  "narr_gold": "narrative_gold_corpus"
+}

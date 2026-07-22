@@ -1,0 +1,263 @@
+[
+  {
+    "id": "rules-c-1",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "In T20I matches, what types of pitches are allowed, and can a hybrid pitch be used?",
+    "reference": "6.3.2 Replace fourth Umpire with third Umpire where available or on-field Umpire\u2019s. 6.3.3 Replace ICC Match Referee with Umpire\u2019s Clause 6.4 Changing the pitch Replace ICC Match Referee with Umpire\u2019s Clause 6.5 Non turf pitches Shall be replaced by the following: All T20I matches shall be played on natural turf or artificial pitches. A hybrid pitch shall be permitted with the prior approval of ICC. The use of PVA and other adhesives in the preparation of turf pitches is not permitted. Clause 9 Preparation and Maintenance of the Playing surface Shall apply to turf pitches only except 9.1.5 and 9.1.6 which may also apply to artificial pitches 9.8 Remove reference to ICC Match Referee Clause 10.2 Covering the pitch during the match Shall only apply if covers are available Clause 10.3. Removal",
+    "source": "icc_t20i_addendums",
+    "verified": true
+  },
+  {
+    "id": "rules-c-2",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What are the umpires responsible for checking about the match conduct, equipment, fair play, and whether play is safe before the toss and during the game?",
+    "reference": "2.5 Conduct of the match, implements and equipment Before the toss and during the match, the umpires shall satisfy themselves that 2.5.1 the conduct of the match is strictly in accordance with these Playing Conditions. 2.5.2 the implements used in the match conform to the following 2.5.2.1 clause 4 (The ball). 2.5.2.2 externally visible requirements of clause 5 (The bat) and paragraph 1 of Appendix B. 2.5.2.3 either clauses 8.2 (Size of stumps) and 8.3 (The bails). 2.5.3 no player uses equipment other than that permitted. See paragraph 2 of Appendix A. Note particularly therein the interpretation of \u2018protective helmet\u2019. 2.5.4 the wicket-keeper\u2019s gloves comply with the requirements of clause 27.2 (Gloves). 2.6 Fair and unfair play The umpires shall be the sole judges of fair and unfair play",
+    "source": "icc_odi",
+    "verified": true
+  },
+  {
+    "id": "rules-c-3",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "Who is responsible for any mowing done before the match?",
+    "reference": "9.3.1 Responsibility for mowing 9.3.1.1 All mowings which are carried out before the match shall be the sole responsibility of the Ground Authority. 9.4 Watering the pitch The pitch shall not be watered during the match. 9.5 Re-marking creases Creases shall be re-marked whenever either umpire considers it necessary. 9.6 Maintenance of footholes The umpires shall ensure that the holes made by the bowlers and batters are cleaned out and dried whenever necessary to facilitate play. The umpires shall allow, if necessary, the returfing of footholes made by the bowlers in their delivery strides, or the use of quick-setting fillings for the same purpose. ICC MEN'S ONE-DAY INTERNATIONAL PLAYING CONDITIONS 17",
+    "source": "icc_odi",
+    "verified": true
+  },
+  {
+    "id": "rules-c-4",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What happens if a bowler is unable to finish an over because they become incapacitated or are suspended during it?",
+    "reference": "17.8 Bowler incapacitated or suspended during an over If for any reason a bowler is incapacitated while running up to deliver the first ball of an over, or is incapacitated or suspended during an over, the umpire shall call and signal Dead ball. If a bowler is incapacitated or suspended during an over, another bowler shall complete the over from the same end, provided that he does not bowl two overs consecutively, nor bowl parts of each of two consecutive overs, in that innings. ICC MEN'S ONE-DAY INTERNATIONAL PLAYING CONDITIONS 29",
+    "source": "icc_odi",
+    "verified": true
+  },
+  {
+    "id": "rules-c-5",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "If part of a boundary fence or marker has moved into the field of play during a match, when should it be taken away?",
+    "reference": "19.3.3 if some part of a fence or other marker has come within the field of play, that part shall be removed from the field of play as soon as is practicable; if play is taking place, this shall be as soon as the ball is dead. 19.4 Ball grounded beyond the boundary 19.4.1 The ball in play is grounded beyond the boundary if it touches \u2013 the boundary or any part of an object used to mark the boundary; \u2013 the ground beyond the boundary; \u2013 any object that is grounded beyond the boundary. 19.4.2 The ball in play is to be regarded as being grounded beyond the boundary if \u2013 a fielder, grounded beyond the boundary as in clause 19.5, touches the ball; \u2013 a fielder, after catching the ball within the boundary, becomes grounded beyond the boundary while in contact with the ball, before completing the c",
+    "source": "icc_odi",
+    "verified": true
+  },
+  {
+    "id": "rules-c-6",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What happens if an umpire thinks a bowler has thrown the ball or bowled underarm for the first time, and what happens if the same bowler does it again later in the innings?",
+    "reference": "21.3.1 If, in the opinion of either umpire, the ball has been thrown (where such mode of delivery does not correspond to the bowler\u2019s normal bowling action) or delivered underarm, he/she shall call and signal No ball and, when the ball is dead, inform the other umpire of the reason for the call. The bowler\u2019s end umpire shall then \u2013 warn the bowler, indicating that this is a first and final warning. This warning shall apply to that bowler throughout the innings. \u2013 inform the captain of the fielding side of the reason for this action. \u2013 inform the batters at the wicket of what has occurred. 21.3.2 If either umpire considers that, in that innings, a further delivery by the same bowler is thrown (where such mode of delivery does not correspond to the bowler\u2019s normal bowling action) or delivere",
+    "source": "icc_odi",
+    "verified": true
+  },
+  {
+    "id": "rules-c-7",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What must the umpires do after the match if the wicket-keeper has been involved in this incident?",
+    "reference": "27.4.2.4 inform the batters and, as soon as practicable, the captain of the batting side of what has occurred. The umpires together shall report the occurrence as soon as possible after the match to the ICC Match Referee, who shall take such action as is considered appropriate against the wicket-keeper concerned. ICC MEN'S ONE-DAY INTERNATIONAL PLAYING CONDITIONS 46",
+    "source": "icc_odi",
+    "verified": true
+  },
+  {
+    "id": "rules-c-8",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "Which umpire is responsible for answering appeals about run out, stumped, or hit wicket when they happen at the wicket-keeper\u2019s end?",
+    "reference": "31.5 Answering appeals The striker\u2019s end umpire shall answer all appeals arising out of any of clauses 35 (Hit wicket), 39 (Stumped) or 38 (Run out) when this occurs at the wicket-keeper\u2019s end. The bowler\u2019s end umpire shall answer all other appeals. When an appeal is made, each umpire shall answer on any matter that falls within his jurisdiction. When a batter has been given Not out, either umpire may answer an appeal, made in accordance with clause 31.3, if it is on a further matter and is within his jurisdiction. 31.6 Consultation by umpires Each umpire shall answer appeals on matters within his/her own jurisdiction. If an umpire is doubtful about any point that the other umpire may have been in a better position to see, he/she shall consult the latter on this point of fact and shall the",
+    "source": "icc_odi",
+    "verified": true
+  },
+  {
+    "id": "rules-c-9",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "When can a bowler run out the non-striker for leaving their ground before the ball is released?",
+    "reference": "38.3.1 If the non-striker is out of his/her ground at any time from the moment the ball comes into play until the instant when the bowler would normally have been expected to release the ball, the non-striker is liable to be Run out by the bowler attempting to run him/her out. In these circumstances, the non- striker will be out Run out if he/she is out of his/her ground when his/her wicket is broken by the bowler throwing the ball at the wicket or by the bowler\u2019s hand holding the ball, whether or not the ball is subsequently delivered. 38.3.1.1 The instant when the bowler would normally have been expected to release the ball is defined as the moment the bowler\u2019s arm reaches the highest point of his/her normal bowling action in the delivery swing. 38.3.1.2 Even if the non-striker had left ",
+    "source": "icc_odi",
+    "verified": true
+  },
+  {
+    "id": "rules-c-10",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What must the umpire do if a bowler is found to have deliberately overstepped the front foot line for a no ball?",
+    "reference": "41.8 Bowling of deliberate front-foot No ball If the umpire considers that the bowler has delivered a deliberate front-foot No ball, he/she shall \u2013 immediately call and signal No ball. \u2013 when the ball is dead, direct the captain of the fielding side to suspend the bowler immediately from bowling \u2013 inform the other umpire for the reason for this action. The bowler thus suspended shall not be allowed to bowl again in that innings. If applicable, the over shall be completed by another bowler, who shall neither have bowled any part of the previous over, nor be allowed to bowl any part of the next over. \u2013 report the occurrence to the batters and, as soon as practicable, to the captain of the batting side. The umpires together shall report the occurrence to the ICC Match Referee who shall take s",
+    "source": "icc_odi",
+    "verified": true
+  },
+  {
+    "id": "rules-c-11",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What parts are counted as part of a batter\u2019s bat, and what counts as a hand holding the bat?",
+    "reference": "2.4 Equipment \u2013 a batter\u2019s equipment is his bat as defined above, together with any external protective equipment he is wearing. A fielder\u2019s equipment is any external protective equipment that he is wearing. 2.5 The bat \u2013 the following are to be considered as part of the bat: \u2013 the whole of the bat itself. \u2013 the whole of a glove (or gloves) worn on the hand (or hands) holding the bat. \u2013 the hand (or hands) holding the bat, if the batter is not wearing a glove on that hand or on those hands. 2.6 Held in batter\u2019s hand. Contact between a batter\u2019s hand, or glove worn on his hand, and any part of the bat shall constitute the bat being held in that hand. 3 THE PLAYING AREA 3.1 The field of play is the area contained within the boundary. 3.2 The square is a specially prepared area of the field of",
+    "source": "icc_odi",
+    "verified": true
+  },
+  {
+    "id": "rules-c-12",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What light should be shown when the third umpire rules a batter out, not out, or is temporarily unavailable to respond?",
+    "reference": "2.1.5 If the third umpire decides that the batter is Out, a red light shall be displayed; if the third umpire decides that the batter is Not out, a green light shall be displayed. Should the third umpire be temporarily unable to respond, a white light (where available) shall remain illuminated throughout the period of interruption to signify to the on-field umpires that Umpire Reviews are temporarily unavailable, in which case the decision shall be taken by the on-field umpire. As an alternative to the red/green light system, the replay screen (where available) may be used for the purpose of conveying the third umpire\u2019s decision, in line with the ICC Big Screen Policy. 2.2 Caught Decisions, Obstructing the Field 2.2.1 Where the bowler\u2019s end umpire is unable to decide upon a Fair Catch or a",
+    "source": "icc_odi",
+    "verified": true
+  },
+  {
+    "id": "rules-c-13",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "If a Player Review is taken on an out decision but the third umpire keeps the batter out for a different kind of dismissal, is the review still considered unsuccessful?",
+    "reference": "3.6.5 Where, following a request for a Player Review, the original on-field decision of Out is unchanged, but for a different mode of dismissal from the original on-field decision, then the Player Review shall still be categorised as \u2019Unsuccessful\u2019. 3.6.6 Where, following a request for a Player Review, the original on-field decision of Not out is unchanged on account of the delivery being a No ball (for any reason), thereby not requiring any further evaluation, the Player Review shall not be counted as \u2018Unsuccessful\u2019 and accordingly shall not count towards the innings limit set out in paragraph 3.6.1. 3.6.7 Where a Player Review and an Umpire Review are requested from the same delivery and the decision of the third umpire from the Umpire Review renders the Player Review unnecessary, the Pl",
+    "source": "icc_odi",
+    "verified": true
+  },
+  {
+    "id": "rules-c-14",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "Can the match referee place restrictions on a concussion replacement if they think it would give that team too much of an advantage?",
+    "reference": "1.2.7.5 If the ICC Match Referee believes that the inclusion of the nominated Concussion Replacement, when performing their normal role, would excessively advantage their team, the ICC Match Referee may impose such conditions upon the identity and involvement of the Concussion Replacement as he/she sees fit, in line with the overriding objective of facilitating a like-for-like replacement for the concussed player. For clarity, a concussion replacement will inherit all warnings, penalty time and suspensions that were imposed on the replaced player. 1.2.7.6 The ICC Match Referee may, in reviewing a Concussion Replacement Request made in accordance with clause 1.2.7.1.3, request any such further information as may be required in order to make the determination required under clauses 1.2.7.4 a",
+    "source": "icc_t20i",
+    "verified": true
+  },
+  {
+    "id": "rules-c-15",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What happens if the team fielding second has not completed 20 overs by the scheduled end time?",
+    "reference": "13.7.1.4 If the team fielding second fails to bowl 20 overs by the scheduled cessation time, the hours of play shall be extended until the required number of overs has been bowled or a result is achieved. 13.7.1.5 Penalties shall apply for slow over rates (refer to clause 13.8 and the ICC Code of Conduct). ICC MEN'S TWENTY20 INTERNATIONAL PLAYING CONDITIONS 23",
+    "source": "icc_t20i",
+    "verified": true
+  },
+  {
+    "id": "rules-c-16",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "If the second innings is interrupted after at least five overs have been bowled and the match cannot be restarted, how is the winner decided using the DLS par score?",
+    "reference": "16.4.2.1 If the innings of the side batting second is suspended (with at least 5 overs bowled) and it is not possible for the match to be resumed, the match will be decided by comparison with the DLS \u2018Par Score\u2019 determined at the instant of the suspension using DLS. If the score is equal to the par score, the match is a Tie. Otherwise the result is a victory, or defeat, by the margin of runs by which the score exceeds, or falls short of, the Par Score. 16.5 Winning hit or extras 16.5.1 As soon as a result is reached as defined in clauses 16.1, 16.2 or 16.3.1, the match is at an end. Nothing that happens thereafter, except as in clause 41.17 (Penalty runs), shall be regarded as part of it. Note also clause 16.8. 16.5.2 The side batting last will have scored enough runs to win only if its to",
+    "source": "icc_t20i",
+    "verified": true
+  },
+  {
+    "id": "rules-c-17",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "If the ball is hit by the bat, who gets the batting side\u2019s runs, and are penalty runs or the one-run no-ball penalty treated differently?",
+    "reference": "18.10.1 if the ball is struck by the bat, all runs scored by the batting side shall be credited to the striker, except for the following: \u2013 an award of 5 Penalty runs, which shall be scored as Penalty runs \u2013 the one run penalty for a No ball, which shall be scored as a No ball extra. 18.10.2 if the ball is not struck by the bat, runs shall be scored as Penalty runs, Byes, Leg byes, No ball extras or Wides as the case may be. If Byes or Leg byes accrue from a No ball, only the one run penalty for No ball shall be scored as such, and the remainder as Byes or Leg byes as appropriate. ICC MEN'S TWENTY20 INTERNATIONAL PLAYING CONDITIONS 31",
+    "source": "icc_t20i",
+    "verified": true
+  },
+  {
+    "id": "rules-c-18",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "When an umpire has to call Dead ball because of unfair play or a serious injury, when is the ball considered dead?",
+    "reference": "20.4.2 Where either umpire is required to call and signal Dead ball under 20.4.2.1 to 20.4.2.14, the ball will be considered to be dead at the instant of the incident causing the ball to become dead. However, where the Playing Conditions specifically provide for the call to be delayed, so as not to disadvantage the non- offending side, under clause 34.4 (Runs permitted from the ball lawfully struck more than once), clause 41.2.1 (Unfair actions) and clause 42.1.2 (Unacceptable conduct), the ball will be considered to be dead at the point of the call. Either umpire shall call and signal Dead ball when 20.4.2.1 intervening in a case of unfair play. 20.4.2.2 a possibly serious injury to a player or umpire occurs. ICC MEN'S TWENTY20 INTERNATIONAL PLAYING CONDITIONS 35",
+    "source": "icc_t20i",
+    "verified": true
+  },
+  {
+    "id": "rules-c-19",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "When a batter retires because of illness or injury, can they come back later, and if not, how is their dismissal recorded?",
+    "reference": "25.4.2 If a batter retires because of illness, injury or any other unavoidable cause, that batter is entitled to resume his innings. If for any reason this does not happen, that batter is to be recorded as \u2018Retired \u2013 not out\u2019. 25.4.3 If a batter retires for any reason other than as in clause 25.4.2, that batter is to be recorded as \u2018Retired \u2013 out\u2019. 25.4.4 If after retiring a batter resumes his innings, subject to the requirements of clause 25.4.2, it shall be only at the fall of a wicket or the retirement of another batter. 25.5 Runners Runners shall not be permitted. 25.6 Striker\u2019s right to play the ball The striker has a right to play the ball, or to make a legitimate second strike, after it has been delivered, without interference from the wicket-keeper or any other fielder (see clause ",
+    "source": "icc_t20i",
+    "verified": true
+  },
+  {
+    "id": "rules-c-20",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What should the umpires do if a fielder moves unfairly during the bowler\u2019s delivery?",
+    "reference": "28.6.1.2 movement by any fielder, other than a close fielder, towards the striker or the striker\u2019s wicket that does not significantly alter the position of the fielder. 28.6.1.3 movement by any fielder in response to the stroke that the striker is playing or that his actions suggest he intends to play. 28.6.2 In all circumstances clause 28.4 (Limitation of on side fielders) shall apply. 28.6.3 In the event of such unfair movement, either umpire shall call and signal Dead ball and inform the other umpire of the reason for doing so. The bowler\u2019s end umpire shall then: 28.6.3.1 award the one-run penalty for Wide or No ball, if applicable 28.6.3.2 award 5 Penalty runs to the batting side 28.6.3.3 inform the captain of the fielding side of the reason for this action. 28.6.3.4 inform the batters",
+    "source": "icc_t20i",
+    "verified": true
+  },
+  {
+    "id": "rules-c-21",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "In what situations is the striker not out if their wicket is put down in a hit wicket way?",
+    "reference": "35.2 Not out Hit wicket The striker is not out under this clause should his wicket be put down in any of the ways referred to in clause 35.1 if any of the following applies: \u2013 it occurs after the striker has completed any action in receiving the delivery, other than in clauses 35.1.1.2 to 35.1.1.4. \u2013 it occurs when the striker is in the act of running, other than setting off immediately for the first run. \u2013 it occurs when the striker is trying to avoid being run out or stumped. \u2013 it occurs when the striker is trying to avoid a throw in at any time. \u2013 the bowler after entering the delivery stride does not deliver the ball. In this case either umpire shall immediately call and signal Dead ball. See clause 20.4 (Umpire calling and signalling Dead ball). \u2013 the delivery is a No ball. 35.3 Runs ",
+    "source": "icc_t20i",
+    "verified": true
+  },
+  {
+    "id": "rules-c-22",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What happens if the same bowler is no-balled a third time in the innings for bowling too many fast short-pitched deliveries in an over?",
+    "reference": "41.6.1.10 If there is a second instance of the bowler being No balled in the innings for bowling more than one fast short pitched delivery in an over, the umpire shall advise the bowler that this is his final warning for the innings. 41.6.1.11 Should there be any further instance by the same bowler in that innings, the umpire shall \u2013 call and signal No ball \u2013 when the ball is dead, direct the captain of the fielding side to suspend the bowler immediately from bowling \u2013 inform the other umpire for the reason for this action. The bowler thus suspended shall not be allowed to bowl again in that innings. If applicable, the over shall be completed by another bowler, who shall neither have bowled any part of the previous over, nor be allowed to bowl any part of the next over. \u2013 The umpire shall ",
+    "source": "icc_t20i",
+    "verified": true
+  },
+  {
+    "id": "rules-c-23",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What area of the pitch is considered the protected area?",
+    "reference": "41.11 The protected area The protected area is defined as that area of the pitch contained within a rectangle bounded at each end by imaginary lines parallel to the popping creases and 5 ft/1.52 m in front of each, and on the sides by imaginary lines, one each side of the imaginary line joining the centres of the two middle stumps, each parallel to it and 1 ft/30.48 cm from it. 41.12 Fielder damaging the pitch 41.12.1 It is unfair to cause deliberate or avoidable damage to the pitch. A fielder will be deemed to be causing avoidable damage if either umpire considers that his presence on the pitch is without reasonable cause. 41.12.2 If a fielder causes deliberate or avoidable damage to the pitch, other than as in clause 41.13.1, at the first instance the umpire seeing the contravention shal",
+    "source": "icc_t20i",
+    "verified": true
+  },
+  {
+    "id": "rules-c-24",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What must the umpire do as soon as practicable after this penalty is imposed?",
+    "reference": "42.2.2.4 As soon as practicable, the umpire shall: \u2013 award 5 Penalty runs to the opposing team \u2013 signal the Level 4 penalty to the scorers \u2013 call Play. 42.2.2.5 The umpires shall then report the matter to the ICC Match Referee under the ICC Code of Conduct. ICC MEN'S TWENTY20 INTERNATIONAL PLAYING CONDITIONS 72",
+    "source": "icc_t20i",
+    "verified": true
+  },
+  {
+    "id": "rules-c-25",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "Before deciding whether to ask for a Player Review, who is allowed to talk to whom, and under what limited circumstance may someone ask the bowler\u2019s end umpire about an LBW decision?",
+    "reference": "3.2.3 The captain may consult with the bowler and other fielders, and the two batters may consult with each other prior to deciding whether to request a Player Review. Either the captain or the two batters may, in respect of a decision relating to an appeal for LBW, question the bowler\u2019s end umpire as to whether his/her decision has been made on the basis that the striker made no genuine attempt to play the ball with the bat. Under no other circumstances is any player permitted to query an umpire about any aspect of a decision before deciding on whether or not to request a Player Review. If the on-field umpires believe that the captain or either batter has received direct or indirect input emanating other than from the players on the field, then they may at their discretion decline the req",
+    "source": "icc_t20i",
+    "verified": true
+  },
+  {
+    "id": "rules-c-27",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What must the bowler\u2019s front and back feet do during the delivery stride for the delivery to be fair?",
+    "reference": "21.5 Fair delivery \u2013 the feet For a delivery to be fair in respect of the feet, in the delivery stride 21.5.1 the bowler\u2019s back foot must land within and not touching the return crease appertaining to his stated mode of delivery. 21.5.2 the bowler\u2019s front foot must land with some part of the foot, whether grounded or raised \u2013 on the same side of the imaginary line joining the two middle stumps as the return crease described in clause 21.5.1, and \u2013 behind the popping crease. The third umpire shall review television replays of the bowler\u2019s feet landing and, if he/she is satisfied that not all the requirements have been met, advise the bowler\u2019s end umpire who shall in turn immediately call and signal No ball. See clause 41.8 (Bowling of deliberate front foot No ball). 21.6 Bowler breaking wic",
+    "source": "icc_test",
+    "verified": true
+  },
+  {
+    "id": "rules-c-28",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What must the umpire do if the same bowler breaks this rule for a third time in the innings when the ball is dead?",
+    "reference": "41.13.4 If, in that innings, the same bowler contravenes this clause a third time, when the ball is dead, the umpire shall, \u2013 direct the captain of the fielding side to suspend the bowler immediately from bowling. If applicable, the over shall be completed by another bowler, who shall neither have bowled any part of the previous over, nor be allowed to bowl any part of the next over. The bowler taken off shall not be allowed to bowl again in that innings. \u2013 inform the other umpire of the reason for this action. \u2013 inform the batters and, as soon as practicable, the captain of the batting side of what has occurred. The umpires may then report the matter to the ICC Match Referee who shall take such action as is considered appropriate against the bowler concerned. 41.14 Batter damaging the pit",
+    "source": "icc_test",
+    "verified": true
+  },
+  {
+    "id": "rules-c-29",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "When deciding whether to play, do the umpires ignore shadows cast on the pitch by the stadium or other permanent structures?",
+    "reference": "8.4 The umpires shall disregard any shadow on the pitch from the stadium or from any permanent object on the ground. 2.8.5 Light Meters Light Meters are not used in IPL 2.8.6 Use of artificial lights For the afternoon matches, IPL Match Referee and Umpires in consultation with the relevant ground authority will decide when the artificial lights will be switched on. However, if in the opinion of the Umpires, Natural light is deteriorating to an unsafe level, they will authorise the lights to be switched on earlier. For the night matches, IPL Match Referee and Umpires in consultation with the relevant ground authority will decide when the artificial lights will be switched on at a suitable time before the toss. In the event of power failure or lights malfunction, the provisions relating to t",
+    "source": "ipl_playing_conditions",
+    "verified": true
+  },
+  {
+    "id": "rules-c-30",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "When the ball becomes dead for some reason other than a wicket, which runs still count for the batting side, and how are they credited if the batter had already completed or crossed for a run?",
+    "reference": "18.9 Runs scored when the ball becomes dead other than at the fall of a wicket When the ball becomes dead for any reason other than the fall of a wicket, or is called dead by an umpire, unless there is specific provision otherwise in these Playing Conditions, any runs for penalties awarded to either side shall be scored. Note however the provisions of clauses 23.3 (Leg byes not to be awarded) and 28.3 (Protective helmets belonging to the fielding side). Additionally, the batting side shall be credited with all runs completed by the batter before the incident or call of Dead ball and the run in progress if the batter had already crossed at the instant of the incident or call of Dead ball. Note specifically, however, the provisions of clause 41.5.7 (Deliberate distraction, deception or obstr",
+    "source": "ipl_playing_conditions",
+    "verified": true
+  }
+]

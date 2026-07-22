@@ -1,0 +1,282 @@
+[
+  {
+    "id": "rules-1",
+    "qtype": "rules",
+    "staleness": true,
+    "question": "Is there a free hit after a no-ball?",
+    "reference": "In white-ball cricket (ODIs and T20Is) the delivery after any no-ball is a free hit, on which the batter can be dismissed only in the ways possible off a no-ball (e.g. run out). Tests have no free hit. It's an ICC playing condition, not in the MCC Laws.",
+    "law": "ICC PC 21.20"
+  },
+  {
+    "id": "rules-2",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What are the conditions for an LBW dismissal?",
+    "reference": "Out LBW if the ball is legal, pitches in line or outside off (not outside leg), strikes the batter in line with the stumps first (or outside off if no genuine shot was offered), and would have gone on to hit the stumps.",
+    "law": "Law 36"
+  },
+  {
+    "id": "rules-3",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "When is a delivery a front-foot no-ball?",
+    "reference": "It's a front-foot no-ball unless some part of the bowler's front foot, whether grounded or raised, is behind the popping crease on landing.",
+    "law": "Law 21.5"
+  },
+  {
+    "id": "rules-4",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "How many fielders can be behind square on the leg side?",
+    "reference": "No more than two fielders may be behind square on the leg side at the instant of delivery; more than two makes it a no-ball.",
+    "law": "Law 28.4"
+  },
+  {
+    "id": "rules-5",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "How many balls are in an over?",
+    "reference": "Six legal deliveries. Wides and no-balls do not count and are re-bowled.",
+    "law": "Law 17.1"
+  },
+  {
+    "id": "rules-6",
+    "qtype": "rules",
+    "staleness": true,
+    "question": "Can a bowler run out the non-striker who backs up too far?",
+    "reference": "Yes. Since the 2022 Code, running out the non-striker who has left the crease before the bowler would normally release the ball is a fair run out \u2014 no longer classed as unfair play.",
+    "law": "Law 38.3"
+  },
+  {
+    "id": "rules-7",
+    "qtype": "rules",
+    "staleness": true,
+    "question": "How long does a new batter have to be ready to face the next ball?",
+    "reference": "Under the MCC Laws the incoming batter must be ready to receive within 3 minutes or be given timed out; ICC playing conditions reduce this to 2 minutes.",
+    "law": "Law 40 / ICC PC"
+  },
+  {
+    "id": "rules-8",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "By how many runs must a team lead to enforce the follow-on in a five-day Test?",
+    "reference": "200 runs or more (for a match scheduled for five or more days).",
+    "law": "Law 14.1.1"
+  },
+  {
+    "id": "rules-9",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "When is a shot worth six runs versus four?",
+    "reference": "Six if the ball clears the boundary on the full; four if it reaches the boundary having bounced or touches the boundary rope.",
+    "law": "Law 19"
+  },
+  {
+    "id": "rules-10",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What is the difference between a bye and a leg bye?",
+    "reference": "A bye is runs scored when the ball misses both bat and body; a leg bye is runs off the body only when the striker attempted a shot or to avoid the ball.",
+    "law": "Law 23"
+  },
+  {
+    "id": "rules-11",
+    "qtype": "rules",
+    "staleness": true,
+    "question": "Is 'handled the ball' still a way of getting out?",
+    "reference": "No. Since the 2017 Code it is no longer a separate dismissal \u2014 deliberately using a hand not holding the bat to stop the ball is now 'obstructing the field'.",
+    "law": "Law 37"
+  },
+  {
+    "id": "rules-12",
+    "qtype": "rules",
+    "staleness": true,
+    "question": "How many unsuccessful reviews does each team get under DRS?",
+    "reference": "Two unsuccessful player reviews per innings under current ICC playing conditions (increased from one).",
+    "law": "ICC PC (DRS)"
+  },
+  {
+    "id": "rules-13",
+    "qtype": "rules",
+    "staleness": true,
+    "question": "How many bouncers are allowed per over?",
+    "reference": "Two fast short-pitched deliveries above shoulder height per over in Tests and ODIs; T20Is historically allowed one, now increased to two.",
+    "law": "ICC PC"
+  },
+  {
+    "id": "rules-14",
+    "qtype": "rules",
+    "staleness": true,
+    "question": "What are the fielding restrictions in an ODI?",
+    "reference": "Overs 1\u201310: at most two fielders outside the 30-yard circle; overs 11\u201340: at most four; overs 41\u201350: at most five.",
+    "law": "ICC ODI PC"
+  },
+  {
+    "id": "rules-15",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "When does the ball become dead?",
+    "reference": "The ball is dead when it finally settles with the wicket-keeper or bowler, when a boundary is scored, when a batter is dismissed, or in the other cases the Law lists; no runs or dismissals count once it is dead.",
+    "law": "Law 20"
+  },
+  {
+    "id": "rules-16",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What is the difference between retired hurt and retired out?",
+    "reference": "A batter who retires due to injury/illness (retired hurt) may resume the innings; a batter who retires for any other reason without the umpires' consent is retired out and may not resume.",
+    "law": "Law 25.4"
+  },
+  {
+    "id": "rules-17",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "If a miscounted 7th delivery of an over is a no-ball, is there a free hit?",
+    "reference": "An extra ball bowled because the umpire miscounted still counts as a delivery; a no-ball on it is a no-ball, and in white-ball cricket the next delivery is a free hit if the over continues. Once the umpire calls 'Over', the over is complete.",
+    "law": "Law 17.5"
+  },
+  {
+    "id": "rules-18",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What is the maximum number of overs that can be bowled in a day of a Test?",
+    "reference": "There is no fixed maximum \u2014 a Test day is bounded by time, not overs. A minimum of 90 overs is scheduled, with the last-hour provision guaranteeing at least 15 further overs.",
+    "law": "Law 12 / ICC PC"
+  },
+  {
+    "id": "rules-19",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "How is a wide judged on a reverse or switch hit?",
+    "reference": "The wide lines are judged on the striker's original stance before the shot; switching to a reverse/switch hit does not swap the off/leg wide markings, so a ball wide of the original stance is still a wide.",
+    "law": "Law 22 / ICC PC"
+  },
+  {
+    "id": "rules-20",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "Can a batter decline a boundary to retain strike?",
+    "reference": "No. Once the ball touches or crosses the boundary the boundary is scored automatically and the runs stand; batters cannot refuse it to keep strike.",
+    "law": "Law 19"
+  },
+  {
+    "id": "rules-21",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "Can two batters be dismissed off a single delivery?",
+    "reference": "No \u2014 only one batter can be dismissed from any single delivery.",
+    "law": "Law 31"
+  },
+  {
+    "id": "rules-22",
+    "qtype": "rules",
+    "staleness": true,
+    "question": "Is underarm bowling allowed?",
+    "reference": "Underarm bowling is not permitted unless both captains agree before the match; otherwise the umpire calls it a no-ball.",
+    "law": "Law 21.1"
+  },
+  {
+    "id": "rules-23",
+    "qtype": "rules",
+    "staleness": true,
+    "question": "If the ball hits the stumps off a no-ball, is the batter bowled?",
+    "reference": "No. A no-ball is still called and the batter cannot be bowled off it; off a no-ball a batter can be out only run out, obstructing the field, or hit the ball twice.",
+    "law": "Law 21"
+  },
+  {
+    "id": "rules-24",
+    "qtype": "rules",
+    "staleness": true,
+    "question": "After how many overs can a new ball be taken?",
+    "reference": "In a match of more than one day the fielding captain may demand a new ball after a set number of overs \u2014 80 overs in Tests under current conditions (85 under the older 2000 code).",
+    "law": "Law 4 / ICC PC"
+  },
+  {
+    "id": "rules-25",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What happens if the ball is lost during play?",
+    "reference": "A fielder may call 'lost ball'; the ball is then dead and the batting side is awarded the runs completed plus the one in progress, or the penalty for any infringement, whichever is greater.",
+    "law": "Law 20.5"
+  },
+  {
+    "id": "rules-26",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "Is a batter obliged to attempt a run after hitting the ball in the air?",
+    "reference": "No \u2014 batters are never obliged to run and may decline. What is not allowed is deliberately obstructing the field.",
+    "law": "Law 37"
+  },
+  {
+    "id": "rules-27",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "Can a batter hit the ball after it has passed the stumps?",
+    "reference": "Yes, a batter may play at the ball after it passes the stumps, provided it is not a second strike made solely to guard the wicket (hit the ball twice).",
+    "law": "Law 34"
+  },
+  {
+    "id": "rules-28",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "Is a trial ball allowed in a match?",
+    "reference": "No \u2014 a bowler may take a trial run-up with the umpire's knowledge but may not bowl a trial delivery; it falls under fair/unfair play.",
+    "law": "Law 41"
+  },
+  {
+    "id": "rules-29",
+    "qtype": "rules",
+    "staleness": true,
+    "question": "How is a tied Super Over resolved?",
+    "reference": "Under current ICC/IPL playing conditions a tied Super Over is resolved by bowling further Super Overs until there is a result; the old boundary-count-back tiebreak was abolished after 2019.",
+    "law": "ICC/IPL PC"
+  },
+  {
+    "id": "rules-30",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "Can the captain be changed during a match?",
+    "reference": "Yes \u2014 the captain may be changed during the match as long as the replacement is one of the nominated eleven (not a substitute).",
+    "law": "Law 1.3"
+  },
+  {
+    "id": "rules-31",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "What dismissals are possible off a no-ball, a wide, and a free hit?",
+    "reference": "Off a no-ball: run out, obstructing the field, hit the ball twice. Off a wide: additionally stumped and hit wicket. On a free hit: the same dismissals as off a no-ball.",
+    "law": "Laws 21, 22 / ICC PC"
+  },
+  {
+    "id": "rules-32",
+    "qtype": "rules",
+    "staleness": true,
+    "question": "Why is polishing/rubbing the ball not ball tampering?",
+    "reference": "Polishing is legal provided no artificial substance is used and no time is wasted; rubbing on the ground or applying substances is unfair. (The relevant Law is 41, renumbered from Law 42 in the 2017 Code.)",
+    "law": "Law 41"
+  },
+  {
+    "id": "rules-33",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "When is a boundary from an overthrow scored, and how many runs?",
+    "reference": "If an overthrow (or a fielder's act) sends the ball to the boundary, the batting side scores the boundary allowance plus the runs already completed, and the run in progress if the batters had crossed at the instant of the throw.",
+    "law": "Law 19.8"
+  },
+  {
+    "id": "rules-34",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "In one-day cricket, does the two-fielders-behind-square-on-the-leg-side limit apply across all 50 overs?",
+    "reference": "Yes \u2014 the cap of two fielders behind square on the leg side is a core Law that applies in every format at all times, and breaching it is a no-ball. ODIs add separate powerplay restrictions on fielders outside the 30-yard circle (overs 1-10: max 2; 11-40: max 4; 41-50: max 5), but those are independent of the behind-square-leg limit, which never changes.",
+    "law": "Law 28.4 / ICC ODI PC"
+  },
+  {
+    "id": "rules-35",
+    "qtype": "rules",
+    "staleness": false,
+    "question": "Does the follow-on depend on the total a team scores or on the lead?",
+    "reference": "On the lead (the first-innings margin), not the absolute total. The required lead depends on match length: 200 for five days or more, 150 for three or four days, 100 for two days, 75 for one day. So regardless of the totals, a first-innings lead of at least 200 in a Test allows the follow-on.",
+    "law": "Law 14.1"
+  }
+]

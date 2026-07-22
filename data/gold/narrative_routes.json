@@ -1,0 +1,202 @@
+{
+  "narr-1": {
+    "source": "rules",
+    "reason": "The question asks about cricket laws/playing conditions: whether a no-ball on the 7th legal delivery triggers a free hit. This is answerable from ICC playing conditions/MCC Laws, so the correct source category is rules."
+  },
+  "narr-2": {
+    "source": "rules",
+    "reason": "This asks about an officiating/laws question: the maximum overs permitted in a single day of a Test match is governed by cricket playing conditions (ICC/MCC), not by match statistics or general history."
+  },
+  "narr-3": {
+    "source": "wiki",
+    "reason": "The question asks about the meaning of 'seeding' in cricket team grouping, which is a terminology/concept explanation answerable from general encyclopedia-style knowledge rather than laws or statistics."
+  },
+  "narr-4": {
+    "source": "wiki",
+    "reason": "This is a general explanatory/history question about ICC rankings and women's Test cricket, best answered from encyclopedic or narrative sources rather than laws or match stats. It does not ask for a calculable record or an officiating rule."
+  },
+  "narr-5": {
+    "source": "wiki",
+    "reason": "The question asks about the meaning of the cricket term \"carrying the bat\" and why a specific innings does not qualify. This is a rules/terminology/history-style explanation answerable from cricket encyclopedia knowledge rather than a numeric stat or live data issue."
+  },
+  "narr-6": {
+    "source": "wiki",
+    "reason": "The question asks about cricket trivia/nomenclature rather than a specific law or computable stat. It is a general terminology/history-style question that is best answered from an encyclopedia-style source."
+  },
+  "narr-7": {
+    "source": "drop",
+    "reason": "The phrase \"Infinite strike rate\" is too vague and does not specify a particular player, match, format, or definable statistic. It could refer to a concept/terminology question rather than a computable record, and there isn\u2019t enough information to answer from rules, stats, or wiki with confidence."
+  },
+  "narr-8": {
+    "source": "rules",
+    "reason": "The question asks for the officiating rule about wides on reverse/switch hits, which is answerable from the MCC Laws and ICC playing conditions."
+  },
+  "narr-9": {
+    "source": "rules",
+    "reason": "This is a laws/playing-conditions question about whether a batsman may refuse a boundary to retain strike, which is answerable from cricket rules rather than stats or encyclopedia-style history."
+  },
+  "narr-10": {
+    "source": "wiki",
+    "reason": "The question asks for the rationale behind a cricket rule/practice (why the bowling end changes every over), which is best answered as a general explanatory/terminology question from cricket history or description rather than by law text or stats."
+  },
+  "narr-11": {
+    "source": "drop",
+    "reason": "The question is about coaching advice for teaching adult beginners to bowl, which is subjective and instructional rather than a laws/definitions question, a stats/record question, or an encyclopedia-style history/terminology question."
+  },
+  "narr-12": {
+    "source": "wiki",
+    "reason": "The question asks about the meanings of cricket terminology (\u201cOverthrow\u201d and \u201cthrow-by\u201d), which is a narrative/definition lookup best answered from an encyclopedia or laws glossary rather than statistics."
+  },
+  "narr-13": {
+    "source": "drop",
+    "reason": "The question asks for an aggregate count of a very specific scoring event in Test cricket (runs scored as four runs by running, not boundaries). This requires detailed ball-by-ball scoring data and a precise definition that is not directly answerable from laws or an encyclopedia. It is too vague for a reliable stats lookup without a specified dataset and method, so the best category is drop."
+  },
+  "narr-14": {
+    "source": "drop",
+    "reason": "The query is too vague: 'Career of a cricketer' does not identify a specific player or ask for a computable stat, law, or encyclopedia-style fact. It needs more detail to determine what information is being requested."
+  },
+  "narr-15": {
+    "source": "rules",
+    "reason": "The question asks about a cricket dismissal scenario ('two dismissals off a single ball'), which is governed by the MCC Laws / playing conditions rather than requiring stats or encyclopedia-style history."
+  },
+  "narr-16": {
+    "source": "wiki",
+    "reason": "The question asks about the practice/strategy of batters sitting near the boundary in T20s rather than in the dressing room, which is a narrative/terminology-style explanation not a laws/officiating issue or a stats question. It\u2019s best answered from general cricket knowledge/encyclopedia context."
+  },
+  "narr-17": {
+    "source": "wiki",
+    "reason": "The question asks for a terminology/technique difference between two types of spin deliveries (googly vs doosra), which is a narrative cricket explanation best answered from an encyclopedia-style source rather than laws or statistics."
+  },
+  "narr-18": {
+    "source": "wiki",
+    "reason": "The question asks for a historical fact about when the first cricket tri-series was held, which is a narrative/history/terminology query best answered from an encyclopedia rather than laws or match stats."
+  },
+  "narr-19": {
+    "source": "wiki",
+    "reason": "The question asks whether 'bat tampering' exists in cricket, which is a terminology/history question best answered from an encyclopedia-style source rather than match stats. It\u2019s not asking for a specific law application or a computable record."
+  },
+  "narr-20": {
+    "source": "rules",
+    "reason": "This is a laws/eligibility question about Under-19 World Cup participation, which is governed by ICC playing conditions/age eligibility rules rather than match statistics or general encyclopedia history."
+  },
+  "narr-21": {
+    "source": "wiki",
+    "reason": "The question asks about the general basis for ICC rankings of players and teams, which is a narrative/terminology/institutional topic best answered from an encyclopedia or ICC explanation rather than match-law rules or computable match stats."
+  },
+  "narr-22": {
+    "source": "wiki",
+    "reason": "The question asks for the historical reason a match referee awarded the 1996 Cricket World Cup semifinal to Sri Lanka by default, which is a narrative/event question about a specific incident. This is best answered from an encyclopedia-style source rather than laws or statistics."
+  },
+  "narr-23": {
+    "source": "wiki",
+    "reason": "The question asks how an international team's annual cricketing schedule is fixed, which is a general governance/administrative topic about cricket scheduling rather than a numeric stat or a specific law/officiating rule. It is best answered from descriptive sources like an encyclopedia or cricket governance overview."
+  },
+  "narr-24": {
+    "source": "drop",
+    "reason": "The question is too vague and context-dependent: it refers to a specific cricket match scenario ('this first time') and asks whether it was the first instance of a team losing despite scoring more, likely involving Duckworth-Lewis, but no match details or timeframe are provided. Answering whether it was the first such occurrence would require a broader historical database and a precise match context, not just laws, encyclopedia history, or a single computable stat from the prompt as given."
+  },
+  "narr-25": {
+    "source": "wiki",
+    "reason": "The question asks how a cricket training device works, which is a descriptive/terminology question best answered from an encyclopedia or product description rather than laws or stats."
+  },
+  "narr-26": {
+    "source": "rules",
+    "reason": "The question asks about whether a type of delivery/pitch is allowed in cricket, which is governed by the Laws of Cricket and playing conditions (e.g., no-ball/bouncer/throwing rules)."
+  },
+  "narr-27": {
+    "source": "rules",
+    "reason": "This is a laws/officiating question about whether a delivery is a no-ball under cricket rules, which is answerable from the MCC Laws and related playing conditions."
+  },
+  "narr-28": {
+    "source": "wiki",
+    "reason": "The question asks for the concept of Test cricket and how wins/draws are decided, which is a general explanatory/historical description best answered from an encyclopedia rather than laws-only or statistics."
+  },
+  "narr-29": {
+    "source": "rules",
+    "reason": "The question asks about the frequency for introducing a 'new' ball in cricket, which is governed by Laws/playing conditions rather than statistics or encyclopedia-style narrative. This is answerable from ICC/MCC rules."
+  },
+  "narr-30": {
+    "source": "rules",
+    "reason": "The question asks about what happens when a ball is lost in cricket, which is an officiating/laws matter answerable from the MCC Laws and playing conditions."
+  },
+  "narr-31": {
+    "source": "stats",
+    "reason": "The question asks for Sachin Tendulkar's bowling record, which is a numerical/statistical record that can be answered from cricket scorecards or a ball-by-ball/match database."
+  },
+  "narr-32": {
+    "source": "wiki",
+    "reason": "The question asks for the name of a cricket batting technique ('dropping the knee'), which is a terminology/narrative query best answered from an encyclopedia or general cricket reference rather than laws or stats."
+  },
+  "narr-33": {
+    "source": "wiki",
+    "reason": "The question asks about the effects of splits or cracks in a cricket bat, which is a general equipment/maintenance topic best answered by encyclopedia-style knowledge rather than laws or statistics."
+  },
+  "narr-34": {
+    "source": "rules",
+    "reason": "The phrase \"refusal to run after skying the ball\" refers to a Laws/playing-conditions concept in cricket, likely about whether a batter can refuse a run after a catch chance or the ball being hit in the air. That is answerable from MCC Laws and ICC playing conditions rather than needing stats or encyclopedia history."
+  },
+  "narr-35": {
+    "source": "stats",
+    "reason": "The question asks for a cricket record/statistic: 10 wickets in an innings in international matches. This is answerable from match/scorecard data and records databases, not from laws or general encyclopedia content."
+  },
+  "narr-36": {
+    "source": "rules",
+    "reason": "The question asks whether nicknames are permitted on jerseys in international matches, which is a uniform/playing-conditions issue answerable from cricket laws and ICC playing conditions rather than from stats or encyclopedia content."
+  },
+  "narr-37": {
+    "source": "rules",
+    "reason": "The question is about cricket law/legality: whether a batsman may hit the ball after it has passed the stumps. That is answerable from the MCC Laws and related playing conditions, so the correct source category is rules."
+  },
+  "narr-38": {
+    "source": "rules",
+    "reason": "The question asks about a cricket law/playing-condition concept (\u201ctrial ball\u201d in international matches), which is answerable from the Laws of Cricket and ICC playing conditions rather than from statistics or encyclopedia-style history."
+  },
+  "narr-39": {
+    "source": "drop",
+    "reason": "The question is about cricket equipment advice/opinion (\u201cAre They a Good Idea?\u201d) rather than a rule, a computable stat, or an encyclopedic history/definition. It requires subjective evaluation and likely practical judgment, so it is not answerable from the allowed source types."
+  },
+  "narr-40": {
+    "source": "rules",
+    "reason": "The question asks about a Super Over tie rule, which is a cricket laws/playing-conditions topic and is answerable from MCC Laws or ICC/IPL playing conditions."
+  },
+  "narr-41": {
+    "source": "wiki",
+    "reason": "The question asks about cricket terminology/record naming: what a 'half century' becomes when a player scores a century. This is a narrative/terminology question answerable from general cricket knowledge or an encyclopedia, not a laws issue or a computable statistical query."
+  },
+  "narr-42": {
+    "source": "rules",
+    "reason": "The question asks about whether captaincy can be changed during a match, which is governed by cricket laws and ICC playing conditions rather than statistics or encyclopedic history."
+  },
+  "narr-43": {
+    "source": "rules",
+    "reason": "This asks about which dismissals are possible off no-ball, wide, and free hit, which is a cricket laws/playing-conditions officiating question answerable from MCC Laws and ICC playing conditions."
+  },
+  "narr-44": {
+    "source": "rules",
+    "reason": "This asks about the cricket law/definition of ball tampering versus legitimate ball maintenance, which is answerable from the MCC Laws and playing conditions."
+  },
+  "narr-45": {
+    "source": "wiki",
+    "reason": "This is a general cricket trivia/history question about whether a no-ball decision by an on-field umpire has ever been overturned. It is not asking for a specific computed stat or a law interpretation, and it can be answered from cricket history/encyclopedic knowledge rather than ball-by-ball database data or officiating rules."
+  },
+  "narr-46": {
+    "source": "rules",
+    "reason": "This is an officiating/laws question about cricket scoring and whether a play should be judged as a boundary or as overthrows, which is answerable from the MCC Laws and ICC playing conditions."
+  },
+  "narr-47": {
+    "source": "wiki",
+    "reason": "This is a terminology/history question asking for the meaning and distinction between two types of spin bowling, which is answerable from an encyclopedia or cricket reference rather than laws or match statistics."
+  },
+  "narr-48": {
+    "source": "wiki",
+    "reason": "The question asks for a terminology explanation (\u201cWhat is the Dew Factor?\u201d and its effect on a cricket match), which is a narrative/definition topic best answered from an encyclopedia-style source rather than laws or stats."
+  },
+  "narr-49": {
+    "source": "drop",
+    "reason": "The question is about who will qualify for the semi-final, which is a live/standings-dependent outcome and not answerable without the current tournament table, points, and tie-breaker scenario."
+  },
+  "narr-50": {
+    "source": "wiki",
+    "reason": "This is a narrative/terminology/history question about why a city name appears as a team in the Ranji Trophy, which is best answered from an encyclopedia-style explanation rather than laws or match statistics."
+  }
+}

@@ -1,0 +1,200 @@
+[
+  {
+    "id": "narr-3",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "What is seedings in grouping the teams in cricket?",
+    "reference": "Seeding is the pre-ranking of teams in a tournament so the strongest teams are placed into different groups or positions to avoid meeting each other early. In cricket group stages, seeded teams are distributed across groups based on ranking or past performance.",
+    "tags": "rules,cricket,terminology,tournaments,cricket-world-cup",
+    "verified": false
+  },
+  {
+    "id": "narr-4",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "Why there is no ICC rankings for women's test cricket?",
+    "reference": "Because ICC Test rankings require enough matches to produce a meaningful points table, and women\u2019s Test cricket is played too infrequently with too few teams for a stable ranking system. Instead, ICC ranks women\u2019s teams in ODIs and T20Is, where there is much more regular competition.",
+    "tags": "cricket,icc,ranking",
+    "verified": false
+  },
+  {
+    "id": "narr-5",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "Why is Sachin Tendulkar's 200* not considered as carrying the bat?",
+    "reference": "Carrying the bat means an opening batter remains not out through the entire innings of a completed all-out innings. Sachin Tendulkar\u2019s 200* was not carried bat because he was not an opener; he batted in the middle order and the innings was not an all-out team innings in which he survived all dismissals.",
+    "tags": "cricket,terminology,trivia,records",
+    "verified": false
+  },
+  {
+    "id": "narr-6",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "Which coin is used for tossing?",
+    "reference": "A coin toss uses any coin, typically a regular two-sided coin such as a one-rupee, one-dollar, or similar coin, with heads and tails.",
+    "tags": "rules,cricket,trivia",
+    "verified": false
+  },
+  {
+    "id": "narr-10",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "Why is the bowling end changed every over in cricket?",
+    "reference": "The bowling end is changed every over so both sides share the use of the two different pitch ends, which can differ in wear, bounce, slope, and wind conditions. It also ensures bowlers alternate ends after each over as required by the Laws of Cricket.",
+    "tags": "rules,cricket",
+    "verified": false
+  },
+  {
+    "id": "narr-12",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "Overthrow and throw-by",
+    "reference": "In cricket, an overthrow is the extra run(s) scored when a fielder\u2019s throw at the stumps misses or deflects off a player or object and the batsmen take more runs. A throw-by is a run or runs scored from a fielder\u2019s wayward return throw that goes past the wicket or another fielder, allowing the batsmen to complete additional runs.",
+    "tags": "cricket,terminology",
+    "verified": false
+  },
+  {
+    "id": "narr-16",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "Why do batsmen in T20 matches sit close to the boundary, instead of sitting in the dressing room?",
+    "reference": "In T20 cricket, batsmen on the boundary sit there as designated \u2018substitute runners\u2019 or part of the active dugout so they can return to the field quickly, receive instructions, and be ready to bat at short notice; the dressing room is farther away and slower to access. It is a practical on-field waiting area, not a place where they are scoring from.",
+    "tags": "rules,cricket",
+    "verified": false
+  },
+  {
+    "id": "narr-17",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "What is the difference between googly and doosra spin?",
+    "reference": "A googly is a leg-spinner's delivery that turns the opposite way from a stock leg break \u2014 for a right-handed batsman, from off to leg (in toward the batter). A doosra is an off-spinner's delivery that turns the opposite way from a stock off break \u2014 for a right-handed batsman, from leg to off (away from the batter).",
+    "tags": "cricket,terminology,technique,spin",
+    "verified": false
+  },
+  {
+    "id": "narr-18",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "When was the first tri-series for cricket held?",
+    "reference": "The first one-day international tri-series was the Benson & Hedges World Series Cup in Australia in 1979-80, contested by Australia, England and the West Indies (West Indies won the inaugural edition). Kerry Packer's World Series Cricket had staged earlier triangular one-day matches in 1977-78 and 1978-79, but those lacked official ODI status.",
+    "tags": "cricket,history,icc,tournaments",
+    "verified": false
+  },
+  {
+    "id": "narr-19",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "Does bat tampering exist in cricket?",
+    "reference": "Yes. Bat tampering exists in cricket; it refers to illegally altering a bat or using a bat that does not comply with the laws, often by physically modifying it to gain an unfair advantage.",
+    "tags": "rules,cricket,terminology",
+    "verified": false
+  },
+  {
+    "id": "narr-21",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "On what basis players and teams are ranked by ICC?",
+    "reference": "The ICC ranks players and teams by their rating points, which are calculated from recent match and series performances against the strength of opposition and match context. The rankings are updated on the basis of performance over a defined recent period, not career totals.",
+    "tags": "cricket,icc,ranking",
+    "verified": false
+  },
+  {
+    "id": "narr-22",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "Why did match referee award the 1996 Cricket World Cup Semifinal to Sri Lanka 'by default?''",
+    "reference": "The match referee awarded Sri Lanka the 1996 World Cup semifinal by default because India forfeited the match after the crowd unrest and protests at Eden Gardens forced play to be abandoned.",
+    "tags": "cricket",
+    "verified": false
+  },
+  {
+    "id": "narr-23",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "How is the annual cricketing schedule of an international team fixed?",
+    "reference": "An international team\u2019s annual cricket schedule is fixed by the team\u2019s cricket board, subject to the International Cricket Council (ICC) and agreements with other boards. It consists of home and away tours, bilateral series, and ICC tournaments arranged in advance.",
+    "tags": "cricket,icc,schedule",
+    "verified": false
+  },
+  {
+    "id": "narr-25",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "How does the Sidearm\u2122 cricket ball thrower work?",
+    "reference": "The Sidearm\u2122 cricket ball thrower uses a flexible arm and wrist-like action to propel the ball at high speed and with a realistic trajectory. The user swings the arm and releases the ball, which is then flung out quickly for fielding or batting practice.",
+    "tags": "cricket,equipment",
+    "verified": false
+  },
+  {
+    "id": "narr-28",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "What is the concept of Test cricket? How and when is it decided that a team has won or there is a draw?",
+    "reference": "Test cricket is the longest format of the game, played over up to five days with each team batting twice unless the match ends earlier. A team wins by scoring more runs than the other after all innings are completed or the target is chased; the match is a draw if time runs out before either side can achieve an outright win.",
+    "tags": "cricket",
+    "verified": false
+  },
+  {
+    "id": "narr-32",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "What is the technique of dropping the knee in cricket called?",
+    "reference": "Dropping the knee in cricket is called a knee drop or kneeling down, a stance used by a batter to get low to play certain shots.",
+    "tags": "cricket,technique",
+    "verified": false
+  },
+  {
+    "id": "narr-33",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "What Effect Could Splits or Cracks in a Cricket Bat Have?",
+    "reference": "Splits or cracks weaken the bat and can cause it to lose performance, with the damage potentially spreading until the bat breaks. They also make the bat less safe to use.",
+    "tags": "cricket,equipment,maintenance",
+    "verified": false
+  },
+  {
+    "id": "narr-41",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "What happens to a half century recorded when a player scores a century?",
+    "reference": "A half century is a score of 50 runs. If a player goes on to make a century, that 50-run half century is simply superseded by the 100-run innings; both milestones are recorded, but the century is the final score.",
+    "tags": "cricket,trivia,statistics",
+    "verified": false
+  },
+  {
+    "id": "narr-45",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "Has a no-ball call from the on-field umpire ever been overturned?",
+    "reference": "Yes. A no-ball called by the on-field umpire can be overturned on review, because the third umpire may check TV replays and confirm whether the bowler was over the line or whether the call was incorrect.",
+    "tags": "cricket,trivia,video-review",
+    "verified": false
+  },
+  {
+    "id": "narr-47",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "What is the difference between chinaman and regular leg spin?",
+    "reference": "A chinaman is a left-arm wrist spinner\u2019s delivery that turns from off to leg to a right-handed batter, i.e. the mirror image of a right-arm leg spinner. Regular leg spin is bowled by a right-arm wrist spinner and turns from leg to off for a right-handed batter.",
+    "tags": "cricket,terminology",
+    "verified": false
+  },
+  {
+    "id": "narr-48",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "What is the Dew Factor? How does it affect the match?",
+    "reference": "The dew factor is the moisture that forms on the ground and ball during cool or humid evening conditions. It makes the ball wet and slippery, reducing spin and grip for bowlers and often giving the batting side an advantage in the second innings.",
+    "tags": "cricket,terminology",
+    "verified": false
+  },
+  {
+    "id": "narr-50",
+    "qtype": "narrative",
+    "staleness": false,
+    "question": "Why Mumbai is considered as a state in Ranji Trophy(Indian Domestic Cricket)",
+    "reference": "Mumbai is treated as a separate Ranji Trophy team because the BCCI organizes domestic cricket by cricket associations, not strictly by Indian states. The Mumbai Cricket Association fields its own team, so Mumbai appears as a separate unit even though it is a city within Maharashtra.",
+    "tags": "cricket,tournaments",
+    "verified": false
+  }
+]

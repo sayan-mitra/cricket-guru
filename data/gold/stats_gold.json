@@ -1,0 +1,794 @@
+[
+  {
+    "id": "stats-1",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who scored the most runs in the IPL 2007/08?",
+    "answer_label": "SE Marsh",
+    "answer_value": 616,
+    "answer": "SE Marsh (616)",
+    "meta": {
+      "format": "IPL",
+      "season": "2007/08"
+    }
+  },
+  {
+    "id": "stats-2",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who took the most wickets in the IPL 2007/08?",
+    "answer_label": "Sohail Tanvir",
+    "answer_value": 22,
+    "answer": "Sohail Tanvir (22)",
+    "meta": {
+      "format": "IPL",
+      "season": "2007/08"
+    }
+  },
+  {
+    "id": "stats-3",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who hit the most sixes in the IPL 2007/08?",
+    "answer_label": "ST Jayasuriya",
+    "answer_value": 31,
+    "answer": "ST Jayasuriya (31)",
+    "meta": {
+      "format": "IPL",
+      "season": "2007/08"
+    }
+  },
+  {
+    "id": "stats-4",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "What was the highest team innings total in the IPL 2007/08?",
+    "answer_label": "Chennai Super Kings",
+    "answer_value": 240,
+    "answer": "Chennai Super Kings (240)",
+    "meta": {
+      "format": "IPL",
+      "season": "2007/08"
+    }
+  },
+  {
+    "id": "stats-5",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who scored the most runs in the IPL 2011?",
+    "answer_label": "CH Gayle",
+    "answer_value": 608,
+    "answer": "CH Gayle (608)",
+    "meta": {
+      "format": "IPL",
+      "season": "2011"
+    }
+  },
+  {
+    "id": "stats-6",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who took the most wickets in the IPL 2011?",
+    "answer_label": "SL Malinga",
+    "answer_value": 28,
+    "answer": "SL Malinga (28)",
+    "meta": {
+      "format": "IPL",
+      "season": "2011"
+    }
+  },
+  {
+    "id": "stats-7",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who hit the most sixes in the IPL 2011?",
+    "answer_label": "CH Gayle",
+    "answer_value": 44,
+    "answer": "CH Gayle (44)",
+    "meta": {
+      "format": "IPL",
+      "season": "2011"
+    }
+  },
+  {
+    "id": "stats-8",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "What was the highest team innings total in the IPL 2011?",
+    "answer_label": "Kings XI Punjab",
+    "answer_value": 232,
+    "answer": "Kings XI Punjab (232)",
+    "meta": {
+      "format": "IPL",
+      "season": "2011"
+    }
+  },
+  {
+    "id": "stats-9",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who scored the most runs in the IPL 2015?",
+    "answer_label": "DA Warner",
+    "answer_value": 562,
+    "answer": "DA Warner (562)",
+    "meta": {
+      "format": "IPL",
+      "season": "2015"
+    }
+  },
+  {
+    "id": "stats-10",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who took the most wickets in the IPL 2015?",
+    "answer_label": "DJ Bravo",
+    "answer_value": 26,
+    "answer": "DJ Bravo (26)",
+    "meta": {
+      "format": "IPL",
+      "season": "2015"
+    }
+  },
+  {
+    "id": "stats-11",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who hit the most sixes in the IPL 2015?",
+    "answer_label": "CH Gayle",
+    "answer_value": 38,
+    "answer": "CH Gayle (38)",
+    "meta": {
+      "format": "IPL",
+      "season": "2015"
+    }
+  },
+  {
+    "id": "stats-12",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "What was the highest team innings total in the IPL 2015?",
+    "answer_label": "Royal Challengers Bangalore",
+    "answer_value": 235,
+    "answer": "Royal Challengers Bangalore (235)",
+    "meta": {
+      "format": "IPL",
+      "season": "2015"
+    }
+  },
+  {
+    "id": "stats-13",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who scored the most runs in the IPL 2016?",
+    "answer_label": "V Kohli",
+    "answer_value": 973,
+    "answer": "V Kohli (973)",
+    "meta": {
+      "format": "IPL",
+      "season": "2016"
+    }
+  },
+  {
+    "id": "stats-14",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who took the most wickets in the IPL 2016?",
+    "answer_label": "B Kumar",
+    "answer_value": 23,
+    "answer": "B Kumar (23)",
+    "meta": {
+      "format": "IPL",
+      "season": "2016"
+    }
+  },
+  {
+    "id": "stats-15",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who hit the most sixes in the IPL 2016?",
+    "answer_label": "V Kohli",
+    "answer_value": 38,
+    "answer": "V Kohli (38)",
+    "meta": {
+      "format": "IPL",
+      "season": "2016"
+    }
+  },
+  {
+    "id": "stats-16",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "What was the highest team innings total in the IPL 2016?",
+    "answer_label": "Royal Challengers Bangalore",
+    "answer_value": 248,
+    "answer": "Royal Challengers Bangalore (248)",
+    "meta": {
+      "format": "IPL",
+      "season": "2016"
+    }
+  },
+  {
+    "id": "stats-17",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who scored the most runs in ODIs 2005/06?",
+    "answer_label": "KC Sangakkara",
+    "answer_value": 978,
+    "answer": "KC Sangakkara (978)",
+    "meta": {
+      "format": "ODI",
+      "season": "2005/06"
+    }
+  },
+  {
+    "id": "stats-18",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who took the most wickets in ODIs 2005/06?",
+    "answer_label": "IK Pathan",
+    "answer_value": 35,
+    "answer": "IK Pathan (35)",
+    "meta": {
+      "format": "ODI",
+      "season": "2005/06"
+    }
+  },
+  {
+    "id": "stats-19",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who hit the most sixes in ODIs 2005/06?",
+    "answer_label": "AC Gilchrist",
+    "answer_value": 22,
+    "answer": "AC Gilchrist (22)",
+    "meta": {
+      "format": "ODI",
+      "season": "2005/06"
+    }
+  },
+  {
+    "id": "stats-20",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "What was the highest team innings total in ODIs 2005/06?",
+    "answer_label": "South Africa",
+    "answer_value": 438,
+    "answer": "South Africa (438)",
+    "meta": {
+      "format": "ODI",
+      "season": "2005/06"
+    }
+  },
+  {
+    "id": "stats-21",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who scored the most runs in ODIs 2006/07?",
+    "answer_label": "ML Hayden",
+    "answer_value": 1368,
+    "answer": "ML Hayden (1368)",
+    "meta": {
+      "format": "ODI",
+      "season": "2006/07"
+    }
+  },
+  {
+    "id": "stats-22",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who took the most wickets in ODIs 2006/07?",
+    "answer_label": "GD McGrath",
+    "answer_value": 49,
+    "answer": "GD McGrath (49)",
+    "meta": {
+      "format": "ODI",
+      "season": "2006/07"
+    }
+  },
+  {
+    "id": "stats-23",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who hit the most sixes in ODIs 2006/07?",
+    "answer_label": "ML Hayden",
+    "answer_value": 29,
+    "answer": "ML Hayden (29)",
+    "meta": {
+      "format": "ODI",
+      "season": "2006/07"
+    }
+  },
+  {
+    "id": "stats-24",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "What was the highest team innings total in ODIs 2006/07?",
+    "answer_label": "South Africa",
+    "answer_value": 418,
+    "answer": "South Africa (418)",
+    "meta": {
+      "format": "ODI",
+      "season": "2006/07"
+    }
+  },
+  {
+    "id": "stats-25",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who scored the most runs in ODIs 2009/10?",
+    "answer_label": "RT Ponting",
+    "answer_value": 1139,
+    "answer": "RT Ponting (1139)",
+    "meta": {
+      "format": "ODI",
+      "season": "2009/10"
+    }
+  },
+  {
+    "id": "stats-26",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who took the most wickets in ODIs 2009/10?",
+    "answer_label": "SR Watson",
+    "answer_value": 32,
+    "answer": "SR Watson (32)",
+    "meta": {
+      "format": "ODI",
+      "season": "2009/10"
+    }
+  },
+  {
+    "id": "stats-27",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who hit the most sixes in ODIs 2009/10?",
+    "answer_label": "SR Watson",
+    "answer_value": 23,
+    "answer": "SR Watson (23)",
+    "meta": {
+      "format": "ODI",
+      "season": "2009/10"
+    }
+  },
+  {
+    "id": "stats-28",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "What was the highest team innings total in ODIs 2009/10?",
+    "answer_label": "India",
+    "answer_value": 414,
+    "answer": "India (414)",
+    "meta": {
+      "format": "ODI",
+      "season": "2009/10"
+    }
+  },
+  {
+    "id": "stats-29",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who scored the most runs in T20Is 2022/23?",
+    "answer_label": "SA Yadav",
+    "answer_value": 749,
+    "answer": "SA Yadav (749)",
+    "meta": {
+      "format": "T20I",
+      "season": "2022/23"
+    }
+  },
+  {
+    "id": "stats-30",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who took the most wickets in T20Is 2022/23?",
+    "answer_label": "YM Nkanya",
+    "answer_value": 32,
+    "answer": "YM Nkanya (32)",
+    "meta": {
+      "format": "T20I",
+      "season": "2022/23"
+    }
+  },
+  {
+    "id": "stats-31",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who hit the most sixes in T20Is 2022/23?",
+    "answer_label": "SA Yadav",
+    "answer_value": 42,
+    "answer": "SA Yadav (42)",
+    "meta": {
+      "format": "T20I",
+      "season": "2022/23"
+    }
+  },
+  {
+    "id": "stats-32",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "What was the highest team innings total in T20Is 2022/23?",
+    "answer_label": "South Africa",
+    "answer_value": 259,
+    "answer": "South Africa (259)",
+    "meta": {
+      "format": "T20I",
+      "season": "2022/23"
+    }
+  },
+  {
+    "id": "stats-33",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who scored the most runs in T20Is 2023/24?",
+    "answer_label": "Sikandar Raza",
+    "answer_value": 595,
+    "answer": "Sikandar Raza (595)",
+    "meta": {
+      "format": "T20I",
+      "season": "2023/24"
+    }
+  },
+  {
+    "id": "stats-34",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who took the most wickets in T20Is 2023/24?",
+    "answer_label": "Karan KC",
+    "answer_value": 25,
+    "answer": "Karan KC (25)",
+    "meta": {
+      "format": "T20I",
+      "season": "2023/24"
+    }
+  },
+  {
+    "id": "stats-35",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who hit the most sixes in T20Is 2023/24?",
+    "answer_label": "Sikandar Raza",
+    "answer_value": 41,
+    "answer": "Sikandar Raza (41)",
+    "meta": {
+      "format": "T20I",
+      "season": "2023/24"
+    }
+  },
+  {
+    "id": "stats-36",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "What was the highest team innings total in T20Is 2023/24?",
+    "answer_label": "England",
+    "answer_value": 267,
+    "answer": "England (267)",
+    "meta": {
+      "format": "T20I",
+      "season": "2023/24"
+    }
+  },
+  {
+    "id": "stats-37",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who scored the most runs in T20Is 2026?",
+    "answer_label": "Karanbir Singh",
+    "answer_value": 710,
+    "answer": "Karanbir Singh (710)",
+    "meta": {
+      "format": "T20I",
+      "season": "2026"
+    }
+  },
+  {
+    "id": "stats-38",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who took the most wickets in T20Is 2026?",
+    "answer_label": "Samiullah Rahmani",
+    "answer_value": 26,
+    "answer": "Samiullah Rahmani (26)",
+    "meta": {
+      "format": "T20I",
+      "season": "2026"
+    }
+  },
+  {
+    "id": "stats-39",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who hit the most sixes in T20Is 2026?",
+    "answer_label": "Karanbir Singh",
+    "answer_value": 65,
+    "answer": "Karanbir Singh (65)",
+    "meta": {
+      "format": "T20I",
+      "season": "2026"
+    }
+  },
+  {
+    "id": "stats-40",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "What was the highest team innings total in T20Is 2026?",
+    "answer_label": "Austria",
+    "answer_value": 322,
+    "answer": "Austria (322)",
+    "meta": {
+      "format": "T20I",
+      "season": "2026"
+    }
+  },
+  {
+    "id": "stats-41",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who scored the most runs in Tests 2005/06?",
+    "answer_label": "RT Ponting",
+    "answer_value": 995,
+    "answer": "RT Ponting (995)",
+    "meta": {
+      "format": "Test",
+      "season": "2005/06"
+    }
+  },
+  {
+    "id": "stats-42",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who took the most wickets in Tests 2005/06?",
+    "answer_label": "M Ntini",
+    "answer_value": 42,
+    "answer": "M Ntini (42)",
+    "meta": {
+      "format": "Test",
+      "season": "2005/06"
+    }
+  },
+  {
+    "id": "stats-43",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who hit the most sixes in Tests 2005/06?",
+    "answer_label": "Shahid Afridi",
+    "answer_value": 13,
+    "answer": "Shahid Afridi (13)",
+    "meta": {
+      "format": "Test",
+      "season": "2005/06"
+    }
+  },
+  {
+    "id": "stats-44",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "What was the highest team innings total in Tests 2005/06?",
+    "answer_label": "India",
+    "answer_value": 603,
+    "answer": "India (603)",
+    "meta": {
+      "format": "Test",
+      "season": "2005/06"
+    }
+  },
+  {
+    "id": "stats-45",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who scored the most runs in Tests 2017?",
+    "answer_label": "JE Root",
+    "answer_value": 729,
+    "answer": "JE Root (729)",
+    "meta": {
+      "format": "Test",
+      "season": "2017"
+    }
+  },
+  {
+    "id": "stats-46",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who took the most wickets in Tests 2017?",
+    "answer_label": "JM Anderson",
+    "answer_value": 39,
+    "answer": "JM Anderson (39)",
+    "meta": {
+      "format": "Test",
+      "season": "2017"
+    }
+  },
+  {
+    "id": "stats-47",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who hit the most sixes in Tests 2017?",
+    "answer_label": "HH Pandya",
+    "answer_value": 10,
+    "answer": "HH Pandya (10)",
+    "meta": {
+      "format": "Test",
+      "season": "2017"
+    }
+  },
+  {
+    "id": "stats-48",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "What was the highest team innings total in Tests 2017?",
+    "answer_label": "India",
+    "answer_value": 622,
+    "answer": "India (622)",
+    "meta": {
+      "format": "Test",
+      "season": "2017"
+    }
+  },
+  {
+    "id": "stats-49",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who scored the most runs in Tests 2017/18?",
+    "answer_label": "AK Markram",
+    "answer_value": 1000,
+    "answer": "AK Markram (1000)",
+    "meta": {
+      "format": "Test",
+      "season": "2017/18"
+    }
+  },
+  {
+    "id": "stats-50",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who took the most wickets in Tests 2017/18?",
+    "answer_label": "K Rabada",
+    "answer_value": 56,
+    "answer": "K Rabada (56)",
+    "meta": {
+      "format": "Test",
+      "season": "2017/18"
+    }
+  },
+  {
+    "id": "stats-51",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Who hit the most sixes in Tests 2017/18?",
+    "answer_label": "C de Grandhomme",
+    "answer_value": 9,
+    "answer": "C de Grandhomme (9)",
+    "meta": {
+      "format": "Test",
+      "season": "2017/18"
+    }
+  },
+  {
+    "id": "stats-52",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "What was the highest team innings total in Tests 2017/18?",
+    "answer_label": "Sri Lanka",
+    "answer_value": 713,
+    "answer": "Sri Lanka (713)",
+    "meta": {
+      "format": "Test",
+      "season": "2017/18"
+    }
+  },
+  {
+    "id": "stats-53",
+    "qtype": "stats",
+    "staleness": true,
+    "question": "Who has hit the most sixes in T20Is?",
+    "answer_label": "Karanbir Singh",
+    "answer_value": 204,
+    "answer": "Karanbir Singh (204)",
+    "meta": {
+      "format": "T20I",
+      "all_time": true
+    }
+  },
+  {
+    "id": "stats-54",
+    "qtype": "stats",
+    "staleness": true,
+    "question": "Who has scored the most career runs in T20Is?",
+    "answer_label": "Babar Azam",
+    "answer_value": 4545,
+    "answer": "Babar Azam (4545)",
+    "meta": {
+      "format": "T20I",
+      "all_time": true
+    }
+  },
+  {
+    "id": "stats-55",
+    "qtype": "stats",
+    "staleness": true,
+    "question": "Who has hit the most sixes in ODIs?",
+    "answer_label": "RG Sharma",
+    "answer_value": 351,
+    "answer": "RG Sharma (351)",
+    "meta": {
+      "format": "ODI",
+      "all_time": true
+    }
+  },
+  {
+    "id": "stats-56",
+    "qtype": "stats",
+    "staleness": true,
+    "question": "Who has scored the most career runs in ODIs?",
+    "answer_label": "V Kohli",
+    "answer_value": 14675,
+    "answer": "V Kohli (14675)",
+    "meta": {
+      "format": "ODI",
+      "all_time": true
+    }
+  },
+  {
+    "id": "stats-57",
+    "qtype": "stats",
+    "staleness": true,
+    "question": "Who has hit the most sixes in Tests?",
+    "answer_label": "BA Stokes",
+    "answer_value": 138,
+    "answer": "BA Stokes (138)",
+    "meta": {
+      "format": "Test",
+      "all_time": true
+    }
+  },
+  {
+    "id": "stats-58",
+    "qtype": "stats",
+    "staleness": true,
+    "question": "Who has scored the most career runs in Tests?",
+    "answer_label": "JE Root",
+    "answer_value": 14114,
+    "answer": "JE Root (14114)",
+    "meta": {
+      "format": "Test",
+      "all_time": true
+    }
+  },
+  {
+    "id": "stats-59",
+    "qtype": "stats",
+    "staleness": true,
+    "question": "Who has hit the most sixes in the IPL?",
+    "answer_label": "CH Gayle",
+    "answer_value": 359,
+    "answer": "CH Gayle (359)",
+    "meta": {
+      "format": "IPL",
+      "all_time": true
+    }
+  },
+  {
+    "id": "stats-60",
+    "qtype": "stats",
+    "staleness": true,
+    "question": "Who has scored the most career runs in the IPL?",
+    "answer_label": "V Kohli",
+    "answer_value": 9346,
+    "answer": "V Kohli (9346)",
+    "meta": {
+      "format": "IPL",
+      "all_time": true
+    }
+  },
+  {
+    "id": "stats-61",
+    "qtype": "stats",
+    "staleness": false,
+    "question": "Which bowler has taken all ten wickets in an innings in a Test match?",
+    "answer_label": "Ajaz Patel",
+    "answer_value": 10,
+    "answer": "Ajaz Patel (10)",
+    "meta": {
+      "note": "AY Patel 10/119 (2021); Kumble's 1999 10/74 predates Cricsheet coverage"
+    }
+  }
+]

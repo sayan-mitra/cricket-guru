@@ -1,0 +1,33 @@
+# Cricket Guru — Postgres + Qdrant (server mode) + the app.
+# One-time after `up`: load data into Postgres and build the Qdrant index
+# (see README — the loaders read CG_* env to reach these services).
+services:
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: cricket
+      POSTGRES_PASSWORD: cricket
+      POSTGRES_DB: cricket_guru
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+
+  qdrant:
+    image: qdrant/qdrant
+    ports: ["6333:6333"]
+    volumes: ["qdrantdata:/qdrant/storage"]
+
+  app:
+    build: .
+    env_file: [backend/.env]
+    environment:
+      CG_HOST: postgres
+      CG_USER: cricket
+      CG_PASSWORD: cricket
+      CG_DB: cricket_guru
+      CG_QDRANT_URL: http://qdrant:6333
+    ports: ["8501:8501"]
+    depends_on: [postgres, qdrant]
+
+volumes:
+  pgdata: {}
+  qdrantdata: {}

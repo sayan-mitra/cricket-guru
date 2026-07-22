@@ -1,0 +1,11 @@
+[theme]
+base = "light"
+primaryColor = "#1F7A5A"            # cricket green — accents, primary buttons, selected nav
+backgroundColor = "#FCFCFA"         # warm near-white canvas
+secondaryBackgroundColor = "#F1F2ED" # sidebar, chat bubbles, bordered cards
+textColor = "#1A1A1A"
+linkColor = "#1F7A5A"
+font = "sans serif"
+
+[client]
+toolbarMode = "minimal"

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "multistep-stats-IPL-2016",
+    "qtype": "multistep",
+    "question": "How many more runs did the leading run-scorer of IPL 2016 make than the leading run-scorer of IPL 2007/08?",
+    "answer_value": 357,
+    "min_tools": 2,
+    "reference": "IPL 2016 top scorer V Kohli (973); IPL 2007/08 top scorer SE Marsh (616); difference 357."
+  },
+  {
+    "id": "multistep-stats-IPL-2015",
+    "qtype": "multistep",
+    "question": "How many more runs did the leading run-scorer of IPL 2015 make than the leading run-scorer of IPL 2011?",
+    "answer_value": -46,
+    "min_tools": 2,
+    "reference": "IPL 2015 top scorer DA Warner (562); IPL 2011 top scorer CH Gayle (608); difference -46."
+  },
+  {
+    "id": "multistep-stats-IPL-2019",
+    "qtype": "multistep",
+    "question": "How many more runs did the leading run-scorer of IPL 2019 make than the leading run-scorer of IPL 2009?",
+    "answer_value": 120,
+    "min_tools": 2,
+    "reference": "IPL 2019 top scorer DA Warner (692); IPL 2009 top scorer ML Hayden (572); difference 120."
+  },
+  {
+    "id": "multistep-cross-1",
+    "qtype": "multistep",
+    "question": "Consider the bowler with the most Test wickets in the database. In cricket, is underarm bowling permitted?",
+    "answer_label": "not permitted",
+    "min_tools": 2,
+    "expected_tools": [
+      "cricket_stats",
+      "cricket_rules"
+    ],
+    "reference": "Underarm bowling is not permitted unless both captains agree before the match (MCC Law 21.1.2). The stats step only identifies the bowler; the rule is the answer."
+  },
+  {
+    "id": "multistep-cross-2",
+    "qtype": "multistep",
+    "question": "For the team that won the most recent India\u2013England Test series, how many fielders are allowed outside the fielding circle during the first powerplay of an ODI?",
+    "answer_value": 2,
+    "min_tools": 2,
+    "expected_tools": [
+      "cricket_stats",
+      "cricket_rules"
+    ],
+    "reference": "The 2025 series was drawn 2-2 (stats). In ODI Powerplay 1, no more than 2 fielders are permitted outside the 30-yard circle (ICC ODI playing conditions, clause 28.7)."
+  }
+]

@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: A4; margin: 11mm 13mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 9.4px; line-height: 1.32; color: #1a1a1a; }
+  h1 { font-size: 18px; margin: 0 0 2px; letter-spacing: -0.2px; }
+  .sub { font-size: 9.6px; color: #444; margin: 0 0 7px; }
+  .meta { font-size: 9.2px; margin: 0 0 8px; padding: 5px 9px; background: #f3f5f7; border-radius: 4px; }
+  .meta b { color: #000; }
+  h2 { font-size: 10.4px; text-transform: uppercase; letter-spacing: 0.4px; margin: 10px 0 3px; padding-bottom: 2px; border-bottom: 1.5px solid #222; color: #111; }
+  p { margin: 0 0 5px; }
+  ul { margin: 0 0 5px; padding-left: 16px; }
+  li { margin: 0 0 2px; }
+  table { border-collapse: collapse; width: 100%; margin: 4px 0 5px; font-size: 9px; }
+  th, td { border: 1px solid #cfcfcf; padding: 3px 6px; text-align: left; vertical-align: top; }
+  th { background: #eef1f4; font-weight: 600; }
+  .ex { background: #f7f9fb; border-left: 3px solid #888; padding: 5px 9px; margin: 5px 0; font-size: 9.2px; }
+  .ex b { color: #000; }
+  code { font-family: "SF Mono", Menlo, monospace; font-size: 8.8px; background: #eef1f4; padding: 0 3px; border-radius: 3px; }
+  b, strong { color: #000; }
+  .stack { font-size: 9.2px; margin-top: 3px; }
+</style>
+</head>
+<body>
+
+  <h1>Cricket Guru</h1>
+  <p class="sub">A cricket question-answering agent grounded in structured ball-by-ball match data and encyclopedic prose, so it answers both "who scored the most in IPL 2016" and "why the 2019 final was controversial" without making either up.</p>
+
+  <div class="meta">
+    <b>Group:</b> IP8, Cricket Guru &nbsp;|&nbsp;
+    <b>Primary framework:</b> Pydantic AI &nbsp;|&nbsp;
+    <b>Domain:</b> Cricket &mdash; International men's (Test / ODI / T20I) + IPL
+  </div>
+
+  <h2>Problem statement</h2>
+  <p>Cricket knowledge lives in two incompatible shapes, and no single retrieval method serves both. <b>Prose</b> holds narrative and judgement: why a match mattered, how a technique worked, what made a decision contentious. <b>Structured records</b> hold exact facts: run tallies, strike rates, results. Ask a vector search for the most runs in a season and it returns a paragraph that sounds right and is often wrong; ask a stats database why a chase was famous and it has no column for that. A third failure sits on top: <b>records go stale</b> the moment they break, so a retrieval-only system answers record questions confidently and out of date.</p>
+  <p>Cricket Guru reads each question, decides which source actually holds the answer, and pulls from it: exact numbers from a structured match DB, narrative from a text index, and a web-search freshness check for records. The scope for now: men's international cricket and the IPL, factual and narrative questions with checkable answers.</p>
+
+  <div class="ex">
+    <b>The kinds of questions it must separate:</b><br>
+    &bull; <i>Fact:</i> "Who scored the most runs in IPL 2016?" &rarr; structured match data.<br>
+    &bull; <i>Narrative:</i> "Why was the 2019 World Cup final decided on boundary count?" &rarr; prose.<br>
+    &bull; <i>Record / stale:</i> "Who holds the record for most sixes in men's T20Is?" &rarr; structured data + web freshness check, not a years-old article.
+  </div>
+
+  <h2>Data sources &amp; tools</h2>
+  <table>
+    <tr><th style="width:19%">Source</th><th style="width:35%">What it is (ingested, verified)</th><th style="width:22%">Store</th><th style="width:24%">Tool it powers</th></tr>
+    <tr><td><b>Cricsheet</b></td><td>Open ball-by-ball, men's intl + IPL. 8,142 matches, 4.14M deliveries.</td><td><b>PostgreSQL</b> (matches, innings, deliveries, players)</td><td><b>Stats query</b> &mdash; agent writes SQL to compute exact numbers</td></tr>
+    <tr><td><b>Wikipedia</b> (cricket)</td><td>575 encyclopedic articles, 8.3M chars. The narrative source.</td><td><b>Qdrant</b> vector DB (bge-small via FastEmbed)</td><td><b>Semantic search</b> &mdash; relevant prose passages, with citations</td></tr>
+    <tr><td><b>Sports Stack&nbsp;Exchange</b></td><td>Cricket-tag Q&amp;A. 839 Q, 459 accepted answers.</td><td><b>PostgreSQL</b> (never embedded)</td><td><b>Evaluation oracle</b> &mdash; accepted answers as the narrative answer key</td></tr>
+  </table>
+  <p><b>Agent tools (Pydantic AI ReAct loop, Claude Sonnet):</b> stats-query (SQL over Cricsheet) &middot; semantic-search (Qdrant) &middot; <b>web-search freshness</b>. <b>Grounding policy:</b> corpus-first; when retrieval is insufficient the agent falls back to web-search instead of fabricating, and labels what came from corpus vs web.</p>
+
+  <h2>Comparative evaluation</h2>
+  <p>Ground truth is found and computed, not hand-authored, on two tracks: <b>stats</b> questions templated from Cricsheet with <b>SQL-computed</b> answers (exact match); <b>narrative</b> questions from Sports SE accepted answers, scored by <b>LLM-as-judge</b> and validated against human labels.</p>
+  <p>We do not just reach for the optimal design. At each pipeline leg we compare <b>two prominent approaches</b>, varying one leg at a time against a simple baseline, so each result shows what the advanced technique actually buys:</p>
+  <ul>
+    <li><b>Chunking:</b> fixed-size vs structural &nbsp;&bull;&nbsp; <b>Retrieval:</b> dense vs hybrid (dense+BM25)</li>
+    <li><b>Routing:</b> rule/keyword router vs LLM tool-calling agent &nbsp;&bull;&nbsp; <b>Judge:</b> same-model vs cross-model (self-preference bias)</li>
+  </ul>
+  <p>Reported per variant: accuracy delta, plus hallucination/groundedness, routing accuracy, cost/latency, and web-fallback rate. Per-question logs feed the failure analysis.</p>
+
+  <h2>Interface</h2>
+  <p>A Streamlit app with two views: a <b>chat</b> (answer + tool trace + sources + corpus-vs-web transparency) and a <b>comparisons dashboard</b> that shows the leg-by-leg results and metrics intuitively.</p>
+
+</body>
+</html>

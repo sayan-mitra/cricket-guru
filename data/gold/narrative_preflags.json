@@ -1,0 +1,202 @@
+{
+  "narr-1": {
+    "keep": false,
+    "reason": "The question is unclear about what \u201c7th delivery\u201d means, and the reference answer discusses umpire miscounting/over completion rather than whether a no-ball on the 7th ball gives a free hit."
+  },
+  "narr-2": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference answer correctly explains that Test cricket has no fixed maximum overs in a day and is time-based."
+  },
+  "narr-3": {
+    "keep": true,
+    "reason": "The question is understandable and the reference explains seeding in cricket groupings, addressing the query substantively."
+  },
+  "narr-4": {
+    "keep": false,
+    "reason": "The question is understandable, but the reference answer is not really about ICC rankings policy and is partly inaccurate/outdated, so it doesn\u2019t reliably answer the question."
+  },
+  "narr-5": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference correctly explains that \u2018carrying the bat\u2019 requires the team to be all out, which didn\u2019t happen in a 200* ODI innings."
+  },
+  "narr-6": {
+    "keep": false,
+    "reason": "The question is too vague, and the reference answer is rambling and doesn\u2019t clearly answer which coin is used for tossing."
+  },
+  "narr-7": {
+    "keep": false,
+    "reason": "The question is vague and the reference answer is confused/off-topic; it doesn't clearly explain a substantive cricket concept in a reliable way."
+  },
+  "narr-8": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference gives a substantive answer explaining that the original off/leg side definition applies, so a reverse/switch hit does not make it a wide."
+  },
+  "narr-9": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference directly explains that a batsman cannot decline a boundary, with a relevant exception for overthrows."
+  },
+  "narr-10": {
+    "keep": true,
+    "reason": "Clear, answerable cricket question, and the reference explains fairness and external factors affecting play."
+  },
+  "narr-11": {
+    "keep": false,
+    "reason": "The question is too vague and not really a clear cricket Q&A item, and the reference answer is generic coaching advice rather than a specific, verifiable answer."
+  },
+  "narr-12": {
+    "keep": false,
+    "reason": "The question is too vague/fragmented, and the reference answer is speculative and does not clearly or fully answer a specific cricket rule question."
+  },
+  "narr-13": {
+    "keep": false,
+    "reason": "The question is vague and unanswerable as written, and the reference answer does not provide a concrete answer."
+  },
+  "narr-14": {
+    "keep": false,
+    "reason": "The question is vague and incomplete, and the reference answer is mostly unrelated general stats info rather than answering a specific cricket query."
+  },
+  "narr-15": {
+    "keep": false,
+    "reason": "The question is vague and broken, and the reference answer is off-topic, discussing unrelated dismissal scenarios without answering it."
+  },
+  "narr-16": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference explains that batsmen sit near the boundary to reduce time taking the crease and allow flexible substitutions."
+  },
+  "narr-17": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference explains the difference between a doosra and a googly with substantive details."
+  },
+  "narr-18": {
+    "keep": true,
+    "reason": "The question is clear, and the reference answer substantively addresses it by giving the first tri-series dates for Test, ODI, and T20 formats."
+  },
+  "narr-19": {
+    "keep": true,
+    "reason": "The question is clear, and the reference answer directly addresses whether bat tampering exists under cricket laws."
+  },
+  "narr-20": {
+    "keep": false,
+    "reason": "The question is vague and the reference answers only for Indian players, not all Under-19 players."
+  },
+  "narr-21": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference explains ICC\u2019s rating basis as a modified Elo-style system with weighted recent results."
+  },
+  "narr-22": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference explains the default award due to crowd-caused abandonment and India being far behind the target."
+  },
+  "narr-23": {
+    "keep": false,
+    "reason": "The question is vague and the reference answer only loosely describes board/ICC approval, not a clear fixed annual schedule process."
+  },
+  "narr-24": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference directly addresses it with substantive historical examples showing it was not the first time."
+  },
+  "narr-25": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference explains the Sidearm mechanism substantively."
+  },
+  "narr-26": {
+    "keep": true,
+    "reason": "The question is clear, and the reference answer substantively explains the legality of underarm bowling in cricket and its practical effect."
+  },
+  "narr-27": {
+    "keep": false,
+    "reason": "The question is clear, but the reference answer is internally inconsistent and cites irrelevant/incorrect laws; it does not cleanly answer whether a ball hitting the wicket is still a no-ball."
+  },
+  "narr-28": {
+    "keep": false,
+    "reason": "The question is broad and awkwardly phrased, and the reference answer is a rules-heavy explanation of Test match results rather than a clear answer to the concept of Test cricket itself."
+  },
+  "narr-29": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference gives the standard 80-over threshold for a new ball in Tests."
+  },
+  "narr-30": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference answer correctly explains the lost-ball rule and scoring outcome."
+  },
+  "narr-31": {
+    "keep": false,
+    "reason": "The question is vague/incomplete (\u201cSachin Tendulkar's bowling record\u201d) and the reference answer is a rambling mix of unrelated stats rather than a direct, clear answer."
+  },
+  "narr-32": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference correctly identifies the technique as the long barrier."
+  },
+  "narr-33": {
+    "keep": false,
+    "reason": "The question is broad and the reference answer is mostly advice about repairing one bat, not a clear direct answer about the effect of splits/cracks in general."
+  },
+  "narr-34": {
+    "keep": false,
+    "reason": "The question is unclear/broken (\u201cRefusal to run after skying the ball\u201d), and the reference answer is confused, off-topic, and does not directly answer the question."
+  },
+  "narr-35": {
+    "keep": false,
+    "reason": "The question is unclear and the reference answer is broken/awkward, with no direct, substantive answer about who achieved 10 wickets in an innings in international cricket."
+  },
+  "narr-36": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference answer directly addresses jersey nicknames in international cricket with examples."
+  },
+  "narr-37": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference answer addresses the legality and gives relevant examples."
+  },
+  "narr-38": {
+    "keep": true,
+    "reason": "The question is clear, and the reference answer directly says trial ball is not permitted in international cricket while noting trial run-up is allowed, so it substantively addresses the topic."
+  },
+  "narr-39": {
+    "keep": false,
+    "reason": "This is not a cricket Q&A item: the question is about bat scuff sheets, and the answer is anecdotal rather than a clear substantive cricket answer."
+  },
+  "narr-40": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference answer gives substantive IPL super-over tie rules for league and playoff matches."
+  },
+  "narr-41": {
+    "keep": false,
+    "reason": "The question is clear, but the reference answer is verbose and partially redundant; it does answer that a century is not also counted as a half-century."
+  },
+  "narr-42": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference answer directly explains that a captain can be changed during a match, so it is substantive and on-topic."
+  },
+  "narr-43": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference explains dismissals off no-balls, wides, and free hits."
+  },
+  "narr-44": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference correctly explains why lawful polishing is allowed and distinguishes it from prohibited ball tampering."
+  },
+  "narr-45": {
+    "keep": false,
+    "reason": "The question is clear, but the reference answer is incorrect/off-topic: it explains why a no-ball call can\u2019t be overturned, which doesn\u2019t answer whether it has ever been overturned."
+  },
+  "narr-46": {
+    "keep": true,
+    "reason": "The question is clear, and the reference answer explains the boundary vs overthrow distinction with a relevant Law 19.7 citation."
+  },
+  "narr-47": {
+    "keep": false,
+    "reason": "The question is a bit imprecise, and the reference answer is confused and self-contradictory about leg spin vs chinaman, so it doesn\u2019t reliably answer the asked difference."
+  },
+  "narr-48": {
+    "keep": true,
+    "reason": "The question is clear and answerable, and the reference answer substantively explains dew and its impact on bowling and fielding conditions."
+  },
+  "narr-49": {
+    "keep": false,
+    "reason": "The question is too vague and context-dependent (\u201cWho will qualify for semi-final?\u201d) without specifying the tournament or teams, so it isn\u2019t a clear answerable cricket question."
+  },
+  "narr-50": {
+    "keep": false,
+    "reason": "The question is understandable, but the reference answer is off-topic and factually muddled; it doesn\u2019t clearly explain why Mumbai is treated as a Ranji team and incorrectly discusses other states/teams."
+  }
+}

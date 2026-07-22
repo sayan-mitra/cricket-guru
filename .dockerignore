@@ -1,0 +1,35 @@
+# Keep the build context lean. INCLUDED (needed by the Dockerfile): backend, frontend, .streamlit,
+# data/gold, data/results, data/qdrant, deploy/. Everything below is excluded.
+.venv
+venv
+.git
+.gitignore
+**/__pycache__
+**/*.pyc
+*.egg-info
+.DS_Store
+.claude
+
+# secrets — never bake keys into the image
+.env
+backend/.env
+
+# raw + derived corpora (not needed at runtime; the gold embeds its references)
+data/cricsheet
+data/wikipedia
+data/rules
+data/sports_se
+
+# runtime artifacts
+data/traces
+data/session
+
+# the raw index dir — we COPY data/qdrant.tar.gz instead (Docker macOS FS checksum quirk)
+data/qdrant
+data/qdrant/**
+
+# docs / misc
+docs
+*.md
+*.pdf
+money_se_handoff.md

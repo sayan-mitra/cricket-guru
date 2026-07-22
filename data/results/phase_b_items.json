@@ -1,0 +1,310 @@
+[
+  {
+    "id": "narr-3",
+    "question": "What is seedings in grouping the teams in cricket?",
+    "reference": "Seeding is the pre-ranking of teams in a tournament so the strongest teams are placed into different groups or positions to avoid meeting each other early. In cricket group stages, seeded teams are distributed across groups based on ranking or past performance.",
+    "candidate": "In cricket tournaments, **seeding** means **ranking or placing teams in advance based on strength, past performance, or tournament rules** so that the draw or group stage is more balanced.\n\nFor example:\n- top-ranked teams may be **seeded** so they don\u2019t all end up in the same group,\n- or they may be placed in different parts of the knockout bracket.\n\nSo, **seeding helps distribute strong teams fairly across groups**.\n\n**Source:** cricket_rules and cricket_prose were not able to provide a corpus definition, so this is a general cricket-tournament explanation based on standard usage.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate answer matches the reference: it explains seeding as pre-ranking teams by strength/past performance so strong teams are spread across groups and avoid meeting early. This is consistent with the reference answer."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "Candidate correctly describes seeding as ranking/placing teams in advance to balance groups and avoid strong teams meeting early, matching the reference's meaning despite different wording and an unnecessary disclaimer."
+    }
+  },
+  {
+    "id": "narr-4",
+    "question": "Why there is no ICC rankings for women's test cricket?",
+    "reference": "Because ICC Test rankings require enough matches to produce a meaningful points table, and women\u2019s Test cricket is played too infrequently with too few teams for a stable ranking system. Instead, ICC ranks women\u2019s teams in ODIs and T20Is, where there is much more regular competition.",
+    "candidate": "There is **no widely used ICC ranking table for women\u2019s Test cricket** mainly because **women\u2019s Tests are very infrequent** compared with ODIs and T20Is, so there isn\u2019t enough match volume to build a stable, meaningful ranking system.\n\n**Why this happens**\n- **Few Tests are played**: many women\u2019s teams barely play any Tests at all.\n- **Ranking systems need volume**: ICC rankings work best when teams play regularly against a range of opponents.\n- **ODIs and T20Is are the priority formats**: these are the formats most women\u2019s teams play, and they have much more consistent scheduling.\n\n**Current status**\n- ICC women\u2019s team rankings are primarily for **ODIs and T20Is**.\n- Women\u2019s Test cricket exists, but it\u2019s **too rare and unevenly scheduled** for a standard ICC team ranking to be especially useful.\n\n**Source**\n- **Cricket prose**: the women\u2019s game has shifted toward ODIs and T20s because they are more popular and financially rewarding.\n- **Cricket rules**: no official ranking explanation for women\u2019s Tests was available in the rules material.\n\nIf you want, I can also explain **why men\u2019s Test cricket does have ICC rankings while women\u2019s Test cricket doesn\u2019t** in a bit more detail.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate answer is factually consistent with the reference: it says women\u2019s Tests are too infrequent and unevenly scheduled for a stable ICC ranking system, and notes ICC rankings are primarily for ODIs and T20Is. This matches the reference explanation."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate correctly explains that women's Tests are too infrequent for a meaningful ranking system and that ICC instead ranks women's ODIs and T20Is, matching the reference answer's key points."
+    }
+  },
+  {
+    "id": "narr-5",
+    "question": "Why is Sachin Tendulkar's 200* not considered as carrying the bat?",
+    "reference": "Carrying the bat means an opening batter remains not out through the entire innings of a completed all-out innings. Sachin Tendulkar\u2019s 200* was not carried bat because he was not an opener; he batted in the middle order and the innings was not an all-out team innings in which he survived all dismissals.",
+    "candidate": "**Caution: my curated cricket corpus didn\u2019t cover this cleanly, so I\u2019m drawing on a live web search.**\n\nSachin Tendulkar\u2019s **200*** is **not** considered \u201ccarrying the bat\u201d because **he was not an opener who batted through a completed all-out innings without being dismissed**.  \n\n**Carrying the bat** means:\n- the player must **open the innings**,\n- remain **not out**,\n- and their team must be **all out**.\n\nSo the key condition is that the **team must be dismissed for a full innings to end** while the opener remains unbeaten.\n\nIn Tendulkar\u2019s case, the innings situation did **not** meet that definition, so it doesn\u2019t count as carrying the bat.\n\n**Source:** live web search.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate answer is factually consistent with the reference: it explains that carrying the bat requires an opener to remain not out in an all-out innings, and says Tendulkar\u2019s 200* did not qualify because he was not an opener and the innings did not meet that condition. It addresses the question correctly."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate correctly identifies that carrying the bat requires being an opener who remains not out through a completed all-out innings, and states Tendulkar's 200* didn't meet this condition, consistent with the reference answer."
+    }
+  },
+  {
+    "id": "narr-6",
+    "question": "Which coin is used for tossing?",
+    "reference": "A coin toss uses any coin, typically a regular two-sided coin such as a one-rupee, one-dollar, or similar coin, with heads and tails.",
+    "candidate": "Source: cricket_rules.\n\nIn cricket, the laws just say the captains **toss a coin** to decide who chooses the innings. They **do not specify any particular coin**\u2014any coin used for the toss is acceptable.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate answer is consistent with the reference: it says no particular coin is specified and any coin used for the toss is acceptable, which matches the reference\u2019s statement that a coin toss uses any regular coin."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate correctly states that any regular coin is used for the toss, consistent with the reference answer that no specific coin is required, just any two-sided coin."
+    }
+  },
+  {
+    "id": "narr-10",
+    "question": "Why is the bowling end changed every over in cricket?",
+    "reference": "The bowling end is changed every over so both sides share the use of the two different pitch ends, which can differ in wear, bounce, slope, and wind conditions. It also ensures bowlers alternate ends after each over as required by the Laws of Cricket.",
+    "candidate": "It\u2019s changed every over mainly because cricket is played with **alternating ends by law/practice**, so each bowler delivers from one end, then the next over is bowled from the other end.\n\nWhy that matters:\n- **Fairness and balance:** Both ends of the pitch can behave differently due to slope, grass, wear, wind, and sun.\n- **Bowling variety:** Switching ends changes the angle to the batter, which affects line, movement, and field settings.\n- **Tradition and structure:** An \u201cover\u201d is a fixed set of 6 legal balls, and after it\u2019s completed the bowling end changes.\n\nSource: **cricket_prose** for the practical/historical explanation.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate answer is consistent with the reference: it says the bowling end changes every over for alternating ends, fairness due to differing pitch conditions, and because the over structure requires switching ends. This matches the reference answer."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "Candidate correctly explains that ends alternate per the rules and highlights fairness due to differing pitch/end conditions, consistent with the reference."
+    }
+  },
+  {
+    "id": "narr-12",
+    "question": "Overthrow and throw-by",
+    "reference": "In cricket, an overthrow is the extra run(s) scored when a fielder\u2019s throw at the stumps misses or deflects off a player or object and the batsmen take more runs. A throw-by is a run or runs scored from a fielder\u2019s wayward return throw that goes past the wicket or another fielder, allowing the batsmen to complete additional runs.",
+    "candidate": "From the **cricket rules / MCC Laws**:\n\n- **Overthrow**: when a fielder throws or deflects the ball in an attempt to run out a batter or stop runs, and the ball then goes past the fielding side\u2019s control and often to/over the boundary.\n- **Runs count**: any runs **completed before the ball is dead** are credited. If a boundary is scored off the overthrow, the boundary runs also count.\n- **Dead-ball effect**: the ball becomes dead in the usual ways \u2014 for example when it is finally settled, a boundary is scored, or a batter is dismissed. Runs completed before that point still count.\n- **Throw-by**: the rule text I have available doesn\u2019t give a separate detailed definition for \u201cthrow-by\u201d; it treats this under the general overthrow / throw from the fielding side context.\n\nSource: **cricket_rules**.",
+    "same": {
+      "correct": false,
+      "reason": "The candidate partly defines overthrow, but it adds boundary/dead-ball details not present in the reference and, more importantly, does not give the reference meaning of throw-by. Instead it says it lacks a separate detailed definition, which misses the question. The reference specifically defines throw-by as runs scored from a wayward return throw that goes past the wicket or another fielder, allowing extra runs."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate correctly explains overthrow as extra runs from a wayward throw, consistent with the reference. It admits lack of specific detail on 'throw-by' but still ties it to the overthrow context, which doesn't contradict the reference's definition. Overall factually consistent, though less precise on throw-by."
+    }
+  },
+  {
+    "id": "narr-16",
+    "question": "Why do batsmen in T20 matches sit close to the boundary, instead of sitting in the dressing room?",
+    "reference": "In T20 cricket, batsmen on the boundary sit there as designated \u2018substitute runners\u2019 or part of the active dugout so they can return to the field quickly, receive instructions, and be ready to bat at short notice; the dressing room is farther away and slower to access. It is a practical on-field waiting area, not a place where they are scoring from.",
+    "candidate": "From the available cricket rules/prose sources, this is **not a law requirement**; it\u2019s mainly a **practical match-day arrangement**.\n\nIn T20s, teams often use a **bench or dugout near the boundary** so players are:\n- **closer to the field** for quick substitutions/fielding changes\n- able to **watch the game live**\n- easier to **communicate with coaches/teammates**\n- ready to **come in immediately** if needed\n\nSo they\u2019re usually sitting near the boundary because it\u2019s convenient and operationally useful, **not because they must** under the Laws.\n\n**Source:** cricket_prose + cricket_rules (both said the corpus doesn\u2019t specify a rule requiring this).",
+    "same": {
+      "correct": true,
+      "reason": "The candidate answer is factually consistent with the reference: it explains that sitting near the boundary is a practical dugout/on-field waiting arrangement for quick access and communication, not a Laws requirement. It addresses the question even though it adds some extra detail about rules and substitutions."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate correctly explains that batsmen sit near the boundary for practical reasons\u2014quick access to the field, readiness to bat, and communication\u2014consistent with the reference's point about being close for quick return and instructions rather than being in the slower-to-access dressing room."
+    }
+  },
+  {
+    "id": "narr-17",
+    "question": "What is the difference between googly and doosra spin?",
+    "reference": "A googly is a leg-spinner's delivery that turns the opposite way from a stock leg break \u2014 for a right-handed batsman, from off to leg (in toward the batter). A doosra is an off-spinner's delivery that turns the opposite way from a stock off break \u2014 for a right-handed batsman, from leg to off (away from the batter).",
+    "candidate": "A **googly** and a **doosra** are both **deceptive spin deliveries**, but they\u2019re bowled by different types of spinners and behave differently.\n\n- **Googly**: bowled by a **leg-spinner**. It is meant to turn the **opposite way** to the bowler\u2019s normal leg break. For a right-arm leg-spinner to a right-handed batter, it usually turns **from off side to leg side**.\n- **Doosra**: bowled by an **off-spinner**. It is meant to turn the **opposite way** to the bowler\u2019s normal off break. For a right-arm off-spinner to a right-handed batter, it usually turns **from leg side to off side**.\n\nIn simple terms:\n- **Googly = leg-spinner\u2019s surprise ball**\n- **Doosra = off-spinner\u2019s surprise ball**\n\nSource: **cricket_prose** from the curated cricket encyclopedia.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate answer matches the reference: it correctly explains that a googly is a leg-spinner\u2019s ball that turns opposite to a stock leg break, and a doosra is an off-spinner\u2019s ball that turns opposite to a stock off break. The directions given for a right-handed batter are also consistent with the reference."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate correctly describes googly as a leg-spinner's delivery turning opposite to leg break (off to leg for a right-hander) and doosra as an off-spinner's delivery turning opposite to off break (leg to off), matching the reference."
+    }
+  },
+  {
+    "id": "narr-18",
+    "question": "When was the first tri-series for cricket held?",
+    "reference": "The first one-day international tri-series was the Benson & Hedges World Series Cup in Australia in 1979-80, contested by Australia, England and the West Indies (West Indies won the inaugural edition). Kerry Packer's World Series Cricket had staged earlier triangular one-day matches in 1977-78 and 1978-79, but those lacked official ODI status.",
+    "candidate": "Source: **cricket_prose**\n\nThe first **Australian Tri-Series** was held in **1979\u201380**.\n\nThere\u2019s a nuance, though: the **tri-series concept** had already appeared in Kerry Packer\u2019s **World Series Cricket** in **1977\u201378** and **1978\u201379**, but those matches were **not given official ODI/List A status**. So if you mean the first **officially recognized international tri-series**, **1979\u201380** is the usual answer.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate answer matches the reference: it identifies the first official tri-series as 1979\u201380 and correctly notes that earlier 1977\u201378 and 1978\u201379 triangular matches in World Series Cricket were not officially recognized."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "Candidate matches reference: identifies 1979-80 as the first officially recognized tri-series, and notes Packer's World Series Cricket triangular matches in 1977-78 and 1978-79 lacked official status, consistent with the reference."
+    }
+  },
+  {
+    "id": "narr-19",
+    "question": "Does bat tampering exist in cricket?",
+    "reference": "Yes. Bat tampering exists in cricket; it refers to illegally altering a bat or using a bat that does not comply with the laws, often by physically modifying it to gain an unfair advantage.",
+    "candidate": "Yes \u2014 **bat tampering does exist in cricket**, though it\u2019s not discussed as often as ball tampering.\n\nFrom the **official cricket rules / bat specifications**:\n- A bat must meet strict limits on **size, shape, and materials**.\n- Any **illegal alteration or modification** that changes how the bat performs can be a breach of the laws/playing conditions.\n- Consequences can include the bat being ruled **illegal**, the batter being required to change it, and in some cases **disciplinary action** depending on the competition\u2019s regulations.\n\nSo, while the term \u201cbat tampering\u201d is used more informally than \u201cball tampering,\u201d the idea is real: **using or modifying an illegal bat is not allowed**.\n\n**Source:** cricket_rules for the legal principle; web search for supplementary context.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate answer is factually consistent with the reference. It clearly says bat tampering does exist in cricket and explains that it involves illegal modification or use of an unlawful bat, which matches the reference answer."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate confirms bat tampering exists and describes it as illegal alteration/modification of a bat to gain unfair advantage, consistent with the reference answer."
+    }
+  },
+  {
+    "id": "narr-21",
+    "question": "On what basis players and teams are ranked by ICC?",
+    "reference": "The ICC ranks players and teams by their rating points, which are calculated from recent match and series performances against the strength of opposition and match context. The rankings are updated on the basis of performance over a defined recent period, not career totals.",
+    "candidate": "According to the ICC ranking system, **teams and players are ranked on a points/ratings basis, not simply by averages or raw totals**.\n\n### Teams\n- **After each match or series**, teams earn or lose points based on a formula.\n- A team\u2019s **rating** is generally calculated from its **total points divided by matches played**.\n- This is how ICC team rankings are produced across formats like **Tests, ODIs, and T20Is**.\n\n### Players\n- ICC player rankings are based on **recent performances**.\n- Players are given a **rating score** that reflects how well they have performed in recent matches.\n- These ratings are used for:\n  - **Batters**\n  - **Bowlers**\n  - **All-rounders**\n- The system is **dynamic** and changes as new performances are added.\n\n### Source\n- **cricket_prose** for the general ICC ranking framework\n- **web_search** for the player-ranking basis, since the prose corpus did not fully cover it\n\nIf you want, I can also explain **how ICC rankings differ for batters, bowlers, and all-rounders**.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate is factually consistent with the reference: it says ICC rankings are based on points/ratings rather than raw totals, and that player rankings reflect recent performances. This matches the reference answer's basis on rating points derived from recent performance."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate correctly explains that ICC rankings are based on rating points derived from recent performances, matching the reference's core claim about rating points and recent period performance rather than career totals."
+    }
+  },
+  {
+    "id": "narr-22",
+    "question": "Why did match referee award the 1996 Cricket World Cup Semifinal to Sri Lanka 'by default?''",
+    "reference": "The match referee awarded Sri Lanka the 1996 World Cup semifinal by default because India forfeited the match after the crowd unrest and protests at Eden Gardens forced play to be abandoned.",
+    "candidate": "The match referee awarded the 1996 World Cup semifinal to Sri Lanka by default because the India\u2013Sri Lanka game in Eden Gardens was abandoned due to serious crowd unrest.\n\nWhat happened:\n- India were collapsing in their chase.\n- The crowd began throwing objects onto the field, including fruit and bottles.\n- Play was halted for about 20 minutes.\n- When play resumed, the disturbance continued and fires were lit in the stands.\n- With the situation unsafe and the match unable to continue properly, referee Clive Lloyd awarded the match to Sri Lanka.\n\nSource: cricket_prose.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate matches the reference: it says Sri Lanka were awarded the semifinal by default because the match at Eden Gardens was abandoned due to crowd unrest/protests. That is consistent with India forfeiting after the disturbance forced play to be abandoned."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate correctly identifies that crowd unrest at Eden Gardens caused the match to be abandoned, leading the referee to award the semifinal to Sri Lanka by default, consistent with the reference answer."
+    }
+  },
+  {
+    "id": "narr-23",
+    "question": "How is the annual cricketing schedule of an international team fixed?",
+    "reference": "An international team\u2019s annual cricket schedule is fixed by the team\u2019s cricket board, subject to the International Cricket Council (ICC) and agreements with other boards. It consists of home and away tours, bilateral series, and ICC tournaments arranged in advance.",
+    "candidate": "An international team\u2019s annual schedule is usually fixed through the ICC\u2019s Future Tours Programme (FTP), which lays out the framework of bilateral and multi-team series for member nations over a set cycle.\n\nKey points:\n- **ICC FTP sets the broad calendar**: it schedules when teams are expected to tour each other and play major series.\n- **Bilateral negotiation fills in the details**: the two cricket boards involved then agree on exact dates, venues, number of matches, and formats.\n- **Boards can add or adjust series**: if both boards agree, additional series can be arranged beyond the base schedule.\n- **Security or other concerns can change venues**: if a team is unwilling to tour a country, the series may be moved to a neutral venue such as the UAE.\n\n**Source:** cricket_prose tool, based on the cricket encyclopedia.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate is factually consistent with the reference. It explains that the annual schedule is fixed through ICC-aligned planning and agreements between cricket boards, which matches the reference\u2019s point that the board fixes the schedule subject to ICC and other boards. The extra detail about the FTP is compatible with the reference, not contradictory."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate's answer aligns with the reference: it states the schedule is fixed by cricket boards subject to ICC (via the FTP framework), consisting of bilateral series and tours arranged in advance, matching the core facts of the reference answer with additional consistent detail."
+    }
+  },
+  {
+    "id": "narr-25",
+    "question": "How does the Sidearm\u2122 cricket ball thrower work?",
+    "reference": "The Sidearm\u2122 cricket ball thrower uses a flexible arm and wrist-like action to propel the ball at high speed and with a realistic trajectory. The user swings the arm and releases the ball, which is then flung out quickly for fielding or batting practice.",
+    "candidate": "I couldn\u2019t find this in my curated cricket corpus, so I\u2019m drawing on a live web search.\n\nThe **Sidearm\u2122 cricket ball thrower** is a training aid that helps coaches or practice partners deliver balls at pace with less effort. You place the ball in the device, swing your arm, and release it with a flicking motion. That lets you simulate faster deliveries and repeat drills more easily than throwing by hand.\n\nIn practice, it\u2019s used to:\n- feed **quick balls** for batting drills,\n- vary **line and length**,\n- practice against **pace, bounce, or angle**,\n- and reduce the strain of repeatedly throwing by hand.\n\n**Source:** web search (unverified live result).",
+    "same": {
+      "correct": true,
+      "reason": "The candidate matches the reference: it says the thrower uses an arm-swing/flicking motion to propel the ball quickly for training, which is consistent with the flexible arm and wrist-like action description. It does not contradict the reference and addresses how it works."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate describes the Sidearm\u2122 thrower as a device you swing and release with a flicking motion to propel the ball quickly, matching the reference's description of a flexible arm/wrist-like swing-and-release mechanism for fast, realistic delivery for practice purposes."
+    }
+  },
+  {
+    "id": "narr-28",
+    "question": "What is the concept of Test cricket? How and when is it decided that a team has won or there is a draw?",
+    "reference": "Test cricket is the longest format of the game, played over up to five days with each team batting twice unless the match ends earlier. A team wins by scoring more runs than the other after all innings are completed or the target is chased; the match is a draw if time runs out before either side can achieve an outright win.",
+    "candidate": "**Caution:** my curated cricket corpus didn\u2019t fully cover the result conditions here, so I\u2019m drawing on a live web search.\n\nA **Test cricket** match is the longest and most traditional format of cricket. It is played over **up to five days** between **two international teams**, and each team has **two innings** to bat, unless the match ends earlier.\n\n### How a Test is decided\nA team **wins** a Test match if it:\n- **dismisses the opposition twice** and\n- finishes with **more runs than the other side**.\n\nThere are also other win conditions in special cases:\n- **By runs**: the team batting last is all out and still falls short.\n- **By wickets**: the chasing team reaches the target before losing all 10 wickets.\n- **By an innings and runs**: one team\u2019s single innings total is greater than the other team\u2019s combined two innings total, so the other team does not need to bat again.\n\n### When is it a draw?\nA Test match is a **draw** if:\n- the allotted playing time ends **before either side can complete the match**, or\n- the match cannot be completed for reasons like **time loss** from weather or bad light.\n\nIn simple terms: **if time runs out and there is no winner, it is a draw**.\n\n### Important distinction\nA **draw** in Test cricket is **not** the same as a tie:\n- **Draw** = the match is unfinished when time expires.\n- **Tie** = both teams finish with exactly the same score, which is very rare.\n\n**Source:** web search, based on general MCC/Test cricket explanations.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate correctly states that Test cricket is the longest format, played over up to five days with two innings per team, and that a draw occurs when time runs out before a decisive result. It also correctly explains win conditions in a way that is consistent with the reference (more runs / target chased). Extra details are not contradictory."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate accurately describes Test cricket as the longest format, up to five days, two innings each, and explains win conditions (more runs after all innings, or target chased) and draw condition (time runs out without a result), consistent with the reference. Additional details (win by innings, tie vs draw) are accurate and not contradictory."
+    }
+  },
+  {
+    "id": "narr-32",
+    "question": "What is the technique of dropping the knee in cricket called?",
+    "reference": "Dropping the knee in cricket is called a knee drop or kneeling down, a stance used by a batter to get low to play certain shots.",
+    "candidate": "In cricket, \u201cdropping the knee\u201d is generally associated with **getting down on one knee to play a sweep shot** \u2014 often just called a **sweep** or **knee sweep**.\n\n**Source:** cricket_prose (with no exact term found in the corpus for that phrasing).",
+    "same": {
+      "correct": true,
+      "reason": "The candidate is factually consistent with the reference. It describes dropping the knee as getting down on one knee to play a sweep shot, which aligns with the reference\u2019s idea of a knee drop/kneeling down stance used to get low for certain shots."
+    },
+    "cross": {
+      "correct": false,
+      "reason": "The reference states the technique is called a \"knee drop\" or \"kneeling down,\" a general stance for playing certain shots. The candidate instead claims it's called a \"sweep\" or \"knee sweep,\" which is a different, specific shot rather than the term for the technique described in the reference."
+    }
+  },
+  {
+    "id": "narr-33",
+    "question": "What Effect Could Splits or Cracks in a Cricket Bat Have?",
+    "reference": "Splits or cracks weaken the bat and can cause it to lose performance, with the damage potentially spreading until the bat breaks. They also make the bat less safe to use.",
+    "candidate": "Splits or cracks in a cricket bat can weaken the blade, making it more likely to break and potentially unsafe to use. They can also reduce performance by affecting how well the bat transfers energy to the ball.\n\nSource: cricket_prose (with limited detail available in the corpus).",
+    "same": {
+      "correct": true,
+      "reason": "The candidate matches the reference: it says splits/cracks weaken the bat, can lead to breakage, make it unsafe, and reduce performance. This is factually consistent with the reference."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate correctly identifies that splits/cracks weaken the bat, risk it breaking, reduce performance, and make it unsafe, matching the reference's key points."
+    }
+  },
+  {
+    "id": "narr-41",
+    "question": "What happens to a half century recorded when a player scores a century?",
+    "reference": "A half century is a score of 50 runs. If a player goes on to make a century, that 50-run half century is simply superseded by the 100-run innings; both milestones are recorded, but the century is the final score.",
+    "candidate": "Source: **cricket_prose**\n\nA score of **100 or more counts only as a century**, not as a half-century.\n\nSo if a batter makes 100, 120, or 150, that innings is recorded as a **century** only. A half-century is for scores from **50 to 99**.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate is consistent with the reference: it states that once a player reaches 100, the innings is recorded as a century rather than a half-century. This matches the reference\u2019s idea that the half-century is superseded by the century."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "Candidate correctly conveys that a score of 100+ is recorded as a century, not a half-century, consistent with the reference's point that the half-century is superseded by the century."
+    }
+  },
+  {
+    "id": "narr-45",
+    "question": "Has a no-ball call from the on-field umpire ever been overturned?",
+    "reference": "Yes. A no-ball called by the on-field umpire can be overturned on review, because the third umpire may check TV replays and confirm whether the bowler was over the line or whether the call was incorrect.",
+    "candidate": "Yes \u2014 a no-ball call from the on-field umpire **can be overturned** in review.\n\n**Source:** live web search, because my curated cricket corpus didn\u2019t fully cover the DRS/no-ball review detail.\n\nIn the result I found, **video review can show that a no-ball should not have been called**, and in that case **the ball is treated as dead at the time of the on-field call**.\n\nA couple of important nuances:\n- This is about **reviewing the no-ball decision itself**.\n- In DRS, a no-ball can also matter as part of **other dismissal reviews** \u2014 for example, a catch or LBW may first need the no-ball check.\n\nIf you want, I can also explain **how this works in current ICC DRS procedure** in plain language.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate answer matches the reference: it says a no-ball call from the on-field umpire can be overturned on review. That is consistent with the reference, even though the candidate adds extra detail and sourcing."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate confirms that a no-ball call can be overturned via video review, matching the reference's claim that the third umpire can check replays and correct the call."
+    }
+  },
+  {
+    "id": "narr-47",
+    "question": "What is the difference between chinaman and regular leg spin?",
+    "reference": "A chinaman is a left-arm wrist spinner\u2019s delivery that turns from off to leg to a right-handed batter, i.e. the mirror image of a right-arm leg spinner. Regular leg spin is bowled by a right-arm wrist spinner and turns from leg to off for a right-handed batter.",
+    "candidate": "\u201cChinaman\u201d and \u201cregular leg spin\u201d are different mainly by **which hand the bowler uses** and **which way the ball turns away from a right-handed batter**.\n\n- **Regular leg spin**: usually bowled by a **right-arm bowler**. The ball turns **from the batter\u2019s leg side to off side** for a right-hander.\n- **Chinaman**: a **left-arm wrist-spinner**. For a right-handed batter, the ball turns **the opposite way** to regular leg spin \u2014 **from off side to leg side**.\n\nA simple way to think about it:\n- **Right-arm leg spin** = wrist spin with the right arm\n- **Left-arm wrist spin / chinaman** = wrist spin with the left arm\n\nOne important note: **\u201cchinaman\u201d is an informal, old term and is now often considered offensive/derogatory**. The more neutral term is **left-arm unorthodox spin** or **left-arm wrist spin**.\n\nSource: cricket encyclopedia-style explanation from the cricket corpus; the rules corpus did not contain a formal law definition for these bowling styles.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate matches the reference: it explains that chinaman is a left-arm wrist spinner\u2019s delivery turning from off to leg to a right-handed batter, while regular leg spin is right-arm wrist spin turning from leg to off. The extra note about terminology is not contradictory."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate correctly identifies that regular leg spin is right-arm wrist spin turning leg to off for a right-hander, while chinaman is left-arm wrist spin turning off to leg (mirror image), matching the reference. Additional commentary about terminology does not contradict the core facts."
+    }
+  },
+  {
+    "id": "narr-48",
+    "question": "What is the Dew Factor? How does it affect the match?",
+    "reference": "The dew factor is the moisture that forms on the ground and ball during cool or humid evening conditions. It makes the ball wet and slippery, reducing spin and grip for bowlers and often giving the batting side an advantage in the second innings.",
+    "candidate": "Source: cricket_prose.\n\nThe **dew factor** is the amount of moisture that settles on the field and ball, usually in the evening or at night in day-night matches.\n\nHow it affects a match:\n- **Makes the ball wet and slippery**, which is harder for bowlers to grip.\n- **Hurts spinners most**, because they rely on dry fingers and a dry ball for turn and control.\n- **Can help batters**, since the ball may **skid on faster** and be easier to hit.\n- **Makes fielding tougher** due to a slippery outfield and harder catching/throwing.\n- In some conditions, **swing bowlers may get help from cooler night air**, but dew generally reduces bowling control overall.\n\nIn short: **heavy dew usually favors the team batting second**.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate answer is factually consistent with the reference: it defines dew as moisture on the field/ball in evening conditions and explains that it makes the ball wet and slippery, reducing bowlers' control and favoring the batting side, especially in the second innings. It adds extra details, but none contradict the reference."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "Candidate correctly describes dew as moisture on the field/ball during evening conditions, making the ball wet and slippery, reducing bowler grip (especially spinners), and generally favoring the team batting second - consistent with the reference."
+    }
+  },
+  {
+    "id": "narr-50",
+    "question": "Why Mumbai is considered as a state in Ranji Trophy(Indian Domestic Cricket)",
+    "reference": "Mumbai is treated as a separate Ranji Trophy team because the BCCI organizes domestic cricket by cricket associations, not strictly by Indian states. The Mumbai Cricket Association fields its own team, so Mumbai appears as a separate unit even though it is a city within Maharashtra.",
+    "candidate": "Mumbai is **not actually a state** in Ranji Trophy. It is a **city-based team** run by the **Mumbai Cricket Association (MCA)**, and it competes separately from **Maharashtra**.\n\nWhy this happened:\n- **Historically**, before and around the early years of the Ranji Trophy, cricket teams were organized by **regions, provinces, and cricket associations**, not only by today\u2019s states.\n- **Bombay/Mumbai cricket** had a long-established cricket structure and strong association identity, so it continued as its own team.\n- After the formation of modern state associations, **Mumbai Cricket Association** kept jurisdiction over **Greater Mumbai and nearby areas**, so Mumbai remained an independent Ranji unit instead of being merged into Maharashtra.\n\nSo the correct idea is:\n- **Mumbai = separate Ranji team**\n- **Maharashtra = separate Ranji team**\n- Mumbai is **not considered a state**, but a **special city association team with historical status**\n\n**Source:** cricket_prose + web search.",
+    "same": {
+      "correct": true,
+      "reason": "The candidate answer matches the reference: it explains that Mumbai is not a state in Ranji Trophy, but a separate team because domestic cricket is organized by cricket associations, and the Mumbai Cricket Association fields its own team separately from Maharashtra."
+    },
+    "cross": {
+      "correct": true,
+      "reason": "The candidate correctly explains that Mumbai is not actually a state but a separate team run by the Mumbai Cricket Association, distinct from Maharashtra, consistent with the reference's point that BCCI organizes by cricket associations rather than states."
+    }
+  }
+]
