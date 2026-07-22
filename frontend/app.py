@@ -453,8 +453,9 @@ def render_howitworks():
                    "hurt rules (already ~90% @1), so it's wiki-only.")
         st.divider()
 
-        st.markdown("**Routing** — a small answerer (gpt-mini) way-found to route on par with a strong "
-                    "model via richer tool descriptions and coverage notes, not hardcoded keyword rules.")
+        st.markdown("**Routing** — richer tool descriptions and coverage notes do the work, not hardcoded "
+                    "keyword rules. A small answerer (gpt-mini) routed on par with a strong model this way; "
+                    "the numbers on this page are now measured on Sonnet, after the OpenAI quota ran out.")
         st.caption("Example — the same router discriminates by intent and by data coverage:")
         st.markdown("- *“most runs in IPL 2016?”* → **cricket_stats** (in-window SQL)\n"
                     "- *“why was the 2019 final controversial?”* → **semantic_search** (wiki prose)\n"
@@ -501,11 +502,50 @@ def render_howitworks():
                    "honest answer beats a confident wrong one.")
         st.divider()
 
-        st.markdown("**Judge** — cross-vendor (gpt answers, Sonnet judges) to dodge same-model self-"
-                    "preference. Validated against human labels — no same-judge bias showed up.")
-        st.caption("Example — on 21 human-labeled items the same/gpt judge agreed 21/21 and the cross/"
-                   "Sonnet judge 20/21; the one miss was Sonnet passing an answer that addressed only half "
-                   "the question, which gpt caught. So no evidence of same-judge bias on this set.")
+        st.markdown("**Judge** — a second model grades the answers, to catch a model marking its own "
+                    "homework. The check was cross-vendor while gpt answered and Sonnet judged; the OpenAI "
+                    "quota ran out mid-run, so Sonnet now answers and Haiku grades. Same vendor, shared "
+                    "training — read the gap as a floor on self-preference, not a measurement of it.")
+        st.caption("The sign flipped when the pair changed. Under gpt/Sonnet the self-judge scored the agent "
+                   "LOWER than the cross judge (56% vs 60%) — no self-preference. Under Sonnet/Haiku it "
+                   "scores HIGHER (88% vs 84%). That is the direction self-preference predicts, but Haiku "
+                   "simply grading more strictly explains it just as well, and this pair cannot separate the "
+                   "two. Restoring a non-Anthropic judge is what would settle it.")
+        st.caption("Earlier, on 21 human-labeled items the same/gpt judge agreed 21/21 and the cross/Sonnet "
+                   "judge 20/21 — the miss was Sonnet passing an answer that addressed half the question. "
+                   "That validation belongs to the old pair and has not been redone for this one.")
+        st.divider()
+
+        st.markdown("**Measuring the measurement** — three findings that came from auditing the harness "
+                    "rather than the system.")
+        st.caption("**The prompts contained the answer key.** Five gold questions were sitting in the router's "
+                   "system prompt as routing exemplars, each tagged with the arm that answers it — including "
+                   "'how many times has England hosted the World Cup' and 'most runs in IPL 2016'. The SQL "
+                   "prompt named four gold answers outright (`JM Anderson`, `V Kohli`, `Kings XI Punjab`, "
+                   "`Royal Challengers Bangalore`), and stats items are scored by substring match. All "
+                   "replaced with entities that appear in no gold file. Stats still scores 15/15 without "
+                   "them, so the leak was inflating confidence rather than the score.")
+        st.caption("**Removing a leak exposed a bad question.** 'Who took the most wickets in Tests 2017?' "
+                   "has two defensible readings — season 2017 (Anderson, 39, which the gold expects) and "
+                   "calendar 2017 (Lyon, 63). The leaked name was quietly settling it. The prompt now states "
+                   "the convention, which fixes every year instead of the one we measure.")
+        st.caption("**A leg can measure nothing.** L1.fixed and L3.dense are the same configuration; run "
+                   "twice on gpt-mini they scored 0.64 and 0.60. The published dense→hybrid gain was 0.04 — "
+                   "smaller than the noise between identical runs. On Sonnet the pair reproduces exactly "
+                   "(0.72/0.72) and the gain is 0.12, so that leg only became real when the measurement got "
+                   "tighter. Rules chunking has the opposite problem: structural now scores 29/29, so the "
+                   "gold is saturated and can no longer separate anything above it.")
+        st.divider()
+
+        st.markdown("**Concurrency** — a question needing two tools used to hang forever. The model returns "
+                    "two tool calls in one turn, the framework runs them on worker threads, and each of our "
+                    "tools answers by starting its own event loop — two at once wedges, and no request "
+                    "timeout can see it. Tools now run one at a time.")
+        st.caption("Example — *“how many more runs did the leading scorer of IPL 2015 make than IPL 2011?”* "
+                   "hung past 200s with concurrent calls, and answers in 23s without them (Warner 562 vs "
+                   "Gayle 608, 46 fewer). It reached the product path, not just the eval: the same router "
+                   "serves the app, so that question would have left a spinner running with nothing logged. "
+                   "Every LLM call now carries a deadline too, so a stall reports itself instead of hiding.")
 
     with tabs[4]:
         path = DATA_DIR / "results" / "experiments.json"
@@ -527,6 +567,36 @@ def render_howitworks():
                        "capped**. The wiki arm alone answers 96%, but the agent misrouted history/record "
                        "questions to stats and managed 64%; sharpening the tool contracts lifted it to ~84%. "
                        "So the L6 judge numbers here (base retrieval, no routing fix) understate the fixed system.")
+
+            m, prev = res.get("models", {}), res.get("previous", {})
+            if m:
+                st.divider()
+                st.markdown("**Which models produced these numbers**")
+                st.caption(f"answerer `{m.get('answerer')}` · critic `{m.get('critic')}` · "
+                           f"judge same `{m.get('judge_same')}` · judge cross `{m.get('judge_cross')}`"
+                           + (f" — {res['judge_note']}" if res.get("judge_note") else ""))
+            if prev.get("legs"):
+                pm = prev.get("models", {})
+                st.markdown("**Against the previous run**")
+                st.caption(f"Then: answerer `{pm.get('answerer')}`, judge cross `{pm.get('judge_cross')}`. "
+                           "Two things changed at once — the answerer switched vendor, and the gold questions "
+                           "and answers came out of the prompts. Read this as two different systems measured "
+                           "the same way, not as a before/after of one change.")
+                rows = []
+                for key in EXP_ORDER:
+                    now, before = res.get(key), prev["legs"].get(key, {})
+                    if not isinstance(now, dict):
+                        continue
+                    for variant, score in now.items():
+                        was = before.get(variant)
+                        rows.append({"leg": key, "variant": variant,
+                                     "was (gpt-mini)": f"{was:.0%}" if isinstance(was, (int, float)) else "—",
+                                     "now (Sonnet)": f"{score:.0%}",
+                                     "Δ": f"{score - was:+.0%}" if isinstance(was, (int, float)) else "—"})
+                st.dataframe(rows, hide_index=True, use_container_width=True)
+            for note in (res.get("caveats") or {}).values():
+                st.caption(f"⚠ {note}")
+            st.divider()
             for key in EXP_ORDER:
                 if key not in res or not isinstance(res[key], dict):
                     continue
