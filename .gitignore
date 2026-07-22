@@ -29,6 +29,11 @@ venv/
 # Personal working docs — not part of this project
 money_se_handoff.md
 docs/superpowers/
+docs/handoff-enhance-legs.md
+
+# Demo video assets — big binaries, not part of the repo
+*.mov
+*.mp4
 
 # Deploy artifacts (dump + built index) are committed so CI can bake them into the amd64 image.
 # ~76MB total; move to Git LFS or release assets later if you want a leaner clone.
