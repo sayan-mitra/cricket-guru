@@ -1,8 +1,9 @@
 # Cricket Guru — data manifest
 
 Three downloaded sources, snapshotted 2026-07-13. Raw data is git-ignored; the
-fetch scripts in `scripts/` reproduce it. Attribution fields are carried on every
-record for CC-BY-SA / ODC compliance.
+fetch/load scripts in `backend/cricket_guru/ingest/` reproduce it. Attribution
+fields are carried on every record for CC-BY-SA / ODC compliance. (Rule-book PDFs
+are dropped in manually — see `data/rules/README.md`.)
 
 ## Cricsheet — structured stats (stats-SQL arm + computed oracle)
 
@@ -23,7 +24,11 @@ on the Cricsheet about page before publishing).
 Note: `it20s_male_json.zip` is a different, smaller category (240 matches) — not
 men's T20Is. The correct file is `t20s_male_json.zip`.
 
-## Sports Stack Exchange — narrative oracle (eval ground truth)
+## Sports Stack Exchange — narrative Q&A (legacy source)
+
+Seeded the early narrative questions. The narrative gold is now corpus-grounded on
+the Wikipedia passages, so this set no longer serves as eval ground truth; it stays
+documented because the fetch script still reproduces it.
 
 `cricket`-tag Q&A pulled via the Stack Exchange API (no dump/torrent needed at
 this volume), frozen to disk.

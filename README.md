@@ -44,7 +44,7 @@ On the wiki arm a **cross-encoder reranker** (`bge-reranker-base`) re-scores the
 
 After an arm answers, a **CRAG critic** grades the finished answer and, on a bad grade, corrects instead of shipping: `ok` ships it, `retrieval_gap` falls back to web plus a caveat, and `hallucination` (or an all-time record reaching before the data window) abstains with the reason shown.
 
-The full walkthrough — the ReAct and CRAG diagrams, what each leg taught us, and the experiment and gold-set design — is in [docs/how-it-works.md](docs/how-it-works.md).
+The full walkthrough — the ReAct and CRAG diagrams, what each leg taught, and the experiment and gold-set design — is in [docs/how-it-works.md](docs/how-it-works.md).
 
 ## What's compared (each leg: baseline → advanced, one leg at a time)
 
@@ -56,7 +56,7 @@ This is an offline eval, not a mode in the app: `python -m cricket_guru.eval.run
 | L3 Retrieval | dense | hybrid (dense + BM25) |
 | L4 Reranking | bi-encoder ranking | cross-encoder rerank on wiki (`bge-reranker-base`) |
 | L5 Routing | rule/keyword | LLM tool-calling agent |
-| L6 Judge | same-model | cross-model (different vendor) |
+| L6 Judge | same-model | cross-model (different model, same vendor) |
 
 ## Layout
 
@@ -64,21 +64,22 @@ This is an offline eval, not a mode in the app: `python -m cricket_guru.eval.run
 backend/cricket_guru/
   config.py         env-driven settings + PipelineConfig (the leg "mode" object)
   db.py  qdrant_store.py  llm.py
-  ingest/           fetch + load: Cricsheet, Sports SE, Wikipedia
+  ingest/           fetch + load: Cricsheet, Wikipedia, rule books, Sports SE (legacy)
   index/            L1 chunking (fixed|structural), FastEmbed, build_index CLI
-  retrieval/        L3 dense | hybrid
+  retrieval/        L3 dense | hybrid, L4 cross-encoder rerank
   arms/             text_rag, stats_sql (shared answer() interface)
   routing/          L5 rule | agent (Pydantic AI)
   tools/            web-search freshness (frozen at eval time)
-  eval/             gold_stats, gold_narrative, judge, harness, run_experiments
+  eval/             gold_* (corpus-grounded), judge, harness, run_experiments, retrieval_recall
 frontend/app.py     Streamlit: chat + traces + how-it-works
 ```
 
 ## Data
 
-- Cricsheet ball-by-ball (men's intl + IPL): 8,142 matches, 4.14M deliveries → Postgres (`cricsheet`).
-- Sports Stack Exchange `cricket` tag: 839 Q, 459 accepted → Postgres (`sports_se`), the narrative oracle.
-- Wikipedia cricket articles: 575 → Qdrant (`wiki_fixed` / `wiki_structural`).
+- Cricsheet ball-by-ball (men's intl + IPL): 8,142 matches, 4.14M deliveries → Postgres (`cricsheet`). The objective oracle for numbers.
+- Wikipedia cricket articles: 575 → Qdrant (`wiki_fixed` / `wiki_structural`). The narrative corpus; the narrative gold is grounded in these passages.
+- Rule books (MCC Laws + ICC/IPL playing conditions): PDF → text → Qdrant (`rules_fixed` / `rules_structural`). The laws corpus.
+- Sports Stack Exchange `cricket` tag: 839 Q, 459 accepted → Postgres (`sports_se`). The original narrative oracle, later dropped from the gold in favour of the corpus-grounded Wikipedia references (see [docs/how-it-works.md](docs/how-it-works.md)).
 
 All CC-BY-SA / ODC; raw data is git-ignored and reproduced by the fetch/load scripts. See `data/README.md`.
 
@@ -90,18 +91,17 @@ cp backend/.env.example backend/.env      # add ANTHROPIC_API_KEY + TAVILY_API_K
 
 # one-time ingestion (Postgres running locally)
 export PYTHONPATH=backend
-.venv/bin/python -m cricket_guru.ingest.fetch_sports_se
 .venv/bin/python -m cricket_guru.ingest.fetch_wikipedia
 psql -d cricket_guru -f backend/cricket_guru/ingest/schema.sql
 .venv/bin/python -m cricket_guru.ingest.load_cricsheet     # after extracting Cricsheet zips to data/cricsheet
-.venv/bin/python -m cricket_guru.ingest.load_sports_se
-.venv/bin/python -m cricket_guru.index.build_index --chunking fixed
-.venv/bin/python -m cricket_guru.index.build_index --chunking structural
+.venv/bin/python -m cricket_guru.ingest.load_rules         # after dropping rule PDFs into data/rules (see data/rules/README.md)
+.venv/bin/python -m cricket_guru.index.build_index --source wiki  --chunking fixed
+.venv/bin/python -m cricket_guru.index.build_index --source wiki  --chunking structural
+.venv/bin/python -m cricket_guru.index.build_index --source rules --chunking fixed
+.venv/bin/python -m cricket_guru.index.build_index --source rules --chunking structural
 
-# gold sets + experiments
-.venv/bin/python -m cricket_guru.eval.gold_stats
-.venv/bin/python -m cricket_guru.eval.gold_narrative
-.venv/bin/python -m cricket_guru.eval.run_experiments --n 10
+# experiments (gold sets ship committed under data/gold/)
+.venv/bin/python -m cricket_guru.eval.run_experiments --n 15
 
 # app
 .venv/bin/streamlit run frontend/app.py
@@ -117,4 +117,4 @@ The answerer, arms, agent, and critic run on `CG_ANSWERER_MODEL` (`anthropic:cla
 
 ## Evaluation
 
-Stats questions are scored objectively (SQL-computed answer must appear in the response). Narrative questions are scored by an LLM-judge against the Sports SE accepted answer, with same-model vs cross-model compared and validated against a hand-labeled sample. Reused projects or fabricated evaluation data are out of scope — every number the harness prints comes from a live run over the frozen gold set.
+Stats questions are scored objectively (the SQL-computed answer must appear in the response). Narrative and rules questions are scored by an LLM-judge against the corpus-grounded reference — the actual Wikipedia passage or rulebook clause — with same-model vs cross-model judging compared and validated against a hand-labeled sample. Reused projects or fabricated evaluation data are out of scope; every number the harness prints comes from a live run over the frozen gold set.
