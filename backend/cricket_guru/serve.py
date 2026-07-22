@@ -100,13 +100,18 @@ class Engine:
         return ServeResult(text, v.verdict, v.reason, base, ms, self.label)
 
 
-@lru_cache(maxsize=1)
-def serving_engine():
+def serving_engine(sid=None):
     """Mode A — the product path on the best-known config (structural + agent).
-    Cached: constructing it loads Qdrant collections into memory once."""
+
+    One engine per browser session, built by the caller and kept for that session's lifetime. It is
+    not cached here: a shared engine means a shared router, and the router holds each answer's trace
+    and evidence on itself, so two visitors asking at once would overwrite each other's. Building one
+    per session is cheap because the expensive part — the in-memory index — is cached in
+    get_retriever and shared by all of them."""
     return Engine(get_router("agent", retrieval="hybrid", chunking="structural",
                              rules_retrieval="dense",    # BM25 pulls lexical noise on rulebooks
-                             rerank=True),                # cross-encoder rerank on the wiki arm (+20 @1)
+                             rerank=True,                 # cross-encoder rerank on the wiki arm (+20 @1)
+                             sid=sid),
                   "structural + agent")
 
 

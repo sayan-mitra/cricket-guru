@@ -67,8 +67,11 @@ SYS = (
 
 class AgentRouter:
     def __init__(self, retrieval="dense", chunking="fixed", guard=True, rules_retrieval=None,
-                 rerank=False):
+                 rerank=False, sid=None):
         self.guard = guard
+        # One router per browser session, so this instance's per-call state is nobody else's. The
+        # arms it builds are cheap; the index behind them is cached in get_retriever and shared.
+        self.sid = sid
         self._t = None
         self._evidence = []
         self._scores = []      # retrieval similarity from each corpus tool call
@@ -142,7 +145,7 @@ class AgentRouter:
         return a
 
     def answer(self, question, history=None):
-        self._t = Trace()
+        self._t = Trace(self.sid)
         self._evidence = []
         self._scores = []
 

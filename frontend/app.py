@@ -7,7 +7,10 @@ Per-leg comparison is a local eval (cricket_guru.eval.run_experiments), not a UI
     PYTHONPATH=backend streamlit run frontend/app.py
 """
 import json
+import re
 import sys
+import time
+import uuid
 from pathlib import Path
 
 import streamlit as st
@@ -16,6 +19,7 @@ import streamlit.components.v1 as components
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "backend"))
 from cricket_guru.config import DATA_DIR          # noqa: E402
 from cricket_guru.serve import serving_engine   # noqa: E402
+from cricket_guru.trace import trace_path      # noqa: E402
 
 st.set_page_config(page_title="Cricket Guru", page_icon="🏏", layout="wide",
                    initial_sidebar_state="expanded")
@@ -36,20 +40,62 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 CHAT_CAP = 5
-CHAT_FILE = DATA_DIR / "session" / "chat.json"   # survives browser refresh (session_state does not)
+SESSION_DIR = DATA_DIR / "session"
+SESSION_TTL = 3600          # seconds a visitor's chat and traces survive; see _sweep
+SID_RE = re.compile(r"\A[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\Z")
+
+def _chat_file(sid):
+    return SESSION_DIR / f"{sid}.json"
 
 
-def _load_chat():
+def _session_id():
+    """This browser's id, minted on first render and carried in the URL from then on.
+
+    Python mints it rather than JavaScript. The obvious version — a components.html snippet that
+    reads localStorage and rewrites the parent URL — cannot work: Streamlit renders components in an
+    iframe sandboxed without allow-top-navigation, so setting the parent's location throws
+    SecurityError. Writing st.query_params updates the URL over the websocket instead, with no
+    reload and no iframe involved.
+
+    An incoming sid is still visitor-controlled, so validate it as a UUID before it is ever part of
+    a path; '?sid=../../x' would otherwise write wherever it liked. A refresh keeps the chat because
+    the id stays in the URL. Reopening the bare URL later starts a fresh chat, which for a demo that
+    forgets everything after an hour is the behaviour we want anyway."""
+    sid = st.query_params.get("sid")
+    if sid and SID_RE.match(sid):
+        return sid
+    sid = str(uuid.uuid4())
+    st.query_params["sid"] = sid
+    return sid
+
+
+def _sweep():
+    """Drop visitor chats and traces older than SESSION_TTL. A public demo mints a file per browser,
+    so without this the disk grows forever and a stranger's conversation outlives their visit. The
+    shared traces.jsonl is the eval's, not a visitor's, so it stays."""
+    cutoff = time.time() - SESSION_TTL
+    for f in list(SESSION_DIR.glob("*.json")) + list((DATA_DIR / "traces").glob("*.jsonl")):
+        if f.name == "traces.jsonl":
+            continue
+        try:
+            if f.stat().st_mtime < cutoff:
+                f.unlink()
+        except OSError:
+            pass
+
+
+def _load_chat(sid):
     try:
-        return json.loads(CHAT_FILE.read_text()) if CHAT_FILE.exists() else []
+        f = _chat_file(sid)
+        return json.loads(f.read_text()) if f.exists() else []
     except Exception:
         return []
 
 
-def _save_chat(chat):
-    CHAT_FILE.parent.mkdir(parents=True, exist_ok=True)
+def _save_chat(sid, chat):
+    SESSION_DIR.mkdir(parents=True, exist_ok=True)
     # cosine scores can be numpy floats — coerce anything json can't take natively
-    CHAT_FILE.write_text(json.dumps(
+    _chat_file(sid).write_text(json.dumps(
         chat, default=lambda o: float(o) if hasattr(o, "__float__") else str(o)))
 
 # Sample questions, each chosen to show a different critic outcome.
@@ -195,9 +241,20 @@ def render_spans(spans):
 
 # --- serving ---------------------------------------------------------------
 
-def chat_serve(question, history):
+def _engine(sid):
+    """This session's engine, built once and kept for the session. Per session rather than shared:
+    the router carries each answer's trace and evidence on itself, so one engine across visitors
+    would let two simultaneous questions overwrite each other. The index behind it is cached in
+    get_retriever, so building one per visitor costs a few agent objects."""
+    if st.session_state.get("engine_sid") != sid:
+        st.session_state.engine = serving_engine(sid)
+        st.session_state.engine_sid = sid
+    return st.session_state.engine
+
+
+def chat_serve(question, history, sid):
     """Mode A serving with conversation history. Not cached — each turn is context-unique."""
-    r = serving_engine().serve(question, history)
+    r = _engine(sid).serve(question, history)
     b = r.base
     return {"text": r.text, "verdict": r.verdict, "reason": r.reason,
             "latency_ms": r.latency_ms, "tokens": b.tokens, "grounded": b.grounded,
@@ -209,18 +266,16 @@ def chat_serve(question, history):
 
 def _new_chat():
     st.session_state.chat = []
-    _save_chat([])
+    _save_chat(st.session_state.sid, [])
     for k in [k for k in list(st.session_state) if k.startswith("tr_")]:
         del st.session_state[k]
 
 
 def render_chat():
-    st.session_state.setdefault("chat", _load_chat())   # reload persisted chat after a refresh
+    sid = _session_id()
+    st.session_state.sid = sid
+    st.session_state.setdefault("chat", _load_chat(sid))   # reload persisted chat after a refresh
     chat = st.session_state.chat
-
-    if chat:                                            # a chat exists — offer New chat at any point
-        st.columns([0.72, 0.28])[1].button(
-            "🔄 New chat", on_click=_new_chat, use_container_width=True)
 
     for i, turn in enumerate(chat):
         with st.chat_message("user"):
@@ -235,17 +290,20 @@ def render_chat():
 
     n = len(chat)
     pending = st.session_state.pop("pending", None)
+    if chat:            # sits just above the input, where you look when a chat has run its course
+        st.columns([0.72, 0.28])[1].button(
+            "🔄 New chat", on_click=_new_chat, use_container_width=True)
     if n >= CHAT_CAP:
-        st.info(f"Reached {CHAT_CAP} questions — tap New chat above to keep going.")
+        st.info(f"Reached {CHAT_CAP} questions — tap New chat to keep going.")
         return
     typed = st.chat_input(f"Ask a cricket question…   ({n}/{CHAT_CAP})")
     q = pending or typed
     if q:
         history = [(t["q"], t["a"]["text"]) for t in chat]
         with st.spinner("Routing, answering, checking…"):
-            a = chat_serve(q, history)
+            a = chat_serve(q, history, sid)
         chat.append({"q": q, "a": a})
-        _save_chat(chat)
+        _save_chat(sid, chat)
         st.rerun()
 
 
@@ -262,7 +320,7 @@ def render_ask():
 def render_traces():
     st.subheader("Traces")
     st.caption("Every run's timed spans (LLM / tool / SQL / guardrail calls), newest first.")
-    path = DATA_DIR / "traces" / "traces.jsonl"
+    path = trace_path(_session_id())          # this browser's traces only, not every visitor's
     if not path.exists():
         st.info("No traces yet — ask a question first.")
         return
@@ -598,4 +656,5 @@ with st.sidebar:
             st.button(sample, key=f"s_{sample[:20]}", use_container_width=True, help=why,
                       on_click=lambda s=sample: st.session_state.update(pending=s))
 
+_sweep()
 {"Ask": render_ask, "Traces": render_traces, "How": render_howitworks}[nav]()
