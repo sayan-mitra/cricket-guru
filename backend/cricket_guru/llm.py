@@ -4,7 +4,7 @@ Runs on whatever CG_ANSWERER_MODEL points at (openai:gpt-5.4-mini for now,
 anthropic:claude-sonnet-5 once that key lands) — the arms don't change.
 """
 from pydantic_ai import Agent
-from pydantic_ai.settings import ModelSettings
+from pydantic_ai.models.anthropic import AnthropicModelSettings
 
 from cricket_guru import config
 
@@ -15,7 +15,15 @@ from cricket_guru import config
 # run_sync themselves, so two at once means two nested event loops and a hang that no request timeout
 # can reach. It cost three eval runs before we caught it: 'how many more runs did the leading scorer of
 # IPL 2015 make than IPL 2011' hung past 200s, and answered in 23s with this off.
-SETTINGS = ModelSettings(timeout=config.LLM_TIMEOUT, parallel_tool_calls=False)
+# anthropic_cache_* mark the system prompt and the tool defs with cache_control. The ReAct loop
+# re-sends both on every one of up to LOOP_CAP model calls per question, so from the second call on
+# that stable prefix is served from cache (~0.1x price, and it shaves the loop's wall time).
+SETTINGS = AnthropicModelSettings(
+    timeout=config.LLM_TIMEOUT,
+    parallel_tool_calls=False,
+    anthropic_cache_instructions=True,
+    anthropic_cache_tool_definitions=True,
+)
 
 
 def agent(system_prompt="", model=None, output_type=str, **kw):

@@ -173,7 +173,7 @@ class AgentRouter:
                 result = self.agent.run_sync(
                     asked, usage_limits=UsageLimits(request_limit=LOOP_CAP))
                 out = result.output
-                tokens = getattr(result.usage(), "total_tokens", 0) or 0
+                tokens = getattr(result.usage, "total_tokens", 0) or 0  # pydantic-ai 2.x: usage is a property
             except UsageLimitExceeded:
                 # Don't throw away what the tools already returned. Running out of budget on the third
                 # part of a three-part question used to discard correct answers to the first two and
