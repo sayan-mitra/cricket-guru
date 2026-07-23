@@ -37,7 +37,7 @@ _ground = {}      # cached per model — the critic may use its own CRITIC_MODEL
 def _gate_agent():
     global _gate
     if _gate is None:
-        _gate = Agent(config.ANSWERER_MODEL, output_type=Gate, model_settings=SETTINGS,
+        _gate = Agent(config.FAST_MODEL, output_type=Gate, model_settings=SETTINGS,
                       system_prompt=(
             "Classify the user message. is_cricket: is it a question about the "
             "sport of cricket? is_safe: is it free of harmful, abusive, or "
@@ -46,7 +46,7 @@ def _gate_agent():
 
 
 def _ground_agent(model=None):
-    model = model or config.ANSWERER_MODEL
+    model = model or config.FAST_MODEL
     if model not in _ground:
         _ground[model] = Agent(model, output_type=Grounded, model_settings=SETTINGS,
                                system_prompt=(

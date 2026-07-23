@@ -5,6 +5,7 @@ Read-only: only a single SELECT is ever run against Postgres.
 import re
 from datetime import date, timedelta
 
+from cricket_guru import config
 from cricket_guru.arms.base import Answer
 from cricket_guru.db import connect
 from cricket_guru.llm import agent
@@ -198,7 +199,7 @@ def _all_null_or_zero(rows, sql):
 class StatsSQLArm:
     def __init__(self):
         self.sqlgen = agent(SQL_SYS)
-        self.phraser = agent(PHRASE_SYS)
+        self.phraser = agent(PHRASE_SYS, model=config.FAST_MODEL)   # rows -> sentence: a format task
 
     def answer(self, question):
         steps, prompt, sql, rows, err = [], question, "", None, None
