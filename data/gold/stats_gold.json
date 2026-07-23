@@ -719,13 +719,14 @@
     "qtype": "stats",
     "staleness": true,
     "question": "Who has scored the most career runs in ODIs?",
-    "answer_label": "V Kohli",
-    "answer_value": 14675,
-    "answer": "V Kohli (14675)",
+    "answer_label": "Tendulkar",
+    "answer_value": 18426,
+    "answer": "SR Tendulkar (18,426) — all-time ODI runs record, via prose",
     "meta": {
       "format": "ODI",
       "all_time": true
-    }
+    },
+    "note": "all-time record; answered from prose, not the truncated in-window DB"
   },
   {
     "id": "stats-57",
@@ -745,13 +746,14 @@
     "qtype": "stats",
     "staleness": true,
     "question": "Who has scored the most career runs in Tests?",
-    "answer_label": "JE Root",
-    "answer_value": 14114,
-    "answer": "JE Root (14114)",
+    "answer_label": "Tendulkar",
+    "answer_value": 15921,
+    "answer": "SR Tendulkar (15,921) — all-time Test runs record, via prose",
     "meta": {
       "format": "Test",
       "all_time": true
-    }
+    },
+    "note": "all-time record; answered from prose, not the truncated in-window DB"
   },
   {
     "id": "stats-59",
