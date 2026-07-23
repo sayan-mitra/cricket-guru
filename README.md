@@ -103,14 +103,79 @@ This is an offline eval, not a mode in the app: `python -m cricket_guru.eval.run
 
 ## What each leg taught
 
-- **Chunking.** Rules split on clause numbers, wiki on paragraphs. Structural chunking degrades to arbitrary windows on rulebook PDFs, which have no paragraph breaks, so rules needed a clause-aware splitter — on the Hit Wicket law, fixed windows cut mid-clause where the clause-aware splitter keeps one rule per chunk.
-- **Retrieval.** Dense for rules, hybrid for wiki; the hit score is the dense cosine, not the fused rank.
-- **Routing.** Good tool descriptions and coverage notes do the routing, not hardcoded keyword rules. A small model kept pace with a strong one on that basis; the numbers here are measured on Sonnet. The biggest narrative finding surfaced here: accuracy was **route-capped, not retrieval-capped**. The wiki arm on its own answers 96% of narrative questions, but the agent managed 64% — it misrouted history and record questions that *look* statistical ("most wickets in a single World Cup", "Kohli's captaincy record") to the stats arm, where they can't be answered. Making the tool contracts concrete about what each source can and can't hold lifted the agent to ~84%. The bottleneck was orchestration, not retrieval.
-- **Stats-SQL.** The biggest lever was the schema. A bare column list made the model infer meaning from column names and guess wrong: `bowling_team` on the wrong table, `runs_batter` (runs off one ball, 0–6) treated as an innings total, so "which match did Kohli score 82 in?" returned nothing. An annotated schema — every column's meaning, units, and granularity — fixed those. It also spells out what the database *can't* hold: no captaincy, no records that predate the window — so those route to prose instead of the model fabricating them. A live Border–Gavaskar query surfaced two subtler traps: `COALESCE(SUM(...), 0)` turned "no rows" into a real-looking 0 that shipped as a tally (an all-NULL single row now reads as empty and retries), and because Cricsheet files that series under a different `event_name`, a retry that only reworded the string never found it — the retry now looks up what the filtered column actually holds. It also catches a query that returns rows and is still wrong: a renamed franchise sits under two names, so a filter on one reads half the club, and the arm now cross-checks each team filter against the other names in the table.
-- **Critic.** Coverage reasoning belongs in the model, not a regex. And the web proved unreliable for precise records ("most Test wickets ever" came back as 272, then Warne's 708, when the answer is Muralitharan's 800), so a record the agent can't verify abstains with the reason instead of shipping a possibly-wrong number.
-- **Judge.** A second model grades the answers, so a model can't mark its own homework. Sonnet answers and Haiku grades — same vendor, shared training, which weakens the check; a non-Anthropic judge would make it stronger. The sign flipped when the pair changed: under the earlier gpt/Sonnet pair the self-judge scored the agent lower than the cross-judge (56% vs 60%); under Sonnet/Haiku it scores higher (88% vs 84%). That is the direction self-preference predicts, but Haiku simply grading stricter explains it just as well, and a same-vendor pair can't separate the two. Read the same-vs-cross gap as a floor on self-preference, not a measurement of it.
-- **Tool concurrency.** A question that needs two tools used to hang forever: the model returns two tool calls in one turn, the framework runs them on worker threads, and each tool answers by starting its own event loop — two at once wedges, and no request timeout can see it. Tools now run one at a time, and every LLM call carries a deadline so a stall reports itself.
-- **Gold and eval.** The narrative gold started from the raw Stack Exchange `cricket` Q&A, but community accepted answers aren't anchored to a retrievable passage and some had gone stale, so grading against them scored the gold as much as the system. Stack Exchange was dropped; the narrative gold is now 25 corpus-grounded questions whose reference is the actual Wikipedia passage the arm should retrieve.
+Each entry is the change and the real example that drove it (red = before, green = after).
+
+**Chunking.** Rules split on clause numbers, wiki on paragraphs. Structural chunking degrades to arbitrary windows on rulebook PDFs, which have no paragraph breaks, so rules needed a clause-aware splitter. On Law 35 (Hit Wicket), a fixed window cuts a clause in half; the clause-aware splitter keeps one rule per chunk:
+
+```diff
+  Law 35 (Hit Wicket), from the ICC playing-conditions PDF:
+- FIXED ~320-char window — the chunk ends inside a clause, mid-word:
+-   …35.1.1.2 in setting off for the first run immediately after playing at the ball,
+-   35.1.1.3 if no attempt is made to play the ba        ← chunk boundary, mid-word
++ CLAUSE-AWARE — split on the clause numbers, one rule per chunk:
++   35.1.1    The striker is out Hit wicket if, after the bowler has entered the delivery
++             stride and while the ball is in play, his wicket is broken by the striker's
++             bat or person in any of the following circumstances …
++   35.1.1.3  if no attempt is made to play the ball, in setting off for the first run …
+```
+
+**Retrieval.** Dense for rules, hybrid for wiki. On rulebooks the BM25 half of hybrid latches onto surface words and floats a lexically-similar but wrong clause to the top, so the rules arm uses pure dense cosine (the hit score is that cosine, not the fused rank):
+
+```diff
+  "what happens when the ball hits a fielder's helmet on the ground?"
+- HYBRID top hit — BM25 grabs the word "fielder", wrong clause:
+-   28.2.3  If a fielder illegally fields the ball …                       score 0.748
++ DENSE top hit — cosine reads the meaning, right clause:
++   28.3.2  If the ball … strikes a protective helmet worn by a fielder …  score 0.779
+```
+
+recall@k confirms the split (dense leads @1 on rules, hybrid @1 on wiki), and a cross-encoder reranker lifts wiki recall@1 from 60% to 80% — wiki-only, since it measured worse on rules.
+
+**Routing.** Good tool descriptions and coverage notes do the routing, not hardcoded keyword rules; a small model kept pace with a strong one on that basis (the numbers here are measured on Sonnet). The biggest narrative finding surfaced here — accuracy was **route-capped, not retrieval-capped**:
+
+```diff
+  "most wickets in a single World Cup" — looks statistical, but it's an all-time record
+- Misrouted → cricket_stats — the DB starts at 2001, can't answer; agent stuck at 64%
++ Tool contracts made concrete about what each source holds → semantic_search (prose); ~84%
+```
+
+The wiki arm alone answers 96% of narrative questions, so the bottleneck was orchestration, not retrieval.
+
+**Stats-SQL.** The biggest lever was the schema. A bare column list let the model infer meaning from column names and guess wrong — `runs_batter` (runs off one ball, 0–6) read as an innings total:
+
+```diff
+  "which match did Kohli score his 82 in?"   (82 is an innings total)
+- BARE column list — runs_batter treated as the total:
+-   … GROUP BY runs_batter HAVING SUM(…) = 82   →  []   (no single ball scores 82)
++ ANNOTATED schema (each column's meaning, units, granularity):
++   SUM(runs_batter) GROUP BY match, innings = 82   →  match found ✓
+```
+
+The annotated schema also states what the database *can't* hold (no captaincy, no pre-window records) so those route to prose. Two later traps from live queries: `COALESCE(SUM(...), 0)` turned "no rows" into a real-looking 0 that shipped as a tally (an all-NULL row now reads as empty and retries), and a renamed franchise sitting under two names meant a filter on one read half the club — the arm now cross-checks each team filter against the other names in the table.
+
+**Critic.** Coverage reasoning belongs in the model, not a regex:
+
+```diff
+  "highest India–Australia T20 total?"   (235 — complete, T20Is only exist post-2005)
+- OLD regex flagged every "highest/most" → sent to web → returned a WRONG 272
++ MODEL reasons about the data window → in-window and complete → ships 235
+```
+
+And the web proved unreliable for precise all-time records ("most Test wickets ever" came back 272, then Warne's 708, when it's Muralitharan's 800), so a record the agent can't verify abstains with the reason instead of shipping a guess.
+
+**Judge.** A second model grades the answers, so a model can't mark its own homework. Sonnet answers and Haiku grades — same vendor, shared training, which weakens the check; a non-Anthropic judge would make it stronger. The sign flipped when the pair changed: under the earlier gpt/Sonnet pair the self-judge scored the agent lower than the cross-judge (56% vs 60%); under Sonnet/Haiku it scores higher (88% vs 84%). That is the direction self-preference predicts, but Haiku simply grading stricter explains it just as well, and a same-vendor pair can't separate the two. Read the same-vs-cross gap as a floor on self-preference, not a measurement of it.
+
+**Tool concurrency.** A question that needs two tools used to hang forever — the model returns two tool calls in one turn, the framework runs them on worker threads, and each tool answers by starting its own event loop, so two at once wedge with no timeout able to see it:
+
+```diff
+  "how many more runs did the IPL 2015 top scorer make than 2011?"   (two lookups)
+- parallel tool calls → two nested event loops → wedged, > 200s, nothing logged
++ parallel_tool_calls = false → tools run one at a time → answers in 23s
+```
+
+Every LLM call now carries a deadline too, so a stall reports itself.
+
+**Gold and eval.** The narrative gold started from the raw Stack Exchange `cricket` Q&A, but community accepted answers aren't anchored to a retrievable passage and some had gone stale, so grading against them scored the gold as much as the system. Stack Exchange was dropped; the narrative gold is now 25 corpus-grounded questions whose reference is the actual Wikipedia passage the arm should retrieve.
 
 ## Experiments and gold
 
