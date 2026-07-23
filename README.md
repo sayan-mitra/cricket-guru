@@ -6,7 +6,7 @@ Group: IP8, Cricket Guru. Framework: Pydantic AI.
 
 Live app (v1, frozen at the `v1` tag): <https://cricket-guru-production.up.railway.app>
 
-v2 (in progress on `main`, separate deploy): <https://cricket-guru-v2-production.up.railway.app> — latency + correctness roadmap in [docs/v2-roadmap.md](docs/v2-roadmap.md).
+v2 (on `main`, separate deploy): <https://cricket-guru-v2-production.up.railway.app> — what changed and the measured gains are in the [v2](#v2) section.
 
 ## Demo
 
@@ -179,6 +179,8 @@ Every LLM call now carries a deadline too, so a stall reports itself.
 
 **Gold and eval.** The narrative gold started from the raw Stack Exchange `cricket` Q&A, but community accepted answers aren't anchored to a retrievable passage and some had gone stale, so grading against them scored the gold as much as the system. Stack Exchange was dropped; the narrative gold is now 25 corpus-grounded questions whose reference is the actual Wikipedia passage the arm should retrieve.
 
+**Serving path (what pushed us to v2).** The per-leg ablations tune each leg in isolation; profiling the assembled serving path is what exposed the next round of work. Most of the wall time sat in the agent's ReAct loop, with the input guard, output guard, and critic running serially behind it. And a cluster of misses were false abstentions the system talked itself into — a recent result read as fabricated because the model had no idea what year it was, a correct "this rule doesn't apply in Tests" flagged as unsupported, a split-year season like `2022/23` counted as two calendar years. Those became [v2](#v2).
+
 ## Experiments and gold
 
 Each leg is ablated one at a time against a baseline (fixed chunking, dense retrieval, rule-router, same-model judge), scored end-to-end on a fixed gold set.
@@ -193,6 +195,52 @@ The gold is **corpus-grounded**: the reference is the actual source passage or c
 For the retrieval and chunking legs, end-to-end accuracy is too noisy: a retrieval gain drowns in the answerer and judge. So those legs also report **recall@k** — ask the question, take the top-k chunks, check whether the gold clause is among them. No LLM, no judge, and it moves when retrieval actually improves. That is what surfaced the dense-vs-hybrid split cleanly: on rules, dense leads at rank 1; on wiki, hybrid does.
 
 Reused projects or fabricated evaluation data are out of scope; every number the harness prints comes from a live run over the frozen gold set. The harness-audit findings (prompt leakage, noise-swamped legs) and the build-time gold curation and judge validation are in [docs/how-it-works.md](docs/how-it-works.md).
+
+### Serving baseline (v1)
+
+The ablations above measure one leg at a time; this is the whole serving path — guards, agent, tools, critic — over the same 120-item gold, which is the number a user actually gets (`backend/cricket_guru/eval/latency_profile.py`):
+
+| type | accuracy | median latency |
+|---|---|---|
+| stats | 75% (46/61) | 18.3s |
+| narrative | 68% (17/25) | 23.8s |
+| rules | 90% (26/29) | 19.2s |
+| multi-step | 40% (2/5) | 30.5s |
+| **all** | **76% (91/120)** | **19.7s** |
+
+The agent loop dominates the latency (~15.5s mean); the two guards and the critic add a few seconds each, in series behind it.
+
+## v2
+
+Same architecture, a reworked serving path. v2 deploys separately from v1 (frozen at the `v1` tag) off the same repo — <https://cricket-guru-v2-production.up.railway.app>, tracking `:latest` from `main`.
+
+**Correctness — fixed at the source, not by editing the gold.**
+
+- The agent and critic had no notion of *today*, so a recent result read as fabricated and abstained. Both now receive the current date, and cricket on or before today counts as real.
+- Cricsheet's `season` is a split-year label: `2022/23` is one season, not two calendar years. The SQL guidance no longer expands it into a year range, which had been double-counting.
+- Bare table names (`matches` vs `cricsheet.matches`) errored and burned a retry; a `search_path` on the connection resolves them.
+- The critic used to abstain to "prove a negative," flagging a correct "this rule doesn't apply in Tests" as unsupported. It now abstains only when the evidence positively contradicts the answer.
+- Two gold records were themselves wrong — the all-time Test and ODI run leaders were labelled with the in-window top scorer instead of Tendulkar. Corrected.
+
+**Latency.** Profiling put most of the wall time in the ReAct loop, the guards and critic serial behind it.
+
+- The mechanical legs moved to Haiku: the input gate (classify) and the stats phraser (rows → sentence). The groundedness guard did *not* — it feeds a forced-abstain gate, and on Haiku it over-rejected five correct answers, so it stays on Sonnet. Cheapen classify and format; leave judgment on the strong model.
+- The ReAct loop re-sends the same system prompt and four tool definitions on every call, up to ten per question. Anthropic prompt caching serves that prefix from cache after the first call (~0.1× the token price, and ~11% off the loop's wall time). It needed pydantic-ai's Anthropic cache settings, so the stack moved to pydantic-ai 2.x on Python 3.10+ (the deployed image was already 3.11).
+
+**Measurements** (same 120-item serving benchmark):
+
+| | accuracy | median latency |
+|---|---|---|
+| v1 baseline | 76% (91/120) | 19.7s |
+| v2 | 79% (95/120) | 17.7s |
+
+The gain concentrates in stats (75% → 82%, from the season and date fixes), and abstentions dropped from 10 to 5; narrative, rules, and multi-step held flat. Per leg, the agent loop fell from 15.5s to 12.6s mean — caching plus fewer wasted retries — and the stats phraser from 9.0s to 6.4s on Haiku.
+
+**Next steps.**
+
+- Trim the agent_run tail: p95 is ~42s and the slowest narrative questions still run past a minute (the caching and fixes already cut the worst case from 172s to 76s).
+- Extend caching to the SQL-generator and critic prompts, and tune the TTL — the 5-minute default expires between sporadic questions, and a 1-hour TTL breaks even at three reads.
+- A non-Anthropic judge to strengthen the same-vs-cross check; today Sonnet answers and Haiku grades, same vendor.
 
 ## Layout
 
