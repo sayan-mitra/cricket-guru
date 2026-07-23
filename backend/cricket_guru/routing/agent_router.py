@@ -39,10 +39,17 @@ SYS = (
     "You are Cricket Guru. Answer cricket questions by calling the right tool:\n"
     "- cricket_stats for numbers COMPUTABLE from the match database — a specific season/match/format "
     "tally WITHIN coverage (Tests 2001+, ODIs 2002+, T20Is 2005+, IPL 2008+), e.g. 'how many Test "
-    "wickets did DL Vettori take in 2010', 'who won the last New Zealand-Bangladesh Test series'. NOT "
-    "for all-time records, tournament history across years, historical firsts, events before the "
-    "window, OR captaincy/leadership records and player careers (the database has no captain data — it "
-    "knows who played, not who led).\n"
+    "wickets did DL Vettori take in 2010', 'who won the last New Zealand-Bangladesh Test series'. This "
+    "includes SUPERLATIVES, as long as every match they range over sits inside coverage — judge by the "
+    "time span, not the words ('record', 'most ever', 'tops the list', 'highest' do not route a "
+    "question; the period does). A single in-window season or edition is always stats (most centuries "
+    "in a single IPL season, most sixes in IPL 2019, highest team total at the 2019 World Cup), and a "
+    "whole competition that began inside the window is stats even phrased all-time (the IPL started in "
+    "2008, T20Is in 2005, so 'most IPL runs ever' is fully computable). NOT for superlatives whose "
+    "range reaches BEFORE the window ('most Test wickets ever' — Tests date to 1877; 'best ODI career "
+    "average' — careers predate 2002), historical firsts, events before the window, OR "
+    "captaincy/leadership records and player careers (the database has no captain data — it knows who "
+    "played, not who led).\n"
     "- cricket_rules for laws/officiating (no-ball, LBW, DRS, free hit, dismissals, playing conditions)\n"
     "- cricket_prose for history, records, and narrative — why a match mattered, controversies, player "
     "style, tournament history, captaincy and leadership records, player careers, AND all-time/"
@@ -93,9 +100,13 @@ class AgentRouter:
             sixes) — queryable by team, season, format, or date, WITHIN coverage (Tests from Dec
             2001, ODIs 2002, T20Is 2005, IPL 2008). Use for a specific in-window tally like 'how many
             Test wickets did DL Vettori take in 2010' or 'who won the last New Zealand-Bangladesh
-            Test series'. Do NOT use for all-time records, tournament history, historical firsts,
-            events before the window, or captaincy/leadership and player careers (no captain data
-            exists) — those go to cricket_prose."""
+            Test series'. Superlatives count too when every match they range over sits inside
+            coverage: a single in-window season or edition ('most centuries in a single IPL season',
+            'highest team total at the 2019 World Cup'), and all-time records of a competition that
+            began inside the window (the IPL from 2008, T20Is from 2005, so 'most IPL runs ever' is
+            computable). Do NOT use for superlatives reaching before the window ('most Test wickets
+            ever', 'best ODI career average'), historical firsts, or captaincy/leadership and player
+            careers (no captain data exists) — those go to cricket_prose."""
             with self._t.span("cricket_stats", "tool") as s:
                 r = stats.answer(question)
                 out = r.text
