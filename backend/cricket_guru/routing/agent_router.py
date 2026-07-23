@@ -6,6 +6,8 @@ insufficient, never fabricate, say which source each part came from.
 Guardrails: input relevance+safety+injection, a loop cap, and an output
 groundedness check. Every step is traced for the frontend and the metrics.
 """
+from datetime import date
+
 from pydantic_ai import Agent
 from pydantic_ai.usage import UsageLimits
 
@@ -80,7 +82,8 @@ class AgentRouter:
         rules = TextRAGArm(rules_retrieval or retrieval, chunking, source="rules")  # dense, no rerank
         text.retriever      # warm the in-memory indexes in this (main) thread so
         rules.retriever     # tool worker threads never touch the SQLite-backed store
-        agent = Agent(config.ANSWERER_MODEL, system_prompt=SYS, model_settings=SETTINGS)
+        agent = Agent(config.ANSWERER_MODEL, model_settings=SETTINGS,
+                      system_prompt=f"Today's date is {date.today().isoformat()}.\n\n{SYS}")
 
         @agent.tool_plain
         def cricket_stats(question: str) -> str:

@@ -12,6 +12,7 @@ is a single CRITIC_MODEL judgment: instead of a coarse 'is this a superlative?' 
 in-window records like the highest India–Australia T20I total and wrongly sent them to the web), the
 model reasons about which formats/matchups predate the window and which exist entirely inside it.
 """
+from datetime import date
 from dataclasses import dataclass
 
 from pydantic import BaseModel
@@ -89,7 +90,8 @@ def critique(question: str, answer: Answer) -> Verdict:
                        f"weak retrieval (top similarity {score:.2f} < {config.CRITIC_THRESHOLD})")
     tools = ", ".join(answer.tool_trace) or "(none)"
     v = _agent().run_sync(
-        f"QUESTION: {question}\n\nANSWER: {answer.text}\n\nTOOLS: {tools}\n\n"
+        f"Today's date is {date.today().isoformat()}; cricket data on or before today is real, not "
+        f"future or fabricated.\n\nQUESTION: {question}\n\nANSWER: {answer.text}\n\nTOOLS: {tools}\n\n"
         f"EVIDENCE:\n{answer.evidence or '(none)'}").output
     verdict = v.verdict if v.verdict in (OK, RETRIEVAL_GAP, HALLUCINATION) else OK
     return Verdict(verdict, v.reason)
