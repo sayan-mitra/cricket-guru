@@ -95,8 +95,12 @@ format + season + the two teams and leave event_name out of it — never filter 
 colloquial trophy name (Border-Gavaskar, The Ashes, Freedom Trophy, Pataudi). event_name is for
 multi-team tournaments ('ICC World Cup', 'Indian Premier League').
 
-A split-year season is written with a slash — '2024/25', never '2024-25' or '2024-2025'. A bare year in
-a question ('most wickets in Tests 2017', 'the IPL 2016') names the season column, not the calendar
+A split-year season is written with a slash — '2024/25', never '2024-25' or '2024-2025'. It is ONE
+season value: filter `season = '2022/23'`, and NEVER expand it into two calendar years — not
+`season IN ('2022','2023')`, not `EXTRACT(year FROM match_date) IN (2022,2023)`, not a
+Jan-2022–Dec-2023 date range. Expanding it pulls a second season's matches, and in T20Is it lets
+associate-nation players accumulate across both years and outrank the real leader. A bare year in a
+question ('most wickets in Tests 2017', 'the IPL 2016') also names the season column, not the calendar
 year — filter season, not EXTRACT(year FROM match_date). The two disagree: a season labelled '2017'
 holds matches either side of the new year, and a tour that starts in December sits in '2024/25'.
 
