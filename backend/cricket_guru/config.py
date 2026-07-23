@@ -51,8 +51,10 @@ BRAVE_API_KEY = os.environ.get("BRAVE_API_KEY")
 # All-Anthropic: Sonnet answers, Haiku cross-judges. A non-Anthropic judge would make
 # the same-vs-cross bias check stronger (see docs/how-it-works.md), but keeps it OpenAI-free.
 ANSWERER_MODEL = os.environ.get("CG_ANSWERER_MODEL", "anthropic:claude-sonnet-5")
-# Fast, cheap model for the mechanical legs — input gate, groundedness guard, phraser. These are
-# classify/format tasks that don't need the answerer's reasoning, so Haiku ~halves their latency.
+# Fast, cheap model for the mechanical legs — the input gate (classify) and the stats phraser (rows ->
+# sentence). Pure classify/format work that doesn't need the answerer's reasoning, so Haiku ~halves
+# their latency. NOT the groundedness guard: that's a judgment call and Haiku over-rejects (see
+# guardrails._ground_agent).
 FAST_MODEL = os.environ.get("CG_FAST_MODEL", "anthropic:claude-haiku-4-5")
 JUDGE_CROSS_MODEL = os.environ.get("CG_JUDGE_MODEL", "anthropic:claude-haiku-4-5")
 # Serving critic (CRAG groundedness gate). Its own knob so it can run on a strong

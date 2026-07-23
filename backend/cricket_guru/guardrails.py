@@ -46,7 +46,10 @@ def _gate_agent():
 
 
 def _ground_agent(model=None):
-    model = model or config.FAST_MODEL
+    # Groundedness stays on the strong model: it's a real judgment call, and the serve() gate turns a
+    # grounded=False into a forced abstain. Haiku over-rejected well-grounded answers here (5 gold items
+    # abstained despite the Sonnet critic ruling them ok), so this leg is NOT a FAST_MODEL candidate.
+    model = model or config.ANSWERER_MODEL
     if model not in _ground:
         _ground[model] = Agent(model, output_type=Grounded, model_settings=SETTINGS,
                                system_prompt=(
