@@ -56,6 +56,11 @@ hallucination — that is exactly how a wrong number ships wearing a correct-loo
 NOT apply to facts the database cannot hold whatever the date — retirements, captaincy, awards, news,
 anything about a player's life rather than the balls bowled.
 
+Do not abstain to prove a negative. An answer that correctly says a rule does not apply in a format
+(a free hit is only in limited-overs, not Tests) is ok even when the evidence shows only the formats
+where it does apply — return hallucination when the evidence positively contradicts the claim, not
+when it merely fails to confirm an absence.
+
 Reason briefly, judging scope by cricket history: which formats or matchups predate the window, and
 which exist entirely inside it."""
 

@@ -41,7 +41,9 @@ def load_gold(name):
 
 def _stats_correct(text, item):
     t = text.lower()
-    return str(item["answer_label"]).lower() in t or str(item["answer_value"]) in text
+    lbl = str(item["answer_label"]).lower()
+    surname = lbl.split()[-1] if lbl.split() else ""   # gold stores DB initials (RG Sharma); prose gives full names
+    return lbl in t or (len(surname) >= 4 and surname in t) or str(item["answer_value"]) in text
 
 
 def _composed(ans, item):
