@@ -108,6 +108,13 @@ holds matches either side of the new year, and a tour that starts in December si
 Never mask an empty result. Do not wrap an aggregate in COALESCE(...,0) and do not add a fallback row:
 when nothing matches, the query must come back empty. A zero conjured by COALESCE reads downstream as a
 real answer — 'scored 0 runs' — and it stops the retry that would have fixed the filters.
+
+A record or superlative — 'the highest', 'the most', 'the record for', 'who holds', 'does X top the
+list' — asks for the extreme value AND everyone tied at it. `ORDER BY n DESC LIMIT 1` returns one
+arbitrary row and hides co-holders, so a shared record reads as a sole one. Return every row at the
+maximum instead: filter on it (`WHERE n = (SELECT MAX(n) FROM …)`) or keep the rows where
+`DENSE_RANK() OVER (ORDER BY n DESC) = 1`. Use LIMIT 1 only for a single named result (one match, one
+series), never for a record.
 Return ONLY the SQL — no markdown fences, no prose."""
 
 PHRASE_SYS = ("Answer the cricket question in one precise sentence using the SQL result. "
@@ -120,6 +127,8 @@ PHRASE_SYS = ("Answer the cricket question in one precise sentence using the SQL
               "team whose career began BEFORE that window, give it but add that it counts only "
               "matches within the database's window and undercounts their full career. Do NOT add "
               "that caveat for players or seasons that fall entirely inside the window. "
+              "If several rows tie for the top, name them all as joint holders rather than picking "
+              "one (e.g. 'a shared record of 4, by V Kohli in 2016 and JC Buttler in 2022'). "
               "If the result is empty, say no data was found.")
 
 # Cricsheet ball-by-ball coverage — anything older is incomplete.
