@@ -145,10 +145,10 @@ frontend/app.py     Streamlit: chat + traces + how-it-works
 
 ## Data
 
-- Cricsheet ball-by-ball (men's intl + IPL): 8,142 matches, 4.14M deliveries → Postgres (`cricsheet`). The objective oracle for numbers.
-- Wikipedia cricket articles: 575 → Qdrant (`wiki_fixed` / `wiki_structural`). The narrative corpus; the narrative gold is grounded in these passages.
-- Rule books (MCC Laws + ICC/IPL playing conditions): PDF → text → Qdrant (`rules_fixed` / `rules_structural`). The laws corpus.
-- Sports Stack Exchange `cricket` tag: 839 Q, 459 accepted → Postgres (`sports_se`). The original narrative oracle, later dropped from the gold in favour of the corpus-grounded Wikipedia references (see [docs/how-it-works.md](docs/how-it-works.md)).
+- [Cricsheet](https://cricsheet.org) ball-by-ball (men's intl + IPL): 8,142 matches, 4.14M deliveries → Postgres (`cricsheet`). The objective oracle for numbers.
+- [Wikipedia](https://en.wikipedia.org) cricket articles (via the MediaWiki API): 575 → Qdrant (`wiki_fixed` / `wiki_structural`). The narrative corpus; the narrative gold is grounded in these passages.
+- Rule books — [MCC Laws of Cricket](https://www.lords.org/mcc/the-laws-of-cricket) plus [ICC](https://www.icc-cricket.com) and [IPL](https://www.iplt20.com) playing conditions: PDF → text → Qdrant (`rules_fixed` / `rules_structural`). The laws corpus.
+- [Sports Stack Exchange `cricket` tag](https://sports.stackexchange.com/questions/tagged/cricket): 839 Q, 459 accepted → Postgres (`sports_se`). The original narrative oracle, later dropped from the gold in favour of the corpus-grounded Wikipedia references (see [docs/how-it-works.md](docs/how-it-works.md)).
 
 All CC-BY-SA / ODC; raw data is git-ignored and reproduced by the fetch/load scripts. See `data/README.md`.
 
