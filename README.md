@@ -4,7 +4,9 @@ A cricket question-answering agent that routes each question to the source that 
 
 Group: IP8, Cricket Guru. Framework: Pydantic AI.
 
-Live app: <https://cricket-guru-production.up.railway.app>
+Live app (v1, frozen at the `v1` tag): <https://cricket-guru-production.up.railway.app>
+
+v2 (in progress on `main`, separate deploy): <https://cricket-guru-v2-production.up.railway.app> — latency + correctness roadmap in [docs/v2-roadmap.md](docs/v2-roadmap.md).
 
 ## Demo
 
